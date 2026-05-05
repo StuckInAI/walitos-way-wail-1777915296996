@@ -23,6 +23,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GOAT',
     badgeType: 'fire',
     categoryIcon: 'Mic2',
+    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
+    imageAlt: 'Concert stage with dramatic lighting',
   },
   {
     id: 'music-2',
@@ -34,6 +36,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'Piano',
+    image: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=800&q=80',
+    imageAlt: 'Electronic music studio with glowing synths',
   },
   {
     id: 'music-3',
@@ -45,6 +49,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'NEW',
     badgeType: 'new',
     categoryIcon: 'Crown',
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80',
+    imageAlt: 'Moody music recording session',
   },
   {
     id: 'music-4',
@@ -56,6 +62,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'OG',
     badgeType: 'og',
     categoryIcon: 'Waves',
+    image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80',
+    imageAlt: 'DJ mixing board with neon lights',
   },
   {
     id: 'music-5',
@@ -67,6 +75,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'Guitar',
+    image: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80',
+    imageAlt: 'Electric guitar close up with dramatic shadows',
   },
   {
     id: 'music-6',
@@ -78,6 +88,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'OG',
     badgeType: 'og',
     categoryIcon: 'Bot',
+    image: 'https://images.unsplash.com/photo-1598387993281-cecf8b71a8f8?w=800&q=80',
+    imageAlt: 'Abstract electronic waveform visualization',
   },
   // GEAR
   {
@@ -90,6 +102,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'TOP',
     badgeType: 'fire',
     categoryIcon: 'Headphones',
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80',
+    imageAlt: 'Sleek headphones on minimal surface',
   },
   {
     id: 'gear-2',
@@ -101,6 +115,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'PenLine',
+    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80',
+    imageAlt: 'Minimal tablet and pen on desk',
   },
   {
     id: 'gear-3',
@@ -112,6 +128,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'FAV',
     badgeType: 'new',
     categoryIcon: 'Keyboard',
+    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&q=80',
+    imageAlt: 'Mechanical keyboard with dramatic side lighting',
   },
   {
     id: 'gear-4',
@@ -121,6 +139,8 @@ export const ITEMS: CuratedItem[] = [
     tags: ['lighting', 'streaming', 'video'],
     link: 'https://www.elgato.com/en/key-light',
     categoryIcon: 'Lightbulb',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    imageAlt: 'Studio lighting setup with warm glow',
   },
   {
     id: 'gear-5',
@@ -132,6 +152,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'FIRE',
     badgeType: 'fire',
     categoryIcon: 'Watch',
+    image: 'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=800&q=80',
+    imageAlt: 'Rugged smartwatch on wrist in outdoor setting',
   },
   // CLOTHING
   {
@@ -144,6 +166,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'TOP',
     badgeType: 'fire',
     categoryIcon: 'Shirt',
+    image: 'https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=800&q=80',
+    imageAlt: 'Editorial streetwear lookbook shot',
   },
   {
     id: 'clothing-2',
@@ -155,6 +179,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'OG',
     badgeType: 'og',
     categoryIcon: 'Footprints',
+    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80',
+    imageAlt: 'Sneakers on concrete with bold shadow',
   },
   {
     id: 'clothing-3',
@@ -166,6 +192,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'Wind',
+    image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80',
+    imageAlt: 'Outdoor jacket against mountain backdrop',
   },
   {
     id: 'clothing-4',
@@ -177,6 +205,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'Layers',
+    image: 'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=800&q=80',
+    imageAlt: 'Bold designer footwear on graphic background',
   },
   {
     id: 'clothing-5',
@@ -185,6 +215,8 @@ export const ITEMS: CuratedItem[] = [
     category: 'clothing',
     tags: ['japanese', 'military', 'streetwear'],
     categoryIcon: 'Swords',
+    image: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=80',
+    imageAlt: 'Monochrome military inspired fashion editorial',
   },
   // FOOD
   {
@@ -197,6 +229,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'FIRE',
     badgeType: 'fire',
     categoryIcon: 'UtensilsCrossed',
+    image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80',
+    imageAlt: 'Steaming ramen bowl close up',
   },
   {
     id: 'food-2',
@@ -206,6 +240,8 @@ export const ITEMS: CuratedItem[] = [
     tags: ['coffee', 'dairy-free', 'morning'],
     link: 'https://www.oatly.com/products/barista-edition',
     categoryIcon: 'Milk',
+    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
+    imageAlt: 'Latte art in ceramic cup on wooden table',
   },
   {
     id: 'food-3',
@@ -217,6 +253,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'HOT',
     badgeType: 'fire',
     categoryIcon: 'Flame',
+    image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&q=80',
+    imageAlt: 'Vibrant red chili oil with dramatic lighting',
   },
   {
     id: 'food-4',
@@ -228,6 +266,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'Coffee',
+    image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&q=80',
+    imageAlt: 'Specialty coffee pour over in minimalist setting',
   },
   {
     id: 'food-5',
@@ -237,6 +277,8 @@ export const ITEMS: CuratedItem[] = [
     tags: ['breakfast', 'healthy', 'cereal'],
     link: 'https://magicspoon.com',
     categoryIcon: 'Soup',
+    image: 'https://images.unsplash.com/photo-1521483451569-e33803c0330c?w=800&q=80',
+    imageAlt: 'Colorful cereal bowl with bold graphic feel',
   },
   // APPS
   {
@@ -249,6 +291,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'MUST',
     badgeType: 'fire',
     categoryIcon: 'BrainCircuit',
+    image: 'https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?w=800&q=80',
+    imageAlt: 'Dark terminal interface with glowing text',
   },
   {
     id: 'apps-2',
@@ -260,6 +304,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'FAV',
     badgeType: 'new',
     categoryIcon: 'Globe',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80',
+    imageAlt: 'Colorful browser UI on laptop screen',
   },
   {
     id: 'apps-3',
@@ -271,6 +317,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'LayoutDashboard',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+    imageAlt: 'Clean dark dashboard UI on monitor',
   },
   {
     id: 'apps-4',
@@ -282,6 +330,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'TOP',
     badgeType: 'fire',
     categoryIcon: 'Rocket',
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80',
+    imageAlt: 'Futuristic command interface with neon glow',
   },
   {
     id: 'apps-5',
@@ -293,6 +343,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'NEW',
     badgeType: 'new',
     categoryIcon: 'SearchCode',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80',
+    imageAlt: 'AI interface with glowing abstract visualization',
   },
   // BOOKS
   {
@@ -305,6 +357,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'MUST',
     badgeType: 'fire',
     categoryIcon: 'Palette',
+    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
+    imageAlt: 'Stack of bold design books on minimal surface',
   },
   {
     id: 'books-2',
@@ -315,6 +369,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'OG',
     badgeType: 'og',
     categoryIcon: 'ScrollText',
+    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80',
+    imageAlt: 'Ancient manuscript aesthetic with dramatic lighting',
   },
   {
     id: 'books-3',
@@ -325,6 +381,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'BookMarked',
+    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
+    imageAlt: 'Weathered book in harsh desert light',
   },
   // PLACES
   {
@@ -336,6 +394,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'TOP',
     badgeType: 'fire',
     categoryIcon: 'Building2',
+    image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80',
+    imageAlt: 'Tokyo neon streets at night',
   },
   {
     id: 'places-2',
@@ -346,6 +406,8 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'Sun',
+    image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80',
+    imageAlt: 'Lisbon colorful tiled building in golden light',
   },
   {
     id: 'places-3',
@@ -356,5 +418,7 @@ export const ITEMS: CuratedItem[] = [
     badge: 'GEM',
     badgeType: 'gem',
     categoryIcon: 'MountainSnow',
+    image: 'https://images.unsplash.com/photo-1518638150340-f706e86654de?w=800&q=80',
+    imageAlt: 'Oaxaca colorful market with bold architecture',
   },
 ];

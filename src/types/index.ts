@@ -17,4 +17,6 @@ export type CuratedItem = {
   badge?: string;
   badgeType?: 'fire' | 'new' | 'og' | 'gem';
   categoryIcon?: string;
+  image?: string;
+  imageAlt?: string;
 };
