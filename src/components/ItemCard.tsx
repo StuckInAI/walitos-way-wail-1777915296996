@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 type ItemCardProps = {
   item: CuratedItem;
+  onClick?: (item: CuratedItem) => void;
 };
 
 const BADGE_CLASS: Record<string, string> = {
@@ -38,13 +39,28 @@ function CardIcon({ name, size = 24 }: { name: string; size?: number }) {
   return <Icon size={size} />;
 }
 
-export default function ItemCard({ item }: ItemCardProps) {
+export default function ItemCard({ item, onClick }: ItemCardProps) {
   const badgeClass = item.badgeType ? BADGE_CLASS[item.badgeType] : '';
   const badgeIconName = item.badgeType ? BADGE_ICON[item.badgeType] : '';
   const accentColor = CATEGORY_COLOR[item.category] ?? '#FF4D00';
+  const isClickable = !!(item.link || onClick);
+
+  const handleClick = () => {
+    if (onClick) {
+      onClick(item);
+    } else if (item.link) {
+      window.open(item.link, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   const cardContent = (
-    <div className={clsx(styles.card, item.link && styles.cardLink)}>
+    <div
+      className={clsx(styles.card, isClickable && styles.cardLink)}
+      onClick={handleClick}
+      role={isClickable ? 'button' : undefined}
+      tabIndex={isClickable ? 0 : undefined}
+      onKeyDown={isClickable ? (e) => { if (e.key === 'Enter' || e.key === ' ') handleClick(); } : undefined}
+    >
       {/* Bold image block */}
       {item.image && (
         <div className={styles.imageWrap}>
@@ -76,6 +92,12 @@ export default function ItemCard({ item }: ItemCardProps) {
               )}
               {item.badge}
             </span>
+          )}
+          {/* External link indicator on image */}
+          {item.link && (
+            <div className={styles.imageExternalLink}>
+              <ExternalLink size={14} />
+            </div>
           )}
         </div>
       )}
@@ -131,22 +153,15 @@ export default function ItemCard({ item }: ItemCardProps) {
             <span key={tag} className={styles.tag}>#{tag}</span>
           ))}
         </div>
+        {item.link && (
+          <span className={styles.footerLink}>
+            <ExternalLink size={11} />
+            <span>Open link</span>
+          </span>
+        )}
       </div>
     </div>
   );
-
-  if (item.link) {
-    return (
-      <a
-        href={item.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.anchor}
-      >
-        {cardContent}
-      </a>
-    );
-  }
 
   return <div className={styles.anchor}>{cardContent}</div>;
 }
