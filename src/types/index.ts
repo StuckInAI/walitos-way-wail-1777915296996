@@ -1,7 +1,7 @@
 export type Category = {
   id: string;
   label: string;
-  emoji: string;
+  icon: string;
   description: string;
 };
 
@@ -16,5 +16,5 @@ export type CuratedItem = {
   link?: string;
   badge?: string;
   badgeType?: 'fire' | 'new' | 'og' | 'gem';
-  imageEmoji?: string;
+  categoryIcon?: string;
 };

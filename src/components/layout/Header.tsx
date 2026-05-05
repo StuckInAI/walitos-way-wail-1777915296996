@@ -1,3 +1,4 @@
+import * as LucideIcons from 'lucide-react';
 import styles from '@/components/layout/Header.module.css';
 
 export default function Header() {
@@ -12,7 +13,10 @@ export default function Header() {
           </div>
         </div>
         <div className={styles.meta}>
-          <span className={styles.pill}>✦ The List</span>
+          <span className={styles.pill}>
+            <LucideIcons.List size={12} />
+            The List
+          </span>
         </div>
       </div>
     </header>

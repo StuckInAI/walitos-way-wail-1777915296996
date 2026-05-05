@@ -54,7 +54,7 @@
   gap: var(--space-2);
 }
 
-.emojiBox {
+.iconBox {
   width: 48px;
   height: 48px;
   background: var(--color-bg-secondary);
@@ -64,11 +64,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-}
-
-.emoji {
-  font-size: 24px;
-  line-height: 1;
+  color: var(--color-accent);
 }
 
 .topRight {
@@ -80,6 +76,7 @@
 .badge {
   display: inline-flex;
   align-items: center;
+  gap: 3px;
   padding: 2px var(--space-2);
   border-radius: var(--radius-sm);
   font-size: 10px;
@@ -87,6 +84,12 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.badgeIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .badgeFire {

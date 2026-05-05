@@ -43,7 +43,9 @@
   color: white !important;
 }
 
-.emoji {
-  font-size: 15px;
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
 }

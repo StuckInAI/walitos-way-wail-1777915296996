@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Search } from 'lucide-react';
 import { CATEGORIES, ITEMS } from '@/data/items';
 import CategoryFilter from '@/components/CategoryFilter';
 import SearchBar from '@/components/SearchBar';
@@ -61,7 +62,9 @@ export default function HomePage() {
 
       {filteredItems.length === 0 ? (
         <div className={styles.empty}>
-          <span className={styles.emptyEmoji}>🔍</span>
+          <span className={styles.emptyIcon}>
+            <Search size={32} />
+          </span>
           <p>Nothing found for <strong>"{ searchQuery }"</strong></p>
           <p className={styles.emptyHint}>Try a different search or category</p>
         </div>

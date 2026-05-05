@@ -1,3 +1,4 @@
+import * as LucideIcons from 'lucide-react';
 import { ExternalLink } from 'lucide-react';
 import { CuratedItem } from '@/types';
 import styles from '@/components/ItemCard.module.css';
@@ -14,18 +15,41 @@ const BADGE_CLASS: Record<string, string> = {
   gem: 'badgeGem',
 };
 
+const BADGE_ICON: Record<string, string> = {
+  fire: 'Flame',
+  new: 'Sparkles',
+  og: 'Trophy',
+  gem: 'Gem',
+};
+
+function CardIcon({ name, size = 24 }: { name: string; size?: number }) {
+  const Icon = (LucideIcons as unknown as Record<string, LucideIcons.LucideIcon>)[name];
+  if (!Icon) return null;
+  return <Icon size={size} />;
+}
+
 export default function ItemCard({ item }: ItemCardProps) {
   const badgeClass = item.badgeType ? BADGE_CLASS[item.badgeType] : '';
+  const badgeIconName = item.badgeType ? BADGE_ICON[item.badgeType] : '';
 
   const cardContent = (
     <div className={clsx(styles.card, item.link && styles.cardLink)}>
       <div className={styles.top}>
-        <div className={styles.emojiBox}>
-          <span className={styles.emoji}>{item.imageEmoji || '✦'}</span>
+        <div className={styles.iconBox}>
+          {item.categoryIcon ? (
+            <CardIcon name={item.categoryIcon} size={22} />
+          ) : (
+            <LucideIcons.Star size={22} />
+          )}
         </div>
         <div className={styles.topRight}>
           {item.badge && (
             <span className={clsx(styles.badge, styles[badgeClass])}>
+              {badgeIconName && (
+                <span className={styles.badgeIconWrap}>
+                  <CardIcon name={badgeIconName} size={9} />
+                </span>
+              )}
               {item.badge}
             </span>
           )}
