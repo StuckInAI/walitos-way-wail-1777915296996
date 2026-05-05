@@ -1,5 +1,6 @@
+import { useRef } from 'react';
 import * as LucideIcons from 'lucide-react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, X, ArrowUpRight } from 'lucide-react';
 import { CuratedItem } from '@/types';
 import styles from '@/components/ItemCard.module.css';
 import clsx from 'clsx';
@@ -43,125 +44,236 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
   const badgeClass = item.badgeType ? BADGE_CLASS[item.badgeType] : '';
   const badgeIconName = item.badgeType ? BADGE_ICON[item.badgeType] : '';
   const accentColor = CATEGORY_COLOR[item.category] ?? '#FF4D00';
-  const isClickable = !!(item.link || onClick);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const handleClick = () => {
+  const openModal = (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.stopPropagation();
     if (onClick) {
       onClick(item);
-    } else if (item.link) {
-      window.open(item.link, '_blank', 'noopener,noreferrer');
+    }
+    dialogRef.current?.showModal();
+  };
+
+  const closeModal = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    dialogRef.current?.close();
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    if (e.target === dialogRef.current) {
+      dialogRef.current?.close();
     }
   };
 
-  const cardContent = (
-    <div
-      className={clsx(styles.card, isClickable && styles.cardLink)}
-      onClick={handleClick}
-      role={isClickable ? 'button' : undefined}
-      tabIndex={isClickable ? 0 : undefined}
-      onKeyDown={isClickable ? (e) => { if (e.key === 'Enter' || e.key === ' ') handleClick(); } : undefined}
-    >
-      {/* Bold image block */}
-      {item.image && (
-        <div className={styles.imageWrap}>
-          <img
-            src={item.image}
-            alt={item.imageAlt ?? item.title}
-            className={styles.image}
-            loading="lazy"
-          />
-          <div
-            className={styles.imageOverlay}
-            style={{ '--accent': accentColor } as React.CSSProperties}
-          />
-          {/* Category icon badge floated over image */}
-          <div className={styles.imageIconBadge}>
-            {item.categoryIcon ? (
-              <CardIcon name={item.categoryIcon} size={16} />
-            ) : (
-              <LucideIcons.Star size={16} />
-            )}
-          </div>
-          {/* Badge pill top-right of image */}
-          {item.badge && (
-            <span className={clsx(styles.badge, styles[badgeClass], styles.imageBadge)}>
-              {badgeIconName && (
-                <span className={styles.badgeIconWrap}>
-                  <CardIcon name={badgeIconName} size={9} />
+  return (
+    <>
+      {/* ── Card ── */}
+      <div className={styles.anchor}>
+        <div
+          className={clsx(styles.card, styles.cardLink)}
+          onClick={openModal}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openModal(e); }}
+        >
+          {/* Bold image block */}
+          {item.image && (
+            <div className={styles.imageWrap}>
+              <img
+                src={item.image}
+                alt={item.imageAlt ?? item.title}
+                className={styles.image}
+                loading="lazy"
+              />
+              <div
+                className={styles.imageOverlay}
+                style={{ '--accent': accentColor } as React.CSSProperties}
+              />
+              <div className={styles.imageIconBadge}>
+                {item.categoryIcon ? (
+                  <CardIcon name={item.categoryIcon} size={16} />
+                ) : (
+                  <LucideIcons.Star size={16} />
+                )}
+              </div>
+              {item.badge && (
+                <span className={clsx(styles.badge, styles[badgeClass], styles.imageBadge)}>
+                  {badgeIconName && (
+                    <span className={styles.badgeIconWrap}>
+                      <CardIcon name={badgeIconName} size={9} />
+                    </span>
+                  )}
+                  {item.badge}
                 </span>
               )}
-              {item.badge}
-            </span>
-          )}
-          {/* External link indicator on image */}
-          {item.link && (
-            <div className={styles.imageExternalLink}>
-              <ExternalLink size={14} />
+              {item.link && (
+                <div className={styles.imageExternalLink}>
+                  <ExternalLink size={14} />
+                </div>
+              )}
             </div>
           )}
-        </div>
-      )}
 
-      {/* No-image fallback header */}
-      {!item.image && (
-        <div className={styles.top}>
-          <div
-            className={styles.iconBox}
-            style={{ '--accent': accentColor } as React.CSSProperties}
-          >
-            {item.categoryIcon ? (
-              <CardIcon name={item.categoryIcon} size={22} />
-            ) : (
-              <LucideIcons.Star size={22} />
-            )}
+          {/* No-image fallback header */}
+          {!item.image && (
+            <div className={styles.top}>
+              <div
+                className={styles.iconBox}
+                style={{ '--accent': accentColor } as React.CSSProperties}
+              >
+                {item.categoryIcon ? (
+                  <CardIcon name={item.categoryIcon} size={22} />
+                ) : (
+                  <LucideIcons.Star size={22} />
+                )}
+              </div>
+              <div className={styles.topRight}>
+                {item.badge && (
+                  <span className={clsx(styles.badge, styles[badgeClass])}>
+                    {badgeIconName && (
+                      <span className={styles.badgeIconWrap}>
+                        <CardIcon name={badgeIconName} size={9} />
+                      </span>
+                    )}
+                    {item.badge}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className={styles.body}>
+            <div className={styles.titleRow}>
+              <h3 className={styles.title}>{item.title}</h3>
+            </div>
+            <p className={styles.description}>{item.description}</p>
           </div>
-          <div className={styles.topRight}>
+
+          <div className={styles.footer}>
+            <div className={styles.tags}>
+              {item.tags.slice(0, 3).map((tag) => (
+                <span key={tag} className={styles.tag}>#{tag}</span>
+              ))}
+            </div>
+            <span className={styles.footerOpen}>
+              <ArrowUpRight size={13} />
+              <span>View</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Modal / Detail overlay ── */}
+      <dialog
+        ref={dialogRef}
+        className={styles.modal}
+        onClick={handleBackdropClick}
+      >
+        <div
+          className={styles.modalInner}
+          style={{ '--accent': accentColor } as React.CSSProperties}
+        >
+          {/* Close button */}
+          <button
+            className={styles.closeBtn}
+            onClick={closeModal}
+            aria-label="Close"
+          >
+            <X size={18} />
+          </button>
+
+          {/* Image */}
+          {item.image && (
+            <div className={styles.modalImageWrap}>
+              <img
+                src={item.image.replace('w=800', 'w=1200')}
+                alt={item.imageAlt ?? item.title}
+                className={styles.modalImage}
+              />
+              <div
+                className={styles.modalImageOverlay}
+                style={{ '--accent': accentColor } as React.CSSProperties}
+              />
+              {/* Big title overlay on image */}
+              <div className={styles.modalImageTitle}>
+                <span
+                  className={styles.modalCategoryPill}
+                  style={{ background: accentColor }}
+                >
+                  {item.categoryIcon && <CardIcon name={item.categoryIcon} size={12} />}
+                  {item.category}
+                </span>
+                <h2 className={styles.modalTitle}>{item.title}</h2>
+              </div>
+            </div>
+          )}
+
+          {/* No-image title */}
+          {!item.image && (
+            <div
+              className={styles.modalNoImageHeader}
+              style={{ borderColor: accentColor }}
+            >
+              <div
+                className={styles.modalNoImageIcon}
+                style={{ color: accentColor }}
+              >
+                {item.categoryIcon ? (
+                  <CardIcon name={item.categoryIcon} size={40} />
+                ) : (
+                  <LucideIcons.Star size={40} />
+                )}
+              </div>
+              <div>
+                <span
+                  className={styles.modalCategoryPill}
+                  style={{ background: accentColor }}
+                >
+                  {item.category}
+                </span>
+                <h2 className={styles.modalTitle} style={{ color: '#fff', marginTop: 8 }}>{item.title}</h2>
+              </div>
+            </div>
+          )}
+
+          {/* Body */}
+          <div className={styles.modalBody}>
             {item.badge && (
-              <span className={clsx(styles.badge, styles[badgeClass])}>
+              <span className={clsx(styles.badge, styles[badgeClass], styles.modalBadge)}>
                 {badgeIconName && (
                   <span className={styles.badgeIconWrap}>
-                    <CardIcon name={badgeIconName} size={9} />
+                    <CardIcon name={badgeIconName} size={11} />
                   </span>
                 )}
                 {item.badge}
               </span>
             )}
+
+            <p className={styles.modalDescription}>{item.description}</p>
+
+            <div className={styles.modalTags}>
+              {item.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>#{tag}</span>
+              ))}
+            </div>
+
             {item.link && (
-              <span className={styles.linkIcon}>
-                <ExternalLink size={13} />
-              </span>
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.modalCta}
+                style={{ '--accent': accentColor, background: accentColor } as React.CSSProperties}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ExternalLink size={16} />
+                <span>Open link</span>
+                <ArrowUpRight size={16} />
+              </a>
             )}
           </div>
         </div>
-      )}
-
-      <div className={styles.body}>
-        <div className={styles.titleRow}>
-          <h3 className={styles.title}>{item.title}</h3>
-          {item.link && (
-            <span className={styles.linkIcon}>
-              <ExternalLink size={13} />
-            </span>
-          )}
-        </div>
-        <p className={styles.description}>{item.description}</p>
-      </div>
-
-      <div className={styles.footer}>
-        <div className={styles.tags}>
-          {item.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className={styles.tag}>#{tag}</span>
-          ))}
-        </div>
-        {item.link && (
-          <span className={styles.footerLink}>
-            <ExternalLink size={11} />
-            <span>Open link</span>
-          </span>
-        )}
-      </div>
-    </div>
+      </dialog>
+    </>
   );
-
-  return <div className={styles.anchor}>{cardContent}</div>;
 }
