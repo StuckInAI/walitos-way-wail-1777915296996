@@ -110,7 +110,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent, #fff);
   backdrop-filter: blur(6px);
   z-index: 2;
 }
@@ -253,6 +252,11 @@
   font-size: 13px;
   color: var(--color-text-secondary);
   line-height: 1.65;
+  /* clamp to 3 lines on card */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ── Footer ── */
@@ -353,7 +357,7 @@
   position: relative;
   background: var(--color-bg-card);
   border: 2px solid var(--accent, var(--color-accent));
-  width: min(640px, calc(100vw - 32px));
+  width: min(660px, calc(100vw - 32px));
   max-height: calc(100vh - 48px);
   overflow-y: auto;
   display: flex;
@@ -389,7 +393,6 @@
   cursor: pointer;
   transition: background var(--transition-base), border-color var(--transition-base);
   backdrop-filter: blur(8px);
-  /* ensure it is always clickable */
   pointer-events: all;
 }
 
@@ -499,7 +502,6 @@
 
 .modalNoImageIcon {
   flex-shrink: 0;
-  color: var(--accent, var(--color-accent));
 }
 
 /* Modal body */
@@ -520,6 +522,47 @@
   font-size: 15px;
   color: var(--color-text-secondary);
   line-height: 1.75;
+}
+
+/* Rating */
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.starFilled {
+  color: var(--color-neon-gold);
+}
+
+.starEmpty {
+  color: var(--color-border-hover);
+}
+
+.ratingLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-left: var(--space-2);
+  letter-spacing: 0.08em;
+}
+
+/* Meta row */
+.modalMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.modalMetaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .modalTags {

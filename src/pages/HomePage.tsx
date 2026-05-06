@@ -32,10 +32,11 @@ export default function HomePage() {
   }, [activeCategory, searchQuery]);
 
   const activeCount = filteredItems.length;
+  const totalCount = ITEMS.length;
 
   return (
     <div className={styles.page}>
-      <Hero />
+      <Hero totalCount={totalCount} />
 
       <div className={styles.controls}>
         <CategoryFilter
@@ -58,6 +59,11 @@ export default function HomePage() {
             </strong>
           </span>
         )}
+        {searchQuery && (
+          <span className={styles.categoryLabel}>
+            matching <strong>"{ searchQuery }"</strong>
+          </span>
+        )}
       </div>
 
       {filteredItems.length === 0 ? (
@@ -75,6 +81,13 @@ export default function HomePage() {
           ))}
         </div>
       )}
+
+      <footer className={styles.footer}>
+        <p className={styles.footerText}>
+          Walito's Way — {totalCount} curated picks, updated regularly.
+        </p>
+        <p className={styles.footerSub}>No ads. No affiliate links. Just real taste.</p>
+      </footer>
     </div>
   );
 }

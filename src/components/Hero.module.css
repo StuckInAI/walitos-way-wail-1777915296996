@@ -1,5 +1,5 @@
 .hero {
-  padding: var(--space-10) 0 var(--space-4);
+  padding: var(--space-10) 0 var(--space-8);
   border-bottom: 1px solid var(--color-border);
   margin-bottom: var(--space-4);
   position: relative;
@@ -33,6 +33,10 @@
   z-index: 1;
 }
 
+.eyebrowDivider {
+  color: var(--color-border-hover);
+}
+
 .dot {
   width: 7px;
   height: 7px;
@@ -48,7 +52,7 @@
 }
 
 .title {
-  font-size: clamp(36px, 7vw, 72px);
+  font-size: clamp(36px, 7vw, 80px);
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 1.0;
@@ -66,7 +70,7 @@
 .subtitle {
   font-size: clamp(14px, 2vw, 17px);
   color: var(--color-text-secondary);
-  max-width: 560px;
+  max-width: 600px;
   line-height: 1.7;
   margin-bottom: var(--space-8);
   position: relative;
@@ -79,6 +83,7 @@
   gap: var(--space-6);
   position: relative;
   z-index: 1;
+  margin-bottom: var(--space-8);
 }
 
 .stat {
@@ -106,4 +111,42 @@
   width: 1px;
   height: 36px;
   background: var(--color-border-hover);
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  position: relative;
+  z-index: 1;
+}
+
+.categoryChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.categoryChip:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+  .stats {
+    gap: var(--space-4);
+  }
+
+  .statNumber {
+    font-size: 20px;
+  }
 }

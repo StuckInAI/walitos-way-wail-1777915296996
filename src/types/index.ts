@@ -19,4 +19,8 @@ export type CuratedItem = {
   categoryIcon?: string;
   image?: string;
   imageAlt?: string;
+  // Extended fields for richer detail view
+  whyILoveIt?: string;
+  rating?: number; // 1-10
+  year?: string;   // year discovered or released
 };

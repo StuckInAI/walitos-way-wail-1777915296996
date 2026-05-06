@@ -1,6 +1,6 @@
 import { useRef, useCallback } from 'react';
 import * as LucideIcons from 'lucide-react';
-import { ExternalLink, X, ArrowUpRight } from 'lucide-react';
+import { ExternalLink, X, ArrowUpRight, Star } from 'lucide-react';
 import { CuratedItem } from '@/types';
 import styles from '@/components/ItemCard.module.css';
 import clsx from 'clsx';
@@ -25,19 +25,37 @@ const BADGE_ICON: Record<string, string> = {
 };
 
 const CATEGORY_COLOR: Record<string, string> = {
-  music: '#FF4D00',
-  gear: '#00C8FF',
-  clothing: '#C8A000',
-  food: '#FF2D6B',
-  apps: '#9B8FFF',
-  books: '#00C878',
-  places: '#FF8C00',
+  music:   '#FF4D00',
+  gear:    '#00C8FF',
+  clothing:'#C8A000',
+  food:    '#FF2D6B',
+  apps:    '#9B8FFF',
+  books:   '#00C878',
+  places:  '#FF8C00',
+  film:    '#E040FB',
+  design:  '#00BCD4',
 };
 
 function CardIcon({ name, size = 24 }: { name: string; size?: number }) {
   const Icon = (LucideIcons as unknown as Record<string, LucideIcons.LucideIcon>)[name];
   if (!Icon) return null;
   return <Icon size={size} />;
+}
+
+function RatingStars({ rating }: { rating: number }) {
+  return (
+    <div className={styles.ratingRow}>
+      {Array.from({ length: 10 }).map((_, i) => (
+        <Star
+          key={i}
+          size={10}
+          className={i < rating ? styles.starFilled : styles.starEmpty}
+          fill={i < rating ? 'currentColor' : 'none'}
+        />
+      ))}
+      <span className={styles.ratingLabel}>{rating}/10</span>
+    </div>
+  );
 }
 
 export default function ItemCard({ item, onClick }: ItemCardProps) {
@@ -58,9 +76,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
   const closeModal = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (dialogRef.current) {
-      dialogRef.current.close();
-    }
+    dialogRef.current?.close();
   }, []);
 
   const handleBackdropClick = useCallback((e: React.MouseEvent<HTMLDialogElement>) => {
@@ -79,6 +95,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
           role="button"
           tabIndex={0}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openModal(e); }}
+          style={{ '--accent': accentColor } as React.CSSProperties}
         >
           {/* Bold image block */}
           {item.image && (
@@ -93,7 +110,9 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
                 className={styles.imageOverlay}
                 style={{ '--accent': accentColor } as React.CSSProperties}
               />
-              <div className={styles.imageIconBadge}>
+              <div className={styles.imageIconBadge}
+                style={{ color: accentColor } as React.CSSProperties}
+              >
                 {item.categoryIcon ? (
                   <CardIcon name={item.categoryIcon} size={16} />
                 ) : (
@@ -110,11 +129,9 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
                   {item.badge}
                 </span>
               )}
-              {item.link && (
-                <div className={styles.imageExternalLink}>
-                  <ExternalLink size={14} />
-                </div>
-              )}
+              <div className={styles.imageExternalLink}>
+                <ArrowUpRight size={14} />
+              </div>
             </div>
           )}
 
@@ -200,7 +217,6 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
                 className={styles.modalImageOverlay}
                 style={{ '--accent': accentColor } as React.CSSProperties}
               />
-              {/* Big title overlay on image */}
               <div className={styles.modalImageTitle}>
                 <span
                   className={styles.modalCategoryPill}
@@ -256,6 +272,21 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
             )}
 
             <p className={styles.modalDescription}>{item.description}</p>
+
+            {item.rating && <RatingStars rating={item.rating} />}
+
+            <div className={styles.modalMeta}>
+              {item.year && (
+                <div className={styles.modalMetaItem}>
+                  <LucideIcons.Calendar size={13} />
+                  <span>Discovered {item.year}</span>
+                </div>
+              )}
+              <div className={styles.modalMetaItem}>
+                <LucideIcons.Tag size={13} />
+                <span style={{ textTransform: 'capitalize' }}>{item.category}</span>
+              </div>
+            </div>
 
             <div className={styles.modalTags}>
               {item.tags.map((tag) => (
