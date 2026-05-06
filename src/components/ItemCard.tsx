@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import * as LucideIcons from 'lucide-react';
 import { ExternalLink, X, ArrowUpRight } from 'lucide-react';
 import { CuratedItem } from '@/types';
@@ -46,33 +46,28 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
   const accentColor = CATEGORY_COLOR[item.category] ?? '#FF4D00';
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const openModal = (e: React.MouseEvent | React.KeyboardEvent) => {
+  const openModal = useCallback((e: React.MouseEvent | React.KeyboardEvent) => {
     e.stopPropagation();
     if (onClick) onClick(item);
-    // Close any other open dialogs first to avoid stacking
     document.querySelectorAll('dialog[open]').forEach((d) => {
       if (d !== dialogRef.current) (d as HTMLDialogElement).close();
     });
     dialogRef.current?.showModal();
-  };
+  }, [item, onClick]);
 
-  const closeModal = (e: React.MouseEvent) => {
+  const closeModal = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
-    dialogRef.current?.close();
-  };
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
+  }, []);
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
-    // The dialog element itself is the backdrop area outside modalInner
+  const handleBackdropClick = useCallback((e: React.MouseEvent<HTMLDialogElement>) => {
     if (e.target === dialogRef.current) {
       dialogRef.current?.close();
     }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDialogElement>) => {
-    if (e.key === 'Escape') {
-      dialogRef.current?.close();
-    }
-  };
+  }, []);
 
   return (
     <>
@@ -177,7 +172,6 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
         ref={dialogRef}
         className={styles.modal}
         onClick={handleBackdropClick}
-        onKeyDown={handleKeyDown}
       >
         <div
           className={styles.modalInner}
@@ -186,6 +180,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
         >
           {/* Close button */}
           <button
+            type="button"
             className={styles.closeBtn}
             onClick={closeModal}
             aria-label="Close"

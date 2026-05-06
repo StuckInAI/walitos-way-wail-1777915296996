@@ -324,18 +324,18 @@
   overflow: hidden;
   position: fixed;
   inset: 0;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+}
+
+.modal[open] {
+  display: flex;
 }
 
 .modal::backdrop {
   background: rgba(4, 4, 12, 0.88);
   backdrop-filter: blur(4px);
-}
-
-.modal[open] {
-  animation: modalFadeIn 0.2s ease-out;
 }
 
 @keyframes modalFadeIn {
@@ -359,6 +359,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: 8px 8px 0px var(--accent, var(--color-accent));
+  animation: modalFadeIn 0.2s ease-out;
 }
 
 .modalInner::-webkit-scrollbar {
@@ -388,6 +389,8 @@
   cursor: pointer;
   transition: background var(--transition-base), border-color var(--transition-base);
   backdrop-filter: blur(8px);
+  /* ensure it is always clickable */
+  pointer-events: all;
 }
 
 .closeBtn:hover {
