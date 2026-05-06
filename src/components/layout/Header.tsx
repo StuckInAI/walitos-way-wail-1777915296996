@@ -1,62 +1,56 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import * as LucideIcons from 'lucide-react';
 import styles from '@/components/layout/Header.module.css';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) =>
+    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <div className={styles.brand}>
-          <div
-            className={styles.avatarWrapper}
-            onMouseEnter={() => setTooltipVisible(true)}
-            onMouseLeave={() => setTooltipVisible(false)}
-          >
-            <img
-              src="/walito.jpg"
-              alt="Wa'il — Walito"
-              className={styles.avatar}
-              onError={(e) => {
-                const target = e.currentTarget as HTMLImageElement;
-                target.style.display = 'none';
-                const fallback = target.nextElementSibling as HTMLElement;
-                if (fallback) fallback.style.display = 'flex';
-              }}
-            />
-            <span className={styles.brandMark} style={{ display: 'none' }}>W</span>
-            {tooltipVisible && (
-              <div className={styles.tooltip}>Hi, I'm Wa'il 👋</div>
-            )}
-          </div>
+        <Link to="/" className={styles.brand}>
+          <div className={styles.brandMark}>W</div>
           <div className={styles.brandText}>
             <span className={styles.brandName}>Walito's Way</span>
             <span className={styles.brandTagline}>curated cool</span>
           </div>
-        </div>
+        </Link>
 
         <nav className={styles.nav}>
-          <a href="#" className={styles.navLink}>
-            <LucideIcons.List size={13} />
+          <Link
+            to="/"
+            className={`${styles.navLink} ${isActive('/') ? styles.navLinkActive : ''}`}
+          >
+            <LucideIcons.LayoutGrid size={13} />
             The List
-          </a>
-          <a href="#" className={styles.navLink}>
-            <LucideIcons.Info size={13} />
+          </Link>
+          <Link
+            to="/about"
+            className={`${styles.navLink} ${isActive('/about') ? styles.navLinkActive : ''}`}
+          >
+            <LucideIcons.User size={13} />
             About
-          </a>
-          <a href="#" className={styles.navLink}>
+          </Link>
+          <Link
+            to="/updates"
+            className={`${styles.navLink} ${isActive('/updates') ? styles.navLinkActive : ''}`}
+          >
             <LucideIcons.Rss size={13} />
             Updates
-          </a>
+          </Link>
         </nav>
 
         <div className={styles.meta}>
-          <span className={styles.pill}>
-            <LucideIcons.Sparkles size={11} />
-            Walito's Picks
-          </span>
+          <Link to="/newsletter" className={styles.ctaBtn}>
+            <LucideIcons.Mail size={13} />
+            Get The List
+            <LucideIcons.ArrowRight size={13} />
+          </Link>
           <button
             className={styles.menuBtn}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -69,18 +63,22 @@ export default function Header() {
 
       {menuOpen && (
         <div className={styles.mobileMenu}>
-          <a href="#" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
-            <LucideIcons.List size={15} />
+          <Link to="/" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.LayoutGrid size={15} />
             The List
-          </a>
-          <a href="#" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
-            <LucideIcons.Info size={15} />
+          </Link>
+          <Link to="/about" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.User size={15} />
             About
-          </a>
-          <a href="#" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+          </Link>
+          <Link to="/updates" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
             <LucideIcons.Rss size={15} />
             Updates
-          </a>
+          </Link>
+          <Link to="/newsletter" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.Mail size={15} />
+            Get The List
+          </Link>
         </div>
       )}
     </header>

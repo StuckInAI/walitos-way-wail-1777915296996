@@ -27,6 +27,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Mic2',
     image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80',
     imageAlt: 'Concert stage with dramatic lighting',
+    dateAdded: 'January 2024',
   },
   {
     id: 'music-2',
@@ -40,6 +41,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Piano',
     image: 'https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=800&q=80',
     imageAlt: 'Electronic music studio with glowing synths',
+    dateAdded: 'March 2023',
   },
   {
     id: 'music-3',
@@ -53,6 +55,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Crown',
     image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80',
     imageAlt: 'Moody music recording session',
+    dateAdded: 'December 2024',
   },
   {
     id: 'music-4',
@@ -66,6 +69,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Waves',
     image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80',
     imageAlt: 'DJ mixing board with neon lights',
+    dateAdded: 'June 2022',
   },
   {
     id: 'music-5',
@@ -79,6 +83,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Guitar',
     image: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&q=80',
     imageAlt: 'Electric guitar close up with dramatic shadows',
+    dateAdded: 'February 2024',
   },
   {
     id: 'music-6',
@@ -92,6 +97,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Bot',
     image: 'https://images.unsplash.com/photo-1598387993281-cecf8b71a8f8?w=800&q=80',
     imageAlt: 'Abstract electronic waveform visualization',
+    dateAdded: 'August 2021',
   },
   {
     id: 'music-7',
@@ -105,6 +111,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Music',
     image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&q=80',
     imageAlt: 'Moody solo musician in blue studio light',
+    dateAdded: 'May 2022',
   },
   {
     id: 'music-8',
@@ -118,6 +125,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'AudioWaveform',
     image: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=800&q=80',
     imageAlt: 'Abstract sound waves in dark studio',
+    dateAdded: 'October 2023',
   },
   // GEAR
   {
@@ -132,6 +140,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Headphones',
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80',
     imageAlt: 'Sleek headphones on minimal surface',
+    dateAdded: 'April 2023',
   },
   {
     id: 'gear-2',
@@ -145,6 +154,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'PenLine',
     image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80',
     imageAlt: 'Minimal tablet and pen on desk',
+    dateAdded: 'November 2022',
   },
   {
     id: 'gear-3',
@@ -158,6 +168,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Keyboard',
     image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&q=80',
     imageAlt: 'Mechanical keyboard with dramatic side lighting',
+    dateAdded: 'July 2023',
   },
   {
     id: 'gear-4',
@@ -169,6 +180,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Lightbulb',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     imageAlt: 'Studio lighting setup with warm glow',
+    dateAdded: 'September 2022',
   },
   {
     id: 'gear-5',
@@ -182,6 +194,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Watch',
     image: 'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=800&q=80',
     imageAlt: 'Rugged smartwatch on wrist in outdoor setting',
+    dateAdded: 'January 2024',
   },
   {
     id: 'gear-6',
@@ -195,6 +208,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Music2',
     image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80',
     imageAlt: 'Colorful portable synthesizer on wooden surface',
+    dateAdded: 'June 2023',
   },
   {
     id: 'gear-7',
@@ -208,6 +222,35 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'LayoutList',
     image: 'https://images.unsplash.com/photo-1586281380117-5a60ae2050cc?w=800&q=80',
     imageAlt: 'Clean desk with card system and minimal objects',
+    dateAdded: 'March 2023',
+  },
+  {
+    id: 'gear-8',
+    title: 'Eufairy UV Printer',
+    description: 'A desktop UV flatbed printer that prints directly onto almost any surface — wood, acrylic, leather, metal, glass. The resolution is sharp and the UV-cured ink is instant-dry and durable. I use it for custom merch prototypes and one-off creative projects. Nobody talks about this machine enough.',
+    category: 'gear',
+    tags: ['printing', 'uv', 'creative', 'diy'],
+    link: 'https://www.eufairy.com',
+    badge: 'GEM',
+    badgeType: 'gem',
+    categoryIcon: 'Printer',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    imageAlt: 'Professional UV flatbed printer in studio',
+    dateAdded: 'October 2024',
+  },
+  {
+    id: 'gear-9',
+    title: 'Rabbit R1',
+    description: 'Controversial but I stand by it — the R1 is a glimpse at what AI hardware can be. The Large Action Model approach is genuinely different from just putting GPT in a box. It\'s imperfect and that\'s fine. First-gen hardware always is. The form factor is charming and Teenage Engineering designed it, which tells you everything.',
+    category: 'gear',
+    tags: ['ai', 'hardware', 'portable', 'assistant'],
+    link: 'https://www.rabbit.tech',
+    badge: 'NEW',
+    badgeType: 'new',
+    categoryIcon: 'Bot',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80',
+    imageAlt: 'Rabbit R1 AI device orange compact hardware',
+    dateAdded: 'April 2024',
   },
   // CLOTHING
   {
@@ -222,6 +265,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Shirt',
     image: 'https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=800&q=80',
     imageAlt: 'Editorial streetwear lookbook shot',
+    dateAdded: 'May 2022',
   },
   {
     id: 'clothing-2',
@@ -235,6 +279,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Footprints',
     image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80',
     imageAlt: 'Sneakers on concrete with bold shadow',
+    dateAdded: 'August 2023',
   },
   {
     id: 'clothing-3',
@@ -248,6 +293,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Wind',
     image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80',
     imageAlt: 'Outdoor jacket against mountain backdrop',
+    dateAdded: 'October 2021',
   },
   {
     id: 'clothing-4',
@@ -261,6 +307,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Layers',
     image: 'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=800&q=80',
     imageAlt: 'Bold designer footwear on graphic background',
+    dateAdded: 'July 2022',
   },
   {
     id: 'clothing-5',
@@ -271,6 +318,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Swords',
     image: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=80',
     imageAlt: 'Monochrome military inspired fashion editorial',
+    dateAdded: 'March 2022',
   },
   {
     id: 'clothing-6',
@@ -284,6 +332,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Scissors',
     image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80',
     imageAlt: 'Minimal fashion editorial in muted tones',
+    dateAdded: 'January 2023',
   },
   // FOOD
   {
@@ -298,6 +347,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'UtensilsCrossed',
     image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&q=80',
     imageAlt: 'Steaming ramen bowl close up',
+    dateAdded: 'February 2023',
   },
   {
     id: 'food-2',
@@ -309,6 +359,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Milk',
     image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
     imageAlt: 'Latte art in ceramic cup on wooden table',
+    dateAdded: 'April 2022',
   },
   {
     id: 'food-3',
@@ -322,6 +373,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Flame',
     image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&q=80',
     imageAlt: 'Vibrant red chili oil with dramatic lighting',
+    dateAdded: 'June 2022',
   },
   {
     id: 'food-4',
@@ -335,6 +387,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Coffee',
     image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&q=80',
     imageAlt: 'Specialty coffee pour over in minimalist setting',
+    dateAdded: 'January 2022',
   },
   {
     id: 'food-5',
@@ -346,6 +399,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Soup',
     image: 'https://images.unsplash.com/photo-1521483451569-e33803c0330c?w=800&q=80',
     imageAlt: 'Colorful cereal bowl with bold graphic feel',
+    dateAdded: 'August 2022',
   },
   {
     id: 'food-6',
@@ -359,6 +413,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Leaf',
     image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=80',
     imageAlt: 'Colorful spices in bowls with warm light',
+    dateAdded: 'November 2023',
   },
   // APPS
   {
@@ -373,6 +428,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'BrainCircuit',
     image: 'https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?w=800&q=80',
     imageAlt: 'Dark terminal interface with glowing text',
+    dateAdded: 'March 2022',
   },
   {
     id: 'apps-2',
@@ -386,6 +442,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Globe',
     image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80',
     imageAlt: 'Colorful browser UI on laptop screen',
+    dateAdded: 'September 2022',
   },
   {
     id: 'apps-3',
@@ -399,6 +456,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'LayoutDashboard',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
     imageAlt: 'Clean dark dashboard UI on monitor',
+    dateAdded: 'January 2023',
   },
   {
     id: 'apps-4',
@@ -412,6 +470,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Rocket',
     image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80',
     imageAlt: 'Futuristic command interface with neon glow',
+    dateAdded: 'July 2022',
   },
   {
     id: 'apps-5',
@@ -425,6 +484,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'SearchCode',
     image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80',
     imageAlt: 'AI interface with glowing abstract visualization',
+    dateAdded: 'February 2024',
   },
   {
     id: 'apps-6',
@@ -438,6 +498,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Code2',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
     imageAlt: 'Dark code editor with colorful syntax highlighting',
+    dateAdded: 'November 2023',
   },
   {
     id: 'apps-7',
@@ -451,6 +512,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'BookOpenCheck',
     image: 'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&q=80',
     imageAlt: 'Clean reading interface on tablet device',
+    dateAdded: 'April 2023',
   },
   // BOOKS
   {
@@ -465,6 +527,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Palette',
     image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
     imageAlt: 'Stack of bold design books on minimal surface',
+    dateAdded: 'February 2023',
   },
   {
     id: 'books-2',
@@ -477,6 +540,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'ScrollText',
     image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&q=80',
     imageAlt: 'Ancient manuscript aesthetic with dramatic lighting',
+    dateAdded: 'June 2021',
   },
   {
     id: 'books-3',
@@ -489,6 +553,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'BookMarked',
     image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
     imageAlt: 'Weathered book in harsh desert light',
+    dateAdded: 'September 2021',
   },
   {
     id: 'books-4',
@@ -502,6 +567,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Eye',
     image: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=800&q=80',
     imageAlt: 'Art book open with bold graphic imagery',
+    dateAdded: 'November 2021',
   },
   {
     id: 'books-5',
@@ -515,12 +581,13 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Globe2',
     image: 'https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?w=800&q=80',
     imageAlt: 'Desert landscape with dramatic sky and light',
+    dateAdded: 'April 2021',
   },
   // PLACES
   {
     id: 'places-1',
     title: 'Tokyo, Japan',
-    description: 'The most stimulating city on earth. Food, fashion, architecture, culture — nothing compares. The sensory density is staggering and yet it never feels chaotic. Somehow the most orderly overwhelming city imaginable.',
+    description: 'I\'ve been 4 times. The city that keeps surprising me — the basement food halls alone justify the flight. Best ramen I\'ve ever had was a counter with 6 seats in Shinjuku at 1am. The sensory density is staggering and yet it never feels chaotic.',
     category: 'places',
     tags: ['asia', 'city', 'food', 'fashion'],
     badge: 'TOP',
@@ -528,6 +595,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Building2',
     image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80',
     imageAlt: 'Tokyo neon streets at night',
+    dateAdded: 'March 2023',
   },
   {
     id: 'places-2',
@@ -540,6 +608,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Sun',
     image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80',
     imageAlt: 'Lisbon colorful tiled building in golden light',
+    dateAdded: 'October 2022',
   },
   {
     id: 'places-3',
@@ -552,6 +621,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'MountainSnow',
     image: 'https://images.unsplash.com/photo-1518638150340-f706e86654de?w=800&q=80',
     imageAlt: 'Oaxaca colorful market with bold architecture',
+    dateAdded: 'June 2023',
   },
   {
     id: 'places-4',
@@ -564,6 +634,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Sparkles',
     image: 'https://images.unsplash.com/photo-1601621915196-2621bfb0cd6e?w=800&q=80',
     imageAlt: 'Seoul skyline with vibrant city lights at dusk',
+    dateAdded: 'January 2024',
   },
   {
     id: 'places-5',
@@ -576,6 +647,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'MapPin',
     image: 'https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=800&q=80',
     imageAlt: 'Mexico City colorful streets and architecture',
+    dateAdded: 'August 2023',
   },
   // FILM
   {
@@ -589,6 +661,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Clapperboard',
     image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80',
     imageAlt: 'Dramatic film noir cinema aesthetic with deep shadows',
+    dateAdded: 'May 2021',
   },
   {
     id: 'film-2',
@@ -601,6 +674,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Award',
     image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80',
     imageAlt: 'Cinematic wide shot with dramatic architectural framing',
+    dateAdded: 'July 2021',
   },
   {
     id: 'film-3',
@@ -613,6 +687,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Zap',
     image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&q=80',
     imageAlt: 'Neon cyberpunk city at night with dramatic rain',
+    dateAdded: 'September 2021',
   },
   // DESIGN
   {
@@ -626,6 +701,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'PenTool',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     imageAlt: 'Minimal industrial product design on white surface',
+    dateAdded: 'February 2022',
   },
   {
     id: 'design-2',
@@ -639,6 +715,7 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Vector',
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
     imageAlt: 'Colorful UI design components on dark canvas',
+    dateAdded: 'April 2022',
   },
   {
     id: 'design-3',
@@ -651,5 +728,21 @@ export const ITEMS: CuratedItem[] = [
     categoryIcon: 'Type',
     image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80',
     imageAlt: 'Bold graphic design editorial spread on flat surface',
+    dateAdded: 'August 2022',
+  },
+  // JMM GLASS
+  {
+    id: 'design-4',
+    title: 'JMM Glass',
+    description: 'Functional glass art at the highest level. JMM pieces sit at the intersection of craft and sculpture — the kind of object that changes the energy of any room it\'s in. Every piece is worked by hand and it shows. If you know, you know.',
+    category: 'design',
+    tags: ['glass', 'art', 'functional', 'craft'],
+    link: 'https://www.jmmglass.com',
+    badge: 'GEM',
+    badgeType: 'gem',
+    categoryIcon: 'Gem',
+    image: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&q=80',
+    imageAlt: 'Handcrafted blown glass art piece with light refraction',
+    dateAdded: 'November 2024',
   },
 ];

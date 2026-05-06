@@ -9,9 +9,6 @@ export default function Layout() {
       <main className={styles.main}>
         <Outlet />
       </main>
-      <footer className={styles.footer}>
-        <p>Walito's Way — curated with love ✦</p>
-      </footer>
     </div>
   );
 }

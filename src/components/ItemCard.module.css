@@ -83,7 +83,6 @@
   opacity: 0.32;
 }
 
-/* Scanline texture */
 .imageOverlay::before {
   content: '';
   position: absolute;
@@ -216,13 +215,6 @@
   border: 1.5px solid var(--color-neon-violet);
 }
 
-.linkIcon {
-  color: var(--color-text-muted);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
 /* ── Body ── */
 .body {
   flex: 1;
@@ -252,7 +244,6 @@
   font-size: 13px;
   color: var(--color-text-secondary);
   line-height: 1.65;
-  /* clamp to 3 lines on card */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -274,6 +265,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
 }
 
 .tag {
@@ -287,11 +280,36 @@
   text-transform: uppercase;
   border: 1px solid var(--color-border);
   transition: color var(--transition-fast), border-color var(--transition-fast);
+  white-space: nowrap;
 }
 
 .tag:hover {
   color: var(--accent, var(--color-accent));
   border-color: var(--accent, var(--color-accent));
+}
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.dateAdded {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.card:hover .dateAdded {
+  opacity: 1;
 }
 
 .footerOpen {
@@ -439,7 +457,6 @@
   mix-blend-mode: color;
 }
 
-/* Scanlines on modal image too */
 .modalImageOverlay::before {
   content: '';
   position: absolute;

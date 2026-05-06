@@ -1,6 +1,6 @@
 import { useRef, useCallback } from 'react';
 import * as LucideIcons from 'lucide-react';
-import { ExternalLink, X, ArrowUpRight, Star } from 'lucide-react';
+import { ExternalLink, X, ArrowUpRight, Star, Calendar } from 'lucide-react';
 import { CuratedItem } from '@/types';
 import styles from '@/components/ItemCard.module.css';
 import clsx from 'clsx';
@@ -176,10 +176,18 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
                 <span key={tag} className={styles.tag}>#{tag}</span>
               ))}
             </div>
-            <span className={styles.footerOpen}>
-              <ArrowUpRight size={13} />
-              <span>View</span>
-            </span>
+            <div className={styles.footerRight}>
+              {item.dateAdded && (
+                <span className={styles.dateAdded}>
+                  <Calendar size={10} />
+                  {item.dateAdded}
+                </span>
+              )}
+              <span className={styles.footerOpen}>
+                <ArrowUpRight size={13} />
+                <span>View</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -276,9 +284,15 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
             {item.rating && <RatingStars rating={item.rating} />}
 
             <div className={styles.modalMeta}>
+              {item.dateAdded && (
+                <div className={styles.modalMetaItem}>
+                  <Calendar size={13} />
+                  <span>Added {item.dateAdded}</span>
+                </div>
+              )}
               {item.year && (
                 <div className={styles.modalMetaItem}>
-                  <LucideIcons.Calendar size={13} />
+                  <LucideIcons.Clock size={13} />
                   <span>Discovered {item.year}</span>
                 </div>
               )}
