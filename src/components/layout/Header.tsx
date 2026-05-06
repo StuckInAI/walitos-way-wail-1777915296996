@@ -4,12 +4,33 @@ import styles from '@/components/layout/Header.module.css';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
         <div className={styles.brand}>
-          <span className={styles.brandMark}>W</span>
+          <div
+            className={styles.avatarWrapper}
+            onMouseEnter={() => setTooltipVisible(true)}
+            onMouseLeave={() => setTooltipVisible(false)}
+          >
+            <img
+              src="https://i.imgur.com/8bJbL9M.jpeg"
+              alt="Wa'il — Walito"
+              className={styles.avatar}
+              onError={(e) => {
+                const target = e.currentTarget as HTMLImageElement;
+                target.style.display = 'none';
+                const fallback = target.nextElementSibling as HTMLElement;
+                if (fallback) fallback.style.display = 'flex';
+              }}
+            />
+            <span className={styles.brandMark} style={{ display: 'none' }}>W</span>
+            {tooltipVisible && (
+              <div className={styles.tooltip}>Hi, I'm Wa'il 👋</div>
+            )}
+          </div>
           <div className={styles.brandText}>
             <span className={styles.brandName}>Walito's Way</span>
             <span className={styles.brandTagline}>curated cool</span>
