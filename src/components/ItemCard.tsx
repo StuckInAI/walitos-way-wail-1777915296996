@@ -48,9 +48,11 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
 
   const openModal = (e: React.MouseEvent | React.KeyboardEvent) => {
     e.stopPropagation();
-    if (onClick) {
-      onClick(item);
-    }
+    if (onClick) onClick(item);
+    // Close any other open dialogs first to avoid stacking
+    document.querySelectorAll('dialog[open]').forEach((d) => {
+      if (d !== dialogRef.current) (d as HTMLDialogElement).close();
+    });
     dialogRef.current?.showModal();
   };
 
@@ -60,7 +62,14 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
   };
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    // The dialog element itself is the backdrop area outside modalInner
     if (e.target === dialogRef.current) {
+      dialogRef.current?.close();
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDialogElement>) => {
+    if (e.key === 'Escape') {
       dialogRef.current?.close();
     }
   };
@@ -168,10 +177,12 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
         ref={dialogRef}
         className={styles.modal}
         onClick={handleBackdropClick}
+        onKeyDown={handleKeyDown}
       >
         <div
           className={styles.modalInner}
           style={{ '--accent': accentColor } as React.CSSProperties}
+          onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
           <button
