@@ -2,11 +2,39 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 10, 10, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(8, 8, 16, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-border);
   height: var(--header-height);
+}
+
+/* Rainbow / neon top-edge line */
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent)    0%,
+    var(--color-neon-pink)   18%,
+    var(--color-neon-violet) 36%,
+    var(--color-neon-cyan)   54%,
+    var(--color-neon-green)  72%,
+    var(--color-neon-gold)   90%,
+    var(--color-accent)      100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
 }
 
 .inner {
@@ -36,8 +64,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-md);
+  border-radius: 0;
   flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(255, 77, 0, 0.5),
+              4px 4px 0 var(--color-neon-pink);
 }
 
 .brandText {
@@ -48,7 +78,7 @@
 
 .brandName {
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
   line-height: 1;
@@ -57,7 +87,7 @@
 .brandTagline {
   font-size: 11px;
   color: var(--color-text-muted);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1;
 }
@@ -72,14 +102,15 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
-  background: var(--color-accent-muted);
-  color: var(--color-accent);
-  border: 1px solid rgba(255, 77, 0, 0.2);
+  background: var(--color-muted-cyan);
+  color: var(--color-neon-cyan);
+  border: 1px solid rgba(0, 245, 255, 0.25);
   padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-full);
+  border-radius: 0;
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.15);
 }
 
 @media (max-width: 480px) {

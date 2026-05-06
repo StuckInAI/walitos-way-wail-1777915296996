@@ -21,8 +21,9 @@
 }
 
 .count {
-  font-weight: 600;
-  color: var(--color-text-secondary);
+  font-weight: 700;
+  color: var(--color-neon-cyan);
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.4);
 }
 
 .categoryLabel {
@@ -31,14 +32,13 @@
 
 .categoryLabel strong {
   color: var(--color-text-secondary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--space-5);
-  /* Offset so card hover shadows don't get clipped */
   padding: var(--space-2);
   margin: calc(-1 * var(--space-2));
 }
@@ -59,8 +59,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-muted);
+  color: var(--color-neon-violet);
   margin-bottom: var(--space-2);
+  filter: drop-shadow(0 0 12px var(--color-neon-violet));
 }
 
 .emptyHint {

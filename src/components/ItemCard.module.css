@@ -22,14 +22,15 @@
 }
 
 .cardLink:focus {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--accent, var(--color-accent));
   outline-offset: 2px;
 }
 
 .card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 6px 6px 0px var(--color-accent);
-  border-color: var(--color-accent);
+  transform: translate(-4px, -4px);
+  box-shadow: 6px 6px 0px var(--accent, var(--color-accent)),
+              0 0 40px rgba(var(--accent-rgb, 255 77 0) / 0.25);
+  border-color: var(--accent, var(--color-accent));
   z-index: 1;
 }
 
@@ -48,13 +49,13 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: grayscale(30%) contrast(1.1);
+  filter: grayscale(20%) contrast(1.15) saturate(0.9);
   transition: transform var(--transition-slow), filter var(--transition-slow);
 }
 
 .card:hover .image {
-  transform: scale(1.04);
-  filter: grayscale(0%) contrast(1.15);
+  transform: scale(1.05);
+  filter: grayscale(0%) contrast(1.2) saturate(1.1);
 }
 
 .imageOverlay {
@@ -62,8 +63,8 @@
   inset: 0;
   background: linear-gradient(
     160deg,
-    transparent 30%,
-    rgba(0, 0, 0, 0.72) 100%
+    transparent 20%,
+    rgba(0, 0, 0, 0.78) 100%
   );
   mix-blend-mode: multiply;
   pointer-events: none;
@@ -74,13 +75,29 @@
   position: absolute;
   inset: 0;
   background: var(--accent, #FF4D00);
-  opacity: 0.12;
+  opacity: 0.18;
   mix-blend-mode: color;
   transition: opacity var(--transition-base);
 }
 
 .card:hover .imageOverlay::after {
-  opacity: 0.22;
+  opacity: 0.32;
+}
+
+/* Scanline texture */
+.imageOverlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 .imageIconBadge {
@@ -89,13 +106,14 @@
   left: var(--space-3);
   width: 32px;
   height: 32px;
-  background: rgba(0, 0, 0, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--accent, #fff);
   backdrop-filter: blur(6px);
+  z-index: 2;
 }
 
 .imageExternalLink {
@@ -104,16 +122,17 @@
   right: var(--space-3);
   width: 28px;
   height: 28px;
-  background: rgba(0, 0, 0, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(6px);
   opacity: 0;
   transform: translateY(4px);
   transition: opacity var(--transition-base), transform var(--transition-base);
+  z-index: 2;
 }
 
 .card:hover .imageExternalLink {
@@ -125,6 +144,7 @@
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
+  z-index: 2;
 }
 
 /* ── No-image header ── */
@@ -140,12 +160,13 @@
   width: 48px;
   height: 48px;
   background: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--accent, var(--color-border));
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   color: var(--accent, var(--color-accent));
+  box-shadow: 0 0 12px rgba(var(--accent-rgb, 255 77 0) / 0.3);
 }
 
 .topRight {
@@ -178,24 +199,28 @@
   background: var(--color-accent);
   color: #fff;
   border: 1.5px solid var(--color-accent);
+  box-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
 }
 
 .badgeNew {
-  background: #00C878;
+  background: var(--color-neon-green);
   color: #000;
-  border: 1.5px solid #00C878;
+  border: 1.5px solid var(--color-neon-green);
+  box-shadow: 0 0 10px rgba(0, 255, 135, 0.4);
 }
 
 .badgeOg {
-  background: #C8A000;
+  background: var(--color-neon-gold);
   color: #000;
-  border: 1.5px solid #C8A000;
+  border: 1.5px solid var(--color-neon-gold);
+  box-shadow: 0 0 10px rgba(255, 184, 0, 0.4);
 }
 
 .badgeGem {
-  background: #9B8FFF;
-  color: #000;
-  border: 1.5px solid #9B8FFF;
+  background: var(--color-neon-violet);
+  color: #fff;
+  border: 1.5px solid var(--color-neon-violet);
+  box-shadow: 0 0 10px rgba(191, 95, 255, 0.4);
 }
 
 .linkIcon {
@@ -263,6 +288,12 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border: 1px solid var(--color-border);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tag:hover {
+  color: var(--accent, var(--color-neon-cyan));
+  border-color: var(--accent, var(--color-neon-cyan));
 }
 
 .footerOpen {
@@ -273,11 +304,12 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--accent, var(--color-accent));
   white-space: nowrap;
   opacity: 0;
   transition: opacity var(--transition-base);
   flex-shrink: 0;
+  text-shadow: 0 0 8px var(--accent, var(--color-accent));
 }
 
 .card:hover .footerOpen {
@@ -289,7 +321,6 @@
 ══════════════════════════════════════════════ */
 
 .modal {
-  /* Reset browser default dialog styles */
   border: none;
   padding: 0;
   background: transparent;
@@ -298,7 +329,6 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  /* Center */
   position: fixed;
   inset: 0;
   display: flex;
@@ -307,19 +337,18 @@
 }
 
 .modal::backdrop {
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(4px);
+  background: rgba(4, 4, 12, 0.9);
+  backdrop-filter: blur(6px);
 }
 
-/* Animate in */
 .modal[open] {
-  animation: modalFadeIn 0.18s ease-out;
+  animation: modalFadeIn 0.2s ease-out;
 }
 
 @keyframes modalFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.97) translateY(12px);
+    transform: scale(0.96) translateY(16px);
   }
   to {
     opacity: 1;
@@ -336,10 +365,12 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  box-shadow: 8px 8px 0px var(--accent, var(--color-accent));
+  box-shadow:
+    8px 8px 0px var(--accent, var(--color-accent)),
+    0 0 60px rgba(var(--accent-rgb, 255 77 0) / 0.3),
+    inset 0 0 80px rgba(0,0,0,0.4);
 }
 
-/* Custom scrollbar inside modal */
 .modalInner::-webkit-scrollbar {
   width: 4px;
 }
@@ -358,20 +389,21 @@
   z-index: 10;
   width: 36px;
   height: 36px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   border: 1.5px solid rgba(255, 255, 255, 0.2);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background var(--transition-base), border-color var(--transition-base);
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
   backdrop-filter: blur(8px);
 }
 
 .closeBtn:hover {
   background: var(--accent, var(--color-accent));
   border-color: var(--accent, var(--color-accent));
+  box-shadow: 0 0 16px var(--accent, var(--color-accent));
 }
 
 /* Modal image */
@@ -389,7 +421,7 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: grayscale(10%) contrast(1.1);
+  filter: grayscale(10%) contrast(1.15) saturate(1.05);
 }
 
 .modalImageOverlay {
@@ -398,7 +430,7 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(0, 0, 0, 0.85) 100%
+    rgba(4, 4, 12, 0.9) 100%
   );
   pointer-events: none;
 }
@@ -408,8 +440,24 @@
   position: absolute;
   inset: 0;
   background: var(--accent, #FF4D00);
-  opacity: 0.15;
+  opacity: 0.2;
   mix-blend-mode: color;
+}
+
+/* Scanlines on modal image too */
+.modalImageOverlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.07) 2px,
+    rgba(0,0,0,0.07) 4px
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 .modalImageTitle {
@@ -421,6 +469,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  z-index: 2;
 }
 
 .modalTitle {
@@ -430,7 +479,7 @@
   letter-spacing: -0.03em;
   text-transform: uppercase;
   line-height: 1.05;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 40px var(--accent, transparent);
 }
 
 .modalCategoryPill {
@@ -445,6 +494,7 @@
   color: #000;
   border-radius: 0;
   width: fit-content;
+  box-shadow: 0 0 12px rgba(255,255,255,0.2);
 }
 
 /* No-image modal header */
@@ -454,10 +504,16 @@
   gap: var(--space-5);
   padding: var(--space-8) var(--space-6) var(--space-5);
   border-left: 4px solid;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--accent-rgb, 255 77 0) / 0.08) 0%,
+    transparent 60%
+  );
 }
 
 .modalNoImageIcon {
   flex-shrink: 0;
+  filter: drop-shadow(0 0 12px var(--accent, #FF4D00));
 }
 
 /* Modal body */
@@ -503,9 +559,10 @@
 }
 
 .modalCta:hover {
-  filter: brightness(1.1);
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 rgba(255,255,255,0.15);
+  filter: brightness(1.15);
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 rgba(255,255,255,0.2),
+              0 0 24px var(--accent, var(--color-accent));
 }
 
 @media (max-width: 640px) {
@@ -515,7 +572,8 @@
     border-left: none;
     border-right: none;
     border-bottom: none;
-    box-shadow: 0 -4px 0 var(--accent, var(--color-accent));
+    box-shadow: 0 -4px 0 var(--accent, var(--color-accent)),
+                0 -20px 60px rgba(var(--accent-rgb, 255 77 0) / 0.2);
     position: fixed;
     bottom: 0;
     border-radius: 0;

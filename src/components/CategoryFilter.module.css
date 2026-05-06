@@ -20,12 +20,14 @@
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-full);
-  font-size: 13px;
-  font-weight: 500;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--color-text-secondary);
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   white-space: nowrap;
   transition: all var(--transition-fast);
   cursor: pointer;
@@ -38,9 +40,46 @@
 }
 
 .btnActive {
+  color: #000 !important;
+  border-color: transparent !important;
+  text-shadow: none;
+}
+
+/* Per-category active colors */
+.btnActive[data-cat="all"] {
   background: var(--color-accent) !important;
-  border-color: var(--color-accent) !important;
-  color: white !important;
+  box-shadow: 0 0 18px rgba(255, 77, 0, 0.5) !important;
+}
+.btnActive[data-cat="music"] {
+  background: var(--color-accent) !important;
+  box-shadow: 0 0 18px rgba(255, 77, 0, 0.5) !important;
+}
+.btnActive[data-cat="gear"] {
+  background: var(--color-neon-cyan) !important;
+  box-shadow: 0 0 18px rgba(0, 245, 255, 0.5) !important;
+}
+.btnActive[data-cat="clothing"] {
+  background: var(--color-neon-gold) !important;
+  box-shadow: 0 0 18px rgba(255, 184, 0, 0.5) !important;
+}
+.btnActive[data-cat="food"] {
+  background: var(--color-neon-pink) !important;
+  color: #fff !important;
+  box-shadow: 0 0 18px rgba(255, 45, 107, 0.5) !important;
+}
+.btnActive[data-cat="apps"] {
+  background: var(--color-neon-violet) !important;
+  color: #fff !important;
+  box-shadow: 0 0 18px rgba(191, 95, 255, 0.5) !important;
+}
+.btnActive[data-cat="books"] {
+  background: var(--color-neon-green) !important;
+  box-shadow: 0 0 18px rgba(0, 255, 135, 0.5) !important;
+}
+.btnActive[data-cat="places"] {
+  background: var(--color-neon-blue) !important;
+  color: #fff !important;
+  box-shadow: 0 0 18px rgba(41, 121, 255, 0.5) !important;
 }
 
 .iconWrap {
