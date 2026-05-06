@@ -16,7 +16,7 @@ export default function Header() {
             onMouseLeave={() => setTooltipVisible(false)}
           >
             <img
-              src="https://i.imgur.com/8bJbL9M.jpeg"
+              src="/walito.jpg"
               alt="Wa'il — Walito"
               className={styles.avatar}
               onError={(e) => {
