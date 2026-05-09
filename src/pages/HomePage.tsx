@@ -13,11 +13,9 @@ export default function HomePage() {
 
   const filteredItems = useMemo(() => {
     let result = ITEMS;
-
     if (activeCategory !== 'all') {
       result = result.filter((item) => item.category === activeCategory);
     }
-
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
@@ -27,7 +25,6 @@ export default function HomePage() {
           item.tags.some((tag) => tag.toLowerCase().includes(q))
       );
     }
-
     return result;
   }, [activeCategory, searchQuery]);
 

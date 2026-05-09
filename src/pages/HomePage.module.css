@@ -17,49 +17,37 @@
   gap: var(--space-2);
   margin-bottom: var(--space-6);
   font-size: 13px;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }
 
 .count {
   font-weight: 700;
-  color: var(--color-text-secondary);
-}
-
-.categoryLabel {
-  color: var(--color-text-muted);
+  color: var(--color-text-primary);
 }
 
 .categoryLabel strong {
-  color: var(--color-text-secondary);
-  font-weight: 700;
+  color: var(--color-accent);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--space-5);
-  padding: var(--space-2);
-  margin: calc(-1 * var(--space-2));
+  margin-bottom: var(--space-12);
 }
 
 .empty {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: var(--space-3);
-  padding: var(--space-16) var(--space-6);
-  text-align: center;
+  padding: var(--space-16) 0;
   color: var(--color-text-secondary);
-  font-size: 15px;
+  text-align: center;
 }
 
 .emptyIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: var(--color-text-muted);
-  margin-bottom: var(--space-2);
 }
 
 .emptyHint {
@@ -68,34 +56,18 @@
 }
 
 .footer {
-  margin-top: var(--space-20);
-  padding-top: var(--space-8);
   border-top: 1px solid var(--color-border);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
+  padding-top: var(--space-8);
+  text-align: center;
 }
 
 .footerText {
   font-size: 13px;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
 }
 
 .footerSub {
   font-size: 12px;
   color: var(--color-text-muted);
-  opacity: 0.6;
-}
-
-@media (max-width: 640px) {
-  .page {
-    padding: 0 var(--space-4) var(--space-12);
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
 }

@@ -1,4 +1,5 @@
-import { Rss, Plus, RefreshCw, Trash2, MessageSquare, ArrowUpRight, Calendar } from 'lucide-react';
+import { useState } from 'react';
+import { Rss, Plus, RefreshCw, Trash2, MessageSquare, ArrowUpRight, Calendar, Filter } from 'lucide-react';
 import { ITEMS } from '@/data/items';
 import styles from '@/pages/UpdatesPage.module.css';
 import { Update } from '@/types';
@@ -17,7 +18,6 @@ const TAG_STYLES: Record<Update['tag'], string> = {
   'note': 'tagNote',
 };
 
-// Build updates from items using their dateAdded
 const UPDATES: Update[] = [
   {
     id: 'u-001',
@@ -87,7 +87,7 @@ const UPDATES: Update[] = [
     id: 'u-009',
     date: 'August 2023',
     title: 'Added Mexico City to Places',
-    body: 'Spent three weeks in Roma Norte. Twenty-two million people and somehow the most navigable mega-city I\'ve ever been to.',
+    body: "Spent three weeks in Roma Norte. Twenty-two million people and somehow the most navigable mega-city I've ever been to.",
     tag: 'new pick',
     itemId: 'places-5',
   },
@@ -119,7 +119,7 @@ const UPDATES: Update[] = [
     id: 'u-013',
     date: 'January 2024',
     title: 'Note: All picks are self-funded',
-    body: 'Just to be clear — I have never accepted payment, product gifting, or affiliate arrangements for anything on this list. If that ever changes, I\'ll say so explicitly.',
+    body: "Just to be clear — I have never accepted payment, product gifting, or affiliate arrangements for anything on this list. If that ever changes, I'll say so explicitly.",
     tag: 'note',
   },
 ];
@@ -130,6 +130,20 @@ function getItemForUpdate(update: Update) {
 }
 
 export default function UpdatesPage() {
+  const [activeTag, setActiveTag] = useState<'all' | Update['tag']>('all');
+
+  const filtered = activeTag === 'all'
+    ? UPDATES
+    : UPDATES.filter(u => u.tag === activeTag);
+
+  const counts = {
+    all: UPDATES.length,
+    'new pick': UPDATES.filter(u => u.tag === 'new pick').length,
+    update: UPDATES.filter(u => u.tag === 'update').length,
+    removed: UPDATES.filter(u => u.tag === 'removed').length,
+    note: UPDATES.filter(u => u.tag === 'note').length,
+  };
+
   return (
     <div className={styles.page}>
       {/* Header */}
@@ -142,11 +156,42 @@ export default function UpdatesPage() {
         <p className={styles.subtitle}>
           This list is alive. Here's what's been added, changed, or noted — in reverse chronological order.
         </p>
+        <div className={styles.stats}>
+          <div className={styles.statItem}>
+            <span className={styles.statNum}>{counts['new pick']}</span>
+            <span className={styles.statLabel}>new picks</span>
+          </div>
+          <div className={styles.statDivider} />
+          <div className={styles.statItem}>
+            <span className={styles.statNum}>{counts.note}</span>
+            <span className={styles.statLabel}>notes</span>
+          </div>
+          <div className={styles.statDivider} />
+          <div className={styles.statItem}>
+            <span className={styles.statNum}>{UPDATES.length}</span>
+            <span className={styles.statLabel}>total entries</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter bar */}
+      <div className={styles.filterBar}>
+        <Filter size={13} className={styles.filterIcon} />
+        {(['all', 'new pick', 'update', 'removed', 'note'] as const).map(tag => (
+          <button
+            key={tag}
+            className={`${styles.filterBtn} ${activeTag === tag ? styles.filterBtnActive : ''}`}
+            onClick={() => setActiveTag(tag)}
+          >
+            {tag === 'all' ? 'All' : tag}
+            <span className={styles.filterCount}>{counts[tag]}</span>
+          </button>
+        ))}
       </div>
 
       {/* Feed */}
       <div className={styles.feed}>
-        {UPDATES.map((update) => {
+        {filtered.map((update) => {
           const linkedItem = getItemForUpdate(update);
           return (
             <div key={update.id} className={styles.entry}>
@@ -182,6 +227,11 @@ export default function UpdatesPage() {
             </div>
           );
         })}
+        {filtered.length === 0 && (
+          <div className={styles.empty}>
+            No entries for this filter.
+          </div>
+        )}
       </div>
 
       {/* Footer */}

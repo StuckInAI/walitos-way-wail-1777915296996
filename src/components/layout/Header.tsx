@@ -30,6 +30,13 @@ export default function Header() {
             The List
           </Link>
           <Link
+            to="/collection"
+            className={`${styles.navLink} ${isActive('/collection') ? styles.navLinkActive : ''}`}
+          >
+            <LucideIcons.Library size={13} />
+            Collection
+          </Link>
+          <Link
             to="/about"
             className={`${styles.navLink} ${isActive('/about') ? styles.navLinkActive : ''}`}
           >
@@ -66,6 +73,10 @@ export default function Header() {
           <Link to="/" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
             <LucideIcons.LayoutGrid size={15} />
             The List
+          </Link>
+          <Link to="/collection" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.Library size={15} />
+            Collection
           </Link>
           <Link to="/about" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
             <LucideIcons.User size={15} />

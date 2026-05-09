@@ -4,6 +4,7 @@ import HomePage from '@/pages/HomePage';
 import AboutPage from '@/pages/AboutPage';
 import UpdatesPage from '@/pages/UpdatesPage';
 import NewsletterPage from '@/pages/NewsletterPage';
+import CollectionPage from '@/pages/CollectionPage';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="about" element={<AboutPage />} />
           <Route path="updates" element={<UpdatesPage />} />
           <Route path="newsletter" element={<NewsletterPage />} />
+          <Route path="collection" element={<CollectionPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
