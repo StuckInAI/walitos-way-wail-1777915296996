@@ -1,35 +1,29 @@
-import { useState, useEffect } from 'react';
-import { ITEMS } from '@/data/items';
+import { useState, useMemo } from 'react';
+import { items } from '@/data/items';
 import type { Item } from '@/data/items';
 
-const STORAGE_KEY = 'walitos_way_items';
+export function useItems() {
+  const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
 
-function loadItems(): Item[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw) as Item[];
-  } catch {
-    // ignore
-  }
-  return ITEMS;
-}
+  const filtered = useMemo(() => {
+    return items.filter((item: Item) => {
+      const matchesCategory =
+        activeCategory === 'all' || item.category === activeCategory;
+      const matchesSearch =
+        !search ||
+        item.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.description.toLowerCase().includes(search.toLowerCase()) ||
+        item.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase()));
+      return matchesCategory && matchesSearch;
+    });
+  }, [search, activeCategory]);
 
-export function useItems(): Item[] {
-  const [items, setItems] = useState<Item[]>(loadItems);
-
-  useEffect(() => {
-    function onStorage(e: StorageEvent) {
-      if (e.key === STORAGE_KEY && e.newValue) {
-        try {
-          setItems(JSON.parse(e.newValue));
-        } catch {
-          // ignore
-        }
-      }
-    }
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
-
-  return items;
+  return {
+    items: filtered,
+    search,
+    setSearch,
+    activeCategory,
+    setActiveCategory,
+  };
 }
