@@ -1,90 +1,50 @@
-import { useState, useMemo } from 'react';
-import { Search } from 'lucide-react';
-import { CATEGORIES, ITEMS } from '@/data/items';
+import Hero from '@/components/Hero';
+import styles from './HomePage.module.css';
+import { items, categories } from '@/data/items';
 import CategoryFilter from '@/components/CategoryFilter';
 import SearchBar from '@/components/SearchBar';
 import ItemCard from '@/components/ItemCard';
-import Hero from '@/components/Hero';
-import styles from './HomePage.module.css';
+import { useState, useMemo } from 'react';
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [search, setSearch] = useState('');
 
-  const filteredItems = useMemo(() => {
-    let result = ITEMS;
-    if (activeCategory !== 'all') {
-      result = result.filter((item) => item.category === activeCategory);
-    }
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      result = result.filter(
-        (item) =>
-          item.title.toLowerCase().includes(q) ||
-          item.description.toLowerCase().includes(q) ||
-          item.tags.some((tag) => tag.toLowerCase().includes(q))
-      );
-    }
-    return result;
-  }, [activeCategory, searchQuery]);
-
-  const activeCount = filteredItems.length;
-  const totalCount = ITEMS.length;
+  const filtered = useMemo(() => {
+    return items.filter((item) => {
+      const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+      const matchesSearch =
+        !search ||
+        item.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.description.toLowerCase().includes(search.toLowerCase()) ||
+        item.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()));
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, search]);
 
   return (
-    <div className={styles.page}>
-      <Hero totalCount={totalCount} />
-
-      <div className={styles.controls}>
-        <CategoryFilter
-          categories={CATEGORIES}
-          active={activeCategory}
-          onChange={setActiveCategory}
-        />
-        <SearchBar value={searchQuery} onChange={setSearchQuery} />
-      </div>
-
-      <div className={styles.resultsBar}>
-        <span className={styles.count}>
-          {activeCount} {activeCount === 1 ? 'item' : 'items'}
-        </span>
-        {activeCategory !== 'all' && (
-          <span className={styles.categoryLabel}>
-            in{' '}
-            <strong>
-              {CATEGORIES.find((c) => c.id === activeCategory)?.label}
-            </strong>
-          </span>
-        )}
-        {searchQuery && (
-          <span className={styles.categoryLabel}>
-            matching <strong>"{searchQuery}"</strong>
-          </span>
-        )}
-      </div>
-
-      {filteredItems.length === 0 ? (
-        <div className={styles.empty}>
-          <span className={styles.emptyIcon}>
-            <Search size={32} />
-          </span>
-          <p>Nothing found for <strong>"{searchQuery}"</strong></p>
-          <p className={styles.emptyHint}>Try a different search or category</p>
+    <div>
+      <Hero />
+      <div className={styles.content}>
+        <div className={styles.toolbar}>
+          <CategoryFilter
+            categories={categories}
+            active={activeCategory}
+            onChange={setActiveCategory}
+          />
+          <SearchBar value={search} onChange={setSearch} />
         </div>
-      ) : (
         <div className={styles.grid}>
-          {filteredItems.map((item) => (
+          {filtered.map((item) => (
             <ItemCard key={item.id} item={item} />
           ))}
         </div>
-      )}
-
-      <footer className={styles.footer}>
-        <p className={styles.footerText}>
-          Walito's Way — {totalCount} curated picks, updated regularly.
-        </p>
-        <p className={styles.footerSub}>No ads. No affiliate links. Just real taste.</p>
-      </footer>
+        {filtered.length === 0 && (
+          <div className={styles.empty}>
+            <p>No picks match your search.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { ArrowRight, Mail, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import styles from './Hero.module.css';
 
-const WALITO_PHOTO = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80';
-
-export default function Hero({ totalCount }: { totalCount: number }) {
+export default function Hero() {
   const [email, setEmail] = useState('');
   const [joined, setJoined] = useState(false);
 
