@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import * as LucideIcons from 'lucide-react';
-import styles from '@/components/Hero.module.css';
-import walitoPhoto from '@/assets/walito.jpg';
+import styles from './Hero.module.css';
 
 type HeroProps = {
   totalCount: number;
 };
+
+const WALITO_PHOTO = 'https://i.imgur.com/8bKDdts.jpeg';
 
 export default function Hero({ totalCount }: HeroProps) {
   const [imgError, setImgError] = useState(false);
@@ -82,7 +83,7 @@ export default function Hero({ totalCount }: HeroProps) {
         <div className={styles.photoWrap}>
           {!imgError ? (
             <img
-              src={walitoPhoto}
+              src={WALITO_PHOTO}
               alt="Wa'il — Walito"
               className={styles.heroPhoto}
               onError={() => setImgError(true)}
