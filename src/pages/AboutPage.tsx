@@ -1,29 +1,18 @@
-import { useState } from 'react';
-import { MapPin, Zap, Heart, ExternalLink, User } from 'lucide-react';
+import { MapPin, Zap, Heart, ExternalLink } from 'lucide-react';
 import styles from './AboutPage.module.css';
-
-const WALITO_PHOTO = 'https://i.imgur.com/8bZkHxJ.jpeg';
+import walitoPhoto from '../components/walito-photo';
 
 export default function AboutPage() {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <div className={styles.page}>
       <div className={styles.heroBlock}>
         <div className={styles.photoCol}>
           <div className={styles.photoWrap}>
-            {!imgError ? (
-              <img
-                src={WALITO_PHOTO}
-                alt="Wa'il — Walito"
-                className={styles.photo}
-                onError={() => setImgError(true)}
-              />
-            ) : (
-              <div className={styles.photoFallback}>
-                <User size={56} />
-              </div>
-            )}
+            <img
+              src={walitoPhoto}
+              alt="Wa'il — Walito"
+              className={styles.photo}
+            />
             <div className={styles.photoBorder} />
           </div>
           <div className={styles.photoMeta}>
@@ -61,7 +50,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Philosophy section */}
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>The Philosophy</h2>
         <div className={styles.principlesGrid}>
@@ -96,7 +84,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Contact */}
       <div className={styles.contactBlock}>
         <h2 className={styles.contactTitle}>Want to reach me?</h2>
         <p className={styles.contactBody}>

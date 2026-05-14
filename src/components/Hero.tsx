@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 import styles from './Hero.module.css';
+import walitoPhoto from './walito-photo';
 
 type HeroProps = {
   totalCount: number;
 };
 
-const WALITO_PHOTO = 'https://i.imgur.com/8bZkHxJ.jpeg';
-
 export default function Hero({ totalCount }: HeroProps) {
   const [email, setEmail] = useState('');
   const [joined, setJoined] = useState(false);
-  const [imgError, setImgError] = useState(false);
 
   const handleJoin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +62,6 @@ export default function Hero({ totalCount }: HeroProps) {
           </div>
         </div>
 
-        {/* Newsletter inline CTA */}
         <div className={styles.newsletterBlock}>
           {!joined ? (
             <form className={styles.newsletterForm} onSubmit={handleJoin}>
@@ -114,21 +111,13 @@ export default function Hero({ totalCount }: HeroProps) {
         </div>
       </div>
 
-      {/* Walito photo panel */}
       <div className={styles.heroRight}>
         <div className={styles.photoWrap}>
-          {!imgError ? (
-            <img
-              src={WALITO_PHOTO}
-              alt="Wa'il — Walito"
-              className={styles.heroPhoto}
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div className={styles.photoFallback}>
-              <LucideIcons.User size={48} />
-            </div>
-          )}
+          <img
+            src={walitoPhoto}
+            alt="Wa'il — Walito"
+            className={styles.heroPhoto}
+          />
           <div className={styles.photoLabel}>
             <span className={styles.photoLabelName}>Wa'il</span>
             <span className={styles.photoLabelSub}>Walito · Curator</span>
