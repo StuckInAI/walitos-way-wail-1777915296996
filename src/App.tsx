@@ -5,6 +5,7 @@ import AboutPage from '@/pages/AboutPage';
 import UpdatesPage from '@/pages/UpdatesPage';
 import CollectionPage from '@/pages/CollectionPage';
 import NewsletterPage from '@/pages/NewsletterPage';
+import AdminPage from '@/pages/AdminPage';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/updates" element={<UpdatesPage />} />
           <Route path="/collection" element={<CollectionPage />} />
           <Route path="/newsletter" element={<NewsletterPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </main>
     </BrowserRouter>

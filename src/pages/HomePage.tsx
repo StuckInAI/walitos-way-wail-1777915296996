@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { ITEMS, CATEGORIES } from '@/data/items';
+import { CATEGORIES } from '@/data/items';
 import type { Item } from '@/data/items';
 import Hero from '@/components/Hero';
 import ItemCard from '@/components/ItemCard';
 import SearchBar from '@/components/SearchBar';
 import CategoryFilter from '@/components/CategoryFilter';
+import { useItems } from '@/hooks/useItems';
 import styles from './HomePage.module.css';
 
 export default function HomePage() {
+  const items = useItems();
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
 
-  const filtered = ITEMS.filter((item: Item) => {
+  const filtered = items.filter((item: Item) => {
     const matchesCategory =
       activeCategory === 'all' || item.category === activeCategory;
     const q = search.toLowerCase();

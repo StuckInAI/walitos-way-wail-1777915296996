@@ -1,63 +1,108 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import styles from './Header.module.css';
 
-const NAV_LINKS = [
-  { label: 'Home', path: '/' },
-  { label: 'Collection', path: '/collection' },
-  { label: 'Updates', path: '/updates' },
-  { label: 'About', path: '/about' },
-];
-
 export default function Header() {
-  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const isActive = (path: string) =>
+    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={styles.header}>
       <div className={styles.inner}>
-        <Link to="/" className={styles.logo}>
-          <span className={styles.logoMark}>W</span>
-          <span className={styles.logoText}>Walito's Way</span>
+        <Link to="/" className={styles.brand}>
+          <div className={styles.brandMark}>W</div>
+          <div className={styles.brandText}>
+            <span className={styles.brandName}>Walito's Way</span>
+            <span className={styles.brandTagline}>curated cool</span>
+          </div>
         </Link>
 
-        <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`${styles.navLink} ${pathname === link.path ? styles.navLinkActive : ''}`}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-              {pathname === link.path && <span className={styles.activeDot} />}
-            </Link>
-          ))}
+        <nav className={styles.nav}>
           <Link
-            to="/newsletter"
-            className={styles.ctaBtn}
-            onClick={() => setMenuOpen(false)}
+            to="/"
+            className={`${styles.navLink} ${isActive('/') ? styles.navLinkActive : ''}`}
           >
-            Get The List <ArrowRight size={12} />
+            <LucideIcons.LayoutGrid size={13} />
+            The List
+          </Link>
+          <Link
+            to="/collection"
+            className={`${styles.navLink} ${isActive('/collection') ? styles.navLinkActive : ''}`}
+          >
+            <LucideIcons.Library size={13} />
+            Collection
+          </Link>
+          <Link
+            to="/about"
+            className={`${styles.navLink} ${isActive('/about') ? styles.navLinkActive : ''}`}
+          >
+            <LucideIcons.User size={13} />
+            About
+          </Link>
+          <Link
+            to="/updates"
+            className={`${styles.navLink} ${isActive('/updates') ? styles.navLinkActive : ''}`}
+          >
+            <LucideIcons.Rss size={13} />
+            Updates
           </Link>
         </nav>
 
-        <button
-          className={styles.menuToggle}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className={styles.meta}>
+          <Link to="/newsletter" className={styles.ctaBtn}>
+            <LucideIcons.Mail size={13} />
+            Get The List
+            <LucideIcons.ArrowRight size={13} />
+          </Link>
+          <Link
+            to="/admin"
+            className={styles.adminBtn}
+            title="Admin"
+          >
+            <LucideIcons.Settings size={14} />
+          </Link>
+          <button
+            className={styles.menuBtn}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+          >
+            {menuOpen ? <LucideIcons.X size={18} /> : <LucideIcons.Menu size={18} />}
+          </button>
+        </div>
       </div>
+
+      {menuOpen && (
+        <div className={styles.mobileMenu}>
+          <Link to="/" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.LayoutGrid size={15} />
+            The List
+          </Link>
+          <Link to="/collection" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.Library size={15} />
+            Collection
+          </Link>
+          <Link to="/about" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.User size={15} />
+            About
+          </Link>
+          <Link to="/updates" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.Rss size={15} />
+            Updates
+          </Link>
+          <Link to="/newsletter" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.Mail size={15} />
+            Get The List
+          </Link>
+          <Link to="/admin" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <LucideIcons.Settings size={15} />
+            Admin
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

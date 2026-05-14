@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { ITEMS, CATEGORIES } from '@/data/items';
+import { CATEGORIES } from '@/data/items';
 import type { Item } from '@/data/items';
 import ItemCard from '@/components/ItemCard';
 import CategoryFilter from '@/components/CategoryFilter';
 import SearchBar from '@/components/SearchBar';
+import { useItems } from '@/hooks/useItems';
 import styles from './CollectionPage.module.css';
 
 export default function CollectionPage() {
+  const items = useItems();
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [view, setView] = useState<'grid' | 'list'>('grid');
 
-  const filtered = ITEMS.filter((item: Item) => {
+  const filtered = items.filter((item: Item) => {
     const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
     const q = search.toLowerCase();
     const matchesSearch =
@@ -24,8 +26,8 @@ export default function CollectionPage() {
 
   const grouped = CATEGORIES.filter((c) => c.id !== 'all').reduce(
     (acc, cat) => {
-      const items = filtered.filter((i) => i.category === cat.id);
-      if (items.length > 0) acc[cat.id] = { label: cat.label, items };
+      const catItems = filtered.filter((i) => i.category === cat.id);
+      if (catItems.length > 0) acc[cat.id] = { label: cat.label, items: catItems };
       return acc;
     },
     {} as Record<string, { label: string; items: Item[] }>
@@ -40,7 +42,7 @@ export default function CollectionPage() {
         </div>
         <h1 className={styles.title}>The Full Collection</h1>
         <p className={styles.subtitle}>
-          {ITEMS.length} curated picks across {CATEGORIES.length - 1} categories.
+          {items.length} curated picks across {CATEGORIES.length - 1} categories.
           Every single thing I'd recommend without hesitation.
         </p>
       </div>
@@ -74,14 +76,14 @@ export default function CollectionPage() {
 
       {activeCategory === 'all' ? (
         <div className={styles.grouped}>
-          {Object.entries(grouped).map(([catId, { label, items }]) => (
+          {Object.entries(grouped).map(([catId, { label, items: catItems }]) => (
             <div key={catId} className={styles.group}>
               <div className={styles.groupHeader}>
                 <h2 className={styles.groupTitle}>{label}</h2>
-                <span className={styles.groupCount}>{items.length}</span>
+                <span className={styles.groupCount}>{catItems.length}</span>
               </div>
               <div className={view === 'grid' ? styles.grid : styles.list}>
-                {items.map((item) => (
+                {catItems.map((item) => (
                   <ItemCard key={item.id} item={item} />
                 ))}
               </div>
