@@ -1,113 +1,107 @@
 import { useState } from 'react';
 import { ITEMS, CATEGORIES } from '@/data/items';
-import { ExternalLink, Tag, Calendar, Star } from 'lucide-react';
+import type { Item } from '@/data/items';
+import ItemCard from '@/components/ItemCard';
+import CategoryFilter from '@/components/CategoryFilter';
+import SearchBar from '@/components/SearchBar';
 import styles from './CollectionPage.module.css';
 
 export default function CollectionPage() {
+  const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
+  const [view, setView] = useState<'grid' | 'list'>('grid');
 
-  const filtered = activeCategory === 'all'
-    ? ITEMS
-    : ITEMS.filter((i) => i.category === activeCategory);
+  const filtered = ITEMS.filter((item: Item) => {
+    const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+    const q = search.toLowerCase();
+    const matchesSearch =
+      !q ||
+      item.title.toLowerCase().includes(q) ||
+      item.description.toLowerCase().includes(q) ||
+      item.tags.some((t) => t.toLowerCase().includes(q));
+    return matchesCategory && matchesSearch;
+  });
 
-  const categoryCounts = CATEGORIES.reduce<Record<string, number>>((acc, cat) => {
-    acc[cat.id] = cat.id === 'all' ? ITEMS.length : ITEMS.filter((i) => i.category === cat.id).length;
-    return acc;
-  }, {});
+  const grouped = CATEGORIES.filter((c) => c.id !== 'all').reduce(
+    (acc, cat) => {
+      const items = filtered.filter((i) => i.category === cat.id);
+      if (items.length > 0) acc[cat.id] = { label: cat.label, items };
+      return acc;
+    },
+    {} as Record<string, { label: string; items: Item[] }>
+  );
 
   return (
     <div className={styles.page}>
       <div className={styles.header}>
         <div className={styles.eyebrow}>
           <span className={styles.dot} />
-          Full archive
+          Every pick
         </div>
-        <h1 className={styles.title}>The Collection</h1>
+        <h1 className={styles.title}>The Full Collection</h1>
         <p className={styles.subtitle}>
-          Everything on the list, organized by category. Every item has been personally
-          tested, used, or visited. Updated regularly.
+          {ITEMS.length} curated picks across {CATEGORIES.length - 1} categories.
+          Every single thing I'd recommend without hesitation.
         </p>
       </div>
 
-      <div className={styles.layout}>
-        <aside className={styles.sidebar}>
-          <p className={styles.sidebarLabel}>Categories</p>
-          {CATEGORIES.map((cat) => (
+      <div className={styles.controls}>
+        <CategoryFilter
+          categories={CATEGORIES}
+          active={activeCategory}
+          onChange={setActiveCategory}
+        />
+        <div className={styles.controlsRight}>
+          <SearchBar value={search} onChange={setSearch} />
+          <div className={styles.viewToggle}>
             <button
-              key={cat.id}
-              className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
-              onClick={() => setActiveCategory(cat.id)}
+              className={`${styles.viewBtn} ${view === 'grid' ? styles.viewBtnActive : ''}`}
+              onClick={() => setView('grid')}
+              aria-label="Grid view"
             >
-              <span className={styles.sidebarItemLabel}>{cat.label}</span>
-              <span className={styles.sidebarItemCount}>{categoryCounts[cat.id] ?? 0}</span>
+              Grid
             </button>
-          ))}
-        </aside>
-
-        <div className={styles.content}>
-          <div className={styles.resultsBar}>
-            <span className={styles.resultsCount}>{filtered.length} items</span>
-            {activeCategory !== 'all' && (
-              <span className={styles.resultsCategory}>
-                in {CATEGORIES.find((c) => c.id === activeCategory)?.label}
-              </span>
-            )}
-          </div>
-
-          <div className={styles.list}>
-            {filtered.map((item) => (
-              <div key={item.id} className={styles.row}>
-                <div className={styles.rowImage}>
-                  <img src={item.image} alt={item.title} className={styles.rowImg} />
-                </div>
-                <div className={styles.rowBody}>
-                  <div className={styles.rowMeta}>
-                    <span className={styles.rowCategory}>{item.category}</span>
-                    <div className={styles.rowStars}>
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          size={10}
-                          fill={i < item.rating ? 'currentColor' : 'none'}
-                          className={i < item.rating ? styles.starFilled : styles.starEmpty}
-                        />
-                      ))}
-                    </div>
-                    <span className={styles.rowDate}>
-                      <Calendar size={10} />
-                      {item.dateAdded}
-                    </span>
-                  </div>
-                  <h3 className={styles.rowTitle}>{item.title}</h3>
-                  <p className={styles.rowDesc}>{item.description}</p>
-                  <p className={styles.rowTake}>"{item.personalTake}"</p>
-                  <div className={styles.rowFooter}>
-                    <div className={styles.rowTags}>
-                      {item.tags.slice(0, 4).map((tag) => (
-                        <span key={tag} className={styles.tag}>
-                          <Tag size={9} />
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.rowLink}
-                      >
-                        <ExternalLink size={12} />
-                        Visit
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
+            <button
+              className={`${styles.viewBtn} ${view === 'list' ? styles.viewBtnActive : ''}`}
+              onClick={() => setView('list')}
+              aria-label="List view"
+            >
+              List
+            </button>
           </div>
         </div>
       </div>
+
+      {activeCategory === 'all' ? (
+        <div className={styles.grouped}>
+          {Object.entries(grouped).map(([catId, { label, items }]) => (
+            <div key={catId} className={styles.group}>
+              <div className={styles.groupHeader}>
+                <h2 className={styles.groupTitle}>{label}</h2>
+                <span className={styles.groupCount}>{items.length}</span>
+              </div>
+              <div className={view === 'grid' ? styles.grid : styles.list}>
+                {items.map((item) => (
+                  <ItemCard key={item.id} item={item} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={view === 'grid' ? styles.grid : styles.list}>
+          {filtered.map((item) => (
+            <ItemCard key={item.id} item={item} />
+          ))}
+        </div>
+      )}
+
+      {filtered.length === 0 && (
+        <div className={styles.empty}>
+          <p>No picks match your search.</p>
+          <p className={styles.emptyHint}>Try a different keyword or category.</p>
+        </div>
+      )}
     </div>
   );
 }

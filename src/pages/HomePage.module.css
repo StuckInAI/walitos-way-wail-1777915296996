@@ -1,11 +1,11 @@
-.page {
-  min-height: 100vh;
+.section {
+  padding-top: 0;
 }
 
 .controls {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 28px 24px 0;
+  padding: 32px 24px 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -17,7 +17,7 @@
   padding: 0 24px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .count {
@@ -29,16 +29,17 @@
 
 .categoryLabel {
   font-size: 12px;
-  color: #555;
+  color: #444;
 }
 
 .categoryLabel strong {
-  color: #888;
+  color: #777;
+  font-weight: 600;
 }
 
 .grid {
   max-width: 1200px;
-  margin: 24px auto 0;
+  margin: 20px auto 0;
   padding: 0 24px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -52,16 +53,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: #444;
-}
-
-.emptyIcon {
-  color: #333;
+  font-size: 14px;
 }
 
 .emptyHint {
-  font-size: 13px;
+  font-size: 12px;
   color: #333;
 }
 
@@ -69,7 +67,7 @@
   max-width: 1200px;
   margin: 80px auto 0;
   padding: 40px 24px;
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid #111;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -78,14 +76,16 @@
 
 .footerText {
   font-size: 13px;
-  color: #555;
+  color: #444;
   margin: 0;
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .footerSub {
   font-size: 11px;
-  color: #333;
+  color: #2a2a2a;
   margin: 0;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }

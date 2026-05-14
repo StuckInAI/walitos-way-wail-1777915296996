@@ -1,69 +1,70 @@
 .page {
-  max-width: 1000px;
+  min-height: 100vh;
+  padding-top: 64px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 24px 100px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
+/* ── HERO BLOCK ── */
 .heroBlock {
   display: grid;
   grid-template-columns: 200px 1fr;
-  gap: 60px;
+  gap: 64px;
+  padding: 72px 0 64px;
+  border-bottom: 1px solid #111;
   align-items: start;
-  margin-bottom: 80px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .heroBlock {
     grid-template-columns: 1fr;
     gap: 32px;
+    padding: 48px 0 40px;
   }
 }
 
+/* ── PHOTO ── */
 .photoCol {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  position: sticky;
+  top: 88px;
 }
 
 .photoWrap {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
 }
 
 .photoPlaceholder {
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-  border: 2px solid #222;
+  background: #0f0f0f;
+  border: 1px solid #1e1e1e;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .photoInitial {
-  font-size: 64px;
+  font-size: 56px;
   font-weight: 900;
   color: #fff;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
   line-height: 1;
-}
-
-.photoBorder {
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1px solid #333;
-  pointer-events: none;
 }
 
 .photoMeta {
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .photoName {
@@ -73,67 +74,69 @@
   letter-spacing: -0.03em;
 }
 
-.photoTitle {
-  font-size: 11px;
+.photoAlias {
+  font-size: 12px;
   color: #555;
   font-weight: 500;
+}
+
+.photoRole {
+  font-size: 11px;
+  color: #333;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
-.introCol {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
+/* ── INTRO ── */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #555;
+  margin-bottom: 20px;
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #fff;
   display: inline-block;
-  flex-shrink: 0;
 }
 
 .title {
   font-size: clamp(24px, 4vw, 36px);
-  font-weight: 900;
+  font-weight: 800;
   color: #fff;
   letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin: 0;
+  line-height: 1.2;
+  margin: 0 0 24px;
 }
 
 .lead {
-  font-size: 15px;
-  color: #aaa;
+  font-size: 16px;
+  color: #888;
   line-height: 1.7;
-  margin: 0;
+  margin-bottom: 16px;
 }
 
 .body {
   font-size: 14px;
-  color: #666;
-  line-height: 1.7;
-  margin: 0;
+  color: #555;
+  line-height: 1.75;
+  margin-bottom: 14px;
 }
 
 .pillRow {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 4px;
+  margin-top: 20px;
 }
 
 .pill {
@@ -142,79 +145,81 @@
   gap: 6px;
   font-size: 11px;
   font-weight: 600;
-  color: #888;
-  background: #111;
-  border: 1px solid #222;
+  color: #555;
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
   padding: 5px 12px;
-  border-radius: 20px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
 }
 
+/* ── SECTION ── */
 .section {
-  margin-bottom: 80px;
+  padding: 64px 0;
+  border-bottom: 1px solid #111;
 }
 
 .sectionTitle {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #444;
-  margin: 0 0 32px;
+  margin-bottom: 32px;
 }
 
+/* ── PRINCIPLES ── */
 .principlesGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;
 }
 
-@media (max-width: 600px) {
-  .principlesGrid {
-    grid-template-columns: 1fr;
-  }
+.principle {
+  padding: 24px;
+  background: #060606;
+  border: 1px solid #111;
+  border-radius: 8px;
+  transition: border-color 0.2s;
 }
 
-.principle {
-  background: #0d0d0d;
-  border: 1px solid #1a1a1a;
-  border-radius: 8px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.principle:hover {
+  border-color: #222;
 }
 
 .principleNum {
-  font-size: 11px;
+  display: block;
+  font-size: 10px;
   font-weight: 700;
   color: #333;
   letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .principleTitle {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: #fff;
-  margin: 0;
+  margin: 0 0 10px;
   letter-spacing: -0.02em;
 }
 
 .principleBody {
   font-size: 13px;
-  color: #666;
+  color: #555;
+  line-height: 1.65;
   margin: 0;
-  line-height: 1.6;
 }
 
+/* ── STATS ── */
 .statsRow {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: #1a1a1a;
-  border: 1px solid #1a1a1a;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 80px;
+  gap: 0;
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
+  margin: 0 0 64px;
 }
 
 @media (max-width: 600px) {
@@ -224,17 +229,19 @@
 }
 
 .stat {
-  background: #0d0d0d;
-  padding: 28px 24px;
+  padding: 36px 24px;
+  border-right: 1px solid #111;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  align-items: center;
-  text-align: center;
+}
+
+.stat:last-child {
+  border-right: none;
 }
 
 .statNum {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 900;
   color: #fff;
   letter-spacing: -0.04em;
@@ -243,40 +250,36 @@
 
 .statLabel {
   font-size: 11px;
-  color: #555;
+  color: #444;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
+/* ── CONTACT ── */
 .contactBlock {
-  border-top: 1px solid #1a1a1a;
-  padding-top: 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  padding: 64px 0;
 }
 
 .contactTitle {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
   color: #fff;
-  margin: 0;
   letter-spacing: -0.03em;
+  margin: 0 0 12px;
 }
 
 .contactBody {
   font-size: 14px;
-  color: #666;
-  margin: 0;
-  line-height: 1.6;
+  color: #555;
+  line-height: 1.65;
   max-width: 480px;
+  margin: 0 0 28px;
 }
 
 .contactLinks {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 8px;
 }
 
 .contactLink {
@@ -285,16 +288,16 @@
   gap: 7px;
   font-size: 13px;
   font-weight: 600;
-  color: #888;
-  background: #111;
-  border: 1px solid #222;
-  padding: 8px 14px;
-  border-radius: 4px;
+  color: #666;
+  background: #080808;
+  border: 1px solid #1a1a1a;
+  padding: 9px 16px;
+  border-radius: 6px;
   text-decoration: none;
   transition: color 0.15s, border-color 0.15s;
 }
 
 .contactLink:hover {
   color: #fff;
-  border-color: #444;
+  border-color: #333;
 }

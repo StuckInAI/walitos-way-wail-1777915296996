@@ -1,13 +1,46 @@
 .hero {
-  padding: 80px 24px 60px;
-  border-bottom: 1px solid #1a1a1a;
+  padding-top: 64px;
   background: #000;
+  border-bottom: 1px solid #1a1a1a;
+  overflow: hidden;
+  position: relative;
 }
 
+/* ── MARQUEE ── */
+.marqueeWrap {
+  overflow: hidden;
+  border-bottom: 1px solid #111;
+  padding: 10px 0;
+  background: #050505;
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 30s linear infinite;
+}
+
+.marqueeItem {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #333;
+  white-space: nowrap;
+  padding-right: 0;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── INNER ── */
 .inner {
   max-width: 640px;
   margin: 0 auto;
   text-align: center;
+  padding: 72px 24px 64px;
 }
 
 .eyebrow {
@@ -18,8 +51,8 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #666;
-  margin-bottom: 24px;
+  color: #555;
+  margin-bottom: 28px;
 }
 
 .dot {
@@ -28,26 +61,79 @@
   border-radius: 50%;
   background: #fff;
   display: inline-block;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 .headline {
-  font-size: clamp(48px, 8vw, 80px);
+  font-size: clamp(56px, 10vw, 96px);
   font-weight: 900;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
   line-height: 1;
-  color: #fff;
-  margin: 0 0 28px;
+  margin: 0 0 24px;
   text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.headlineStatic {
+  color: #fff;
+}
+
+.headlineAccent {
+  color: #fff;
+  -webkit-text-stroke: 2px #fff;
+  color: transparent;
+}
+
+/* ── ROTATING TEXT ── */
+.rotatingRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.rotatingWord {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  min-width: 100px;
+  text-align: right;
+}
+
+.rotatingWordVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rotatingRest {
+  font-size: 13px;
+  color: #444;
+  letter-spacing: 0.01em;
 }
 
 .voice {
   font-size: 15px;
-  line-height: 1.7;
-  color: #888;
-  max-width: 560px;
+  line-height: 1.75;
+  color: #666;
+  max-width: 500px;
   margin: 0 auto 36px;
 }
 
+/* ── EMAIL FORM ── */
 .emailForm {
   display: flex;
   gap: 8px;
@@ -57,12 +143,12 @@
 
 .emailInput {
   flex: 1;
-  background: #111;
-  border: 1px solid #2a2a2a;
+  background: #0d0d0d;
+  border: 1px solid #222;
   color: #fff;
-  padding: 10px 14px;
+  padding: 11px 14px;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 6px;
   outline: none;
   transition: border-color 0.15s;
 }
@@ -72,7 +158,7 @@
 }
 
 .emailInput::placeholder {
-  color: #444;
+  color: #333;
 }
 
 .emailBtn {
@@ -82,17 +168,18 @@
   background: #fff;
   color: #000;
   border: none;
-  padding: 10px 18px;
+  padding: 11px 20px;
   font-size: 13px;
   font-weight: 700;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   white-space: nowrap;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
 }
 
 .emailBtn:hover {
   opacity: 0.85;
+  transform: translateY(-1px);
 }
 
 .emailSuccess {
@@ -107,7 +194,8 @@
 
 .emailSub {
   font-size: 11px;
-  color: #444;
+  color: #333;
   margin: 0;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }

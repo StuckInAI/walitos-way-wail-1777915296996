@@ -80,7 +80,9 @@ export default function ItemCard({ item }: Props) {
             {/* Modal image */}
             <div className={styles.modalImageWrap}>
               <img src={item.image} alt={item.title} className={styles.modalImage} />
+              <div className={styles.modalImageOverlay} />
               <span className={styles.modalCategoryBadge}>{item.category}</span>
+              <h2 className={styles.modalTitleOverlay}>{item.title}</h2>
             </div>
 
             {/* Modal content */}
@@ -102,7 +104,6 @@ export default function ItemCard({ item }: Props) {
                 </span>
               </div>
 
-              <h2 className={styles.modalTitle}>{item.title}</h2>
               <p className={styles.modalDescription}>{item.description}</p>
 
               <div className={styles.modalTakeWrap}>

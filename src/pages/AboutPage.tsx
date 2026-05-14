@@ -4,17 +4,18 @@ import styles from './AboutPage.module.css';
 export default function AboutPage() {
   return (
     <div className={styles.page}>
+
       <div className={styles.heroBlock}>
         <div className={styles.photoCol}>
           <div className={styles.photoWrap}>
             <div className={styles.photoPlaceholder}>
               <span className={styles.photoInitial}>W</span>
             </div>
-            <div className={styles.photoBorder} />
           </div>
           <div className={styles.photoMeta}>
             <span className={styles.photoName}>Wa'il</span>
-            <span className={styles.photoTitle}>aka Walito · Founder & Curator</span>
+            <span className={styles.photoAlias}>aka Walito</span>
+            <span className={styles.photoRole}>Founder & Curator</span>
           </div>
         </div>
 
@@ -40,9 +41,9 @@ export default function AboutPage() {
           </p>
 
           <div className={styles.pillRow}>
-            <span className={styles.pill}><MapPin size={12} /> Based in Nairobi</span>
-            <span className={styles.pill}><Zap size={12} /> Founder</span>
-            <span className={styles.pill}><Heart size={12} /> Obsessive researcher</span>
+            <span className={styles.pill}><MapPin size={11} /> Based in Nairobi</span>
+            <span className={styles.pill}><Zap size={11} /> Founder</span>
+            <span className={styles.pill}><Heart size={11} /> Obsessive researcher</span>
           </div>
         </div>
       </div>

@@ -35,15 +35,33 @@ export default function HomePage() {
           />
           <SearchBar value={search} onChange={setSearch} />
         </div>
+
+        <div className={styles.resultsBar}>
+          <span className={styles.count}>{filtered.length}</span>
+          <span className={styles.categoryLabel}>
+            {activeCategory === 'all' ? 'picks across all categories' : `picks in `}
+            {activeCategory !== 'all' && <strong>{activeCategory}</strong>}
+          </span>
+        </div>
+
         <div className={styles.grid}>
           {filtered.map((item: Item) => (
             <ItemCard key={item.id} item={item} />
           ))}
         </div>
+
         {filtered.length === 0 && (
-          <p className={styles.empty}>No picks match your search.</p>
+          <div className={styles.empty}>
+            <p>No picks match your search.</p>
+            <p className={styles.emptyHint}>Try a different keyword or category.</p>
+          </div>
         )}
       </section>
+
+      <footer className={styles.footer}>
+        <p className={styles.footerText}>Walito's Way &mdash; {new Date().getFullYear()}</p>
+        <p className={styles.footerSub}>Real picks. No noise. No affiliate links.</p>
+      </footer>
     </>
   );
 }

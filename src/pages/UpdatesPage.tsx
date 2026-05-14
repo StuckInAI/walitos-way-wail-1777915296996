@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Calendar, ArrowRight, Tag, Plus, RefreshCw, CheckCircle, Flag } from 'lucide-react';
 import styles from './UpdatesPage.module.css';
 
@@ -100,6 +101,8 @@ const UPDATES = [
   },
 ];
 
+const ALL_TYPES = ['all', 'new', 'update', 'confirmed', 'milestone'];
+
 const TYPE_CONFIG: Record<string, { label: string; Icon: React.FC<{ size?: number }> }> = {
   new: { label: 'New Pick', Icon: Plus },
   update: { label: 'Updated', Icon: RefreshCw },
@@ -108,6 +111,10 @@ const TYPE_CONFIG: Record<string, { label: string; Icon: React.FC<{ size?: numbe
 };
 
 export default function UpdatesPage() {
+  const [filter, setFilter] = useState('all');
+
+  const visible = filter === 'all' ? UPDATES : UPDATES.filter((u) => u.type === filter);
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -122,8 +129,20 @@ export default function UpdatesPage() {
         </p>
       </div>
 
+      <div className={styles.filterRow}>
+        {ALL_TYPES.map((t) => (
+          <button
+            key={t}
+            className={`${styles.filterBtn} ${filter === t ? styles.filterBtnActive : ''}`}
+            onClick={() => setFilter(t)}
+          >
+            {t === 'all' ? 'All' : TYPE_CONFIG[t]?.label ?? t}
+          </button>
+        ))}
+      </div>
+
       <div className={styles.feed}>
-        {UPDATES.map((u, i) => {
+        {visible.map((u, i) => {
           const config = TYPE_CONFIG[u.type] ?? TYPE_CONFIG.new;
           const Icon = config.Icon;
           return (
@@ -132,7 +151,7 @@ export default function UpdatesPage() {
                 <div className={`${styles.entryDot} ${styles[`dot_${u.type}`]}`}>
                   <Icon size={10} />
                 </div>
-                {i < UPDATES.length - 1 && <div className={styles.entryLine} />}
+                {i < visible.length - 1 && <div className={styles.entryLine} />}
               </div>
               <div className={styles.entryContent}>
                 <div className={styles.entryMeta}>

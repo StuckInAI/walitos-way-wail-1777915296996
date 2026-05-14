@@ -1,42 +1,31 @@
 import { useState } from 'react';
-import { Mail, CheckCircle, ArrowRight, Lock } from 'lucide-react';
+import { ArrowRight, CheckCircle, Mail, Zap, Eye, Lock } from 'lucide-react';
 import styles from './NewsletterPage.module.css';
 
 const PAST_ISSUES = [
   {
     id: '1',
-    issue: '#005',
     date: 'Oct 2024',
-    title: 'The Reading Stack',
-    preview: 'The Kindle that got me reading again, the books in my queue, and why physical books are a different experience than I thought.',
+    subject: 'The device I carried every day for 3 months',
+    preview: 'Rabbit R1 deep-dive, plus the Kindle that got me reading again...',
   },
   {
     id: '2',
-    issue: '#004',
-    date: 'Jul 2024',
-    title: 'The Glass Issue',
-    preview: 'JMM Glass, the maker economy, and why handcrafted still wins in a world of infinite print-on-demand.',
+    date: 'Sep 2024',
+    subject: 'Nairobi food update + a Miyazaki recommendation',
+    preview: 'Sugarhill wings, Spirited Away, and what I\'ve been listening to...',
   },
   {
     id: '3',
-    issue: '#003',
-    date: 'Jun 2024',
-    title: 'AI in Your Pocket',
-    preview: "The Rabbit R1 three months later, what Large Action Models actually mean, and the gadgets I'm watching.",
+    date: 'Aug 2024',
+    subject: 'The only bag I travel with now',
+    preview: 'Patagonia Black Hole Duffel after 18 months. Plus: Jazz Club fragrance update...',
   },
   {
     id: '4',
-    issue: '#002',
-    date: 'Apr 2024',
-    title: 'The Scent Edit',
-    preview: 'Jazz Club vs. Tobacco Mandarin, why fragrance is the most underrated personal brand tool, and my full rotation.',
-  },
-  {
-    id: '5',
-    issue: '#001',
-    date: 'Feb 2024',
-    title: 'The First List',
-    preview: "The 10 things I'd recommend to anyone, anywhere, right now. Where Walito's Way started.",
+    date: 'Jul 2024',
+    subject: 'I found a glassmaker you need to know about',
+    preview: 'JMM Glass — handmade, made to order, and the craftsmanship is unreal...',
   },
 ];
 
@@ -51,15 +40,18 @@ export default function NewsletterPage() {
 
   return (
     <div className={styles.page}>
-      {/* Hero */}
       <div className={styles.hero}>
         <div className={styles.iconWrap}>
-          <Mail size={24} />
+          <Mail size={28} />
+        </div>
+        <div className={styles.eyebrow}>
+          <span className={styles.dot} />
+          Monthly · Free · No noise
         </div>
         <h1 className={styles.title}>Get The List</h1>
         <p className={styles.subtitle}>
-          New picks, monthly. No noise. The things I actually found this month — gear,
-          music, places, tools — written the way I'd text them to a friend.
+          Once a month I send the new picks, updated takes, and anything I've been
+          thinking about. No padding. No sponsored content. Just the real stuff.
         </p>
 
         {!joined ? (
@@ -79,64 +71,40 @@ export default function NewsletterPage() {
           </form>
         ) : (
           <div className={styles.success}>
-            <CheckCircle size={18} />
-            <span>You're in. First issue drops next month.</span>
+            <CheckCircle size={20} />
+            <div>
+              <p className={styles.successTitle}>You're on the list.</p>
+              <p className={styles.successSub}>First issue lands in your inbox next month.</p>
+            </div>
           </div>
         )}
-
-        <p className={styles.legal}>
-          <Lock size={10} />
-          No spam. Unsubscribe anytime. No affiliate links — ever.
-        </p>
       </div>
 
-      {/* What you get */}
-      <div className={styles.features}>
-        <h2 className={styles.featuresTitle}>What you get</h2>
-        <div className={styles.featuresGrid}>
-          {[
-            {
-              num: '01',
-              title: 'Real picks only.',
-              body: "Everything in the newsletter I've personally used, visited, or tested. Not a digest of links I found interesting.",
-            },
-            {
-              num: '02',
-              title: 'Monthly, not daily.',
-              body: 'One email a month. Enough time to actually have something worth saying.',
-            },
-            {
-              num: '03',
-              title: 'Specific, not vague.',
-              body: "Not 'great coffee shop in Tokyo'. The exact counter, the exact order, the exact reason it made the list.",
-            },
-            {
-              num: '04',
-              title: 'No financial interest.',
-              body: 'Zero affiliate links. Zero sponsored content. If I recommend it, the only reason is that I think you should know.',
-            },
-          ].map((f) => (
-            <div key={f.num} className={styles.feature}>
-              <span className={styles.featureNum}>{f.num}</span>
-              <h3 className={styles.featureTitle}>{f.title}</h3>
-              <p className={styles.featureBody}>{f.body}</p>
+      <div className={styles.promises}>
+        {[
+          { Icon: Zap, title: 'One email a month', body: 'That\'s it. No welcome series, no re-engagement drip. One real email, monthly.' },
+          { Icon: Eye, title: 'Only real picks', body: 'Everything in the email is something I\'m personally using or thinking about. No filler.' },
+          { Icon: Lock, title: 'No third-party sharing', body: 'Your email stays here. I don\'t sell it, share it, or use it for ads.' },
+        ].map(({ Icon, title, body }) => (
+          <div key={title} className={styles.promise}>
+            <div className={styles.promiseIcon}><Icon size={16} /></div>
+            <div>
+              <h3 className={styles.promiseTitle}>{title}</h3>
+              <p className={styles.promiseBody}>{body}</p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
-      {/* Past issues */}
-      <div className={styles.issues}>
-        <h2 className={styles.issuesTitle}>Past Issues</h2>
-        <div className={styles.issuesList}>
+      <div className={styles.archiveSection}>
+        <h2 className={styles.archiveTitle}>Past issues</h2>
+        <p className={styles.archiveSub}>A look at what's been sent.</p>
+        <div className={styles.archiveList}>
           {PAST_ISSUES.map((issue) => (
-            <div key={issue.id} className={styles.issueRow}>
-              <div className={styles.issueMeta}>
-                <span className={styles.issueNum}>{issue.issue}</span>
-                <span className={styles.issueDate}>{issue.date}</span>
-              </div>
+            <div key={issue.id} className={styles.issue}>
+              <span className={styles.issueDate}>{issue.date}</span>
               <div className={styles.issueContent}>
-                <h3 className={styles.issueTitle}>{issue.title}</h3>
+                <p className={styles.issueSubject}>{issue.subject}</p>
                 <p className={styles.issuePreview}>{issue.preview}</p>
               </div>
             </div>

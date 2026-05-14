@@ -11,20 +11,22 @@ type Props = {
 export default function CategoryFilter({ categories, active, onChange }: Props) {
   return (
     <div className={styles.wrap}>
-      {categories.map((cat) => {
-        const Icon = (LucideIcons as unknown as Record<string, LucideIcons.LucideIcon>)[cat.icon];
-        const isActive = cat.id === active;
-        return (
-          <button
-            key={cat.id}
-            className={`${styles.tab} ${isActive ? styles.tabActive : ''}`}
-            onClick={() => onChange(cat.id)}
-          >
-            {Icon && <Icon size={12} />}
-            {cat.label}
-          </button>
-        );
-      })}
+      <div className={styles.scroll}>
+        {categories.map((cat) => {
+          const Icon = (LucideIcons as Record<string, React.FC<{ size?: number }>>)[cat.icon];
+          const isActive = cat.id === active;
+          return (
+            <button
+              key={cat.id}
+              className={`${styles.tab} ${isActive ? styles.tabActive : ''}`}
+              onClick={() => onChange(cat.id)}
+            >
+              {Icon && <Icon size={13} />}
+              {cat.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

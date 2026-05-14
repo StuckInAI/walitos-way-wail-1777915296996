@@ -1,22 +1,23 @@
 .card {
-  background: #0d0d0d;
+  background: #0a0a0a;
   border: 1px solid #1a1a1a;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column;
 }
 
 .card:hover {
-  border-color: #333;
-  transform: translateY(-2px);
+  border-color: #2a2a2a;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6);
 }
 
 .imageWrap {
   position: relative;
-  aspect-ratio: 16/10;
+  aspect-ratio: 4/3;
   overflow: hidden;
   background: #111;
 }
@@ -26,17 +27,17 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s;
+  transition: transform 0.5s ease;
 }
 
 .card:hover .image {
-  transform: scale(1.04);
+  transform: scale(1.06);
 }
 
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);
+  background: linear-gradient(160deg, transparent 30%, rgba(0,0,0,0.85) 100%);
   pointer-events: none;
 }
 
@@ -44,16 +45,16 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  background: rgba(0,0,0,0.75);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #ccc;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #aaa;
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 3px 8px;
-  border-radius: 3px;
-  backdrop-filter: blur(4px);
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
 }
 
 .viewHint {
@@ -63,16 +64,16 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
   color: #fff;
   font-size: 10px;
   font-weight: 600;
-  padding: 4px 9px;
-  border-radius: 3px;
-  backdrop-filter: blur(4px);
+  padding: 5px 10px;
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease;
 }
 
 .card:hover .viewHint {
@@ -80,7 +81,7 @@
 }
 
 .body {
-  padding: 14px 16px 16px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -104,7 +105,7 @@
 }
 
 .starEmpty {
-  color: #333;
+  color: #2a2a2a;
 }
 
 .dateAdded {
@@ -126,7 +127,7 @@
 
 .description {
   font-size: 12px;
-  color: #666;
+  color: #555;
   margin: 0;
   line-height: 1.5;
 }
@@ -136,6 +137,7 @@
   flex-wrap: wrap;
   gap: 5px;
   margin-top: auto;
+  padding-top: 4px;
 }
 
 .tag {
@@ -146,66 +148,89 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #555;
-  background: #111;
-  border: 1px solid #222;
+  color: #444;
+  background: #0f0f0f;
+  border: 1px solid #1e1e1e;
   padding: 3px 7px;
-  border-radius: 3px;
+  border-radius: 4px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tag:hover {
+  color: #888;
+  border-color: #333;
 }
 
 /* ── OVERLAY ── */
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: overlayIn 0.2s ease;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* ── MODAL ── */
 .modal {
   position: relative;
-  background: #0d0d0d;
-  border: 1px solid #222;
-  border-radius: 10px;
+  background: #0a0a0a;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
   width: 100%;
-  max-width: 520px;
+  max-width: 540px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.9);
+  animation: modalIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  scrollbar-width: thin;
+  scrollbar-color: #222 transparent;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.94) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .closeBtn {
   position: absolute;
   top: 12px;
   right: 12px;
-  z-index: 10;
-  background: rgba(0,0,0,0.7);
-  border: 1px solid #333;
+  z-index: 20;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid #2a2a2a;
   color: #fff;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
 }
 
 .closeBtn:hover {
-  background: #222;
+  background: #1a1a1a;
+  border-color: #444;
 }
 
 .modalImageWrap {
   position: relative;
   aspect-ratio: 16/9;
   overflow: hidden;
-  border-radius: 10px 10px 0 0;
+  border-radius: 12px 12px 0 0;
   background: #111;
 }
 
@@ -216,27 +241,48 @@
   display: block;
 }
 
+.modalImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.9) 100%);
+  pointer-events: none;
+}
+
 .modalCategoryBadge {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(0,0,0,0.75);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #ccc;
+  top: 14px;
+  left: 14px;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #aaa;
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 3px 8px;
-  border-radius: 3px;
-  backdrop-filter: blur(4px);
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+}
+
+.modalTitleOverlay {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 50px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
 }
 
 .modalBody {
   padding: 20px 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .modalMeta {
@@ -245,45 +291,36 @@
   justify-content: space-between;
 }
 
-.modalTitle {
-  font-size: 22px;
-  font-weight: 800;
-  color: #fff;
-  margin: 0;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-}
-
 .modalDescription {
   font-size: 14px;
-  color: #888;
+  color: #777;
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .modalTakeWrap {
-  background: #111;
-  border: 1px solid #1e1e1e;
+  background: #0d0d0d;
+  border: 1px solid #1a1a1a;
   border-left: 3px solid #fff;
-  border-radius: 4px;
-  padding: 14px 16px;
+  border-radius: 0 6px 6px 0;
+  padding: 16px 18px;
 }
 
 .modalTakeLabel {
   display: block;
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #555;
-  margin-bottom: 8px;
+  color: #444;
+  margin-bottom: 10px;
 }
 
 .modalTake {
-  font-size: 13px;
-  color: #ccc;
+  font-size: 14px;
+  color: #bbb;
   margin: 0;
-  line-height: 1.7;
+  line-height: 1.75;
   font-style: italic;
 }
 
@@ -301,13 +338,15 @@
   color: #000;
   font-size: 13px;
   font-weight: 700;
-  padding: 10px 18px;
-  border-radius: 4px;
+  padding: 11px 20px;
+  border-radius: 6px;
   text-decoration: none;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
   align-self: flex-start;
+  letter-spacing: 0.01em;
 }
 
 .modalLink:hover {
   opacity: 0.85;
+  transform: translateY(-1px);
 }
