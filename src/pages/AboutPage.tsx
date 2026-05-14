@@ -1,17 +1,29 @@
-import { MapPin, Zap, Heart, ExternalLink } from 'lucide-react';
+import { useState } from 'react';
+import { MapPin, Zap, Heart, ExternalLink, User } from 'lucide-react';
 import styles from './AboutPage.module.css';
 
+const WALITO_PHOTO = 'https://i.imgur.com/8bZkHxJ.jpeg';
+
 export default function AboutPage() {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div className={styles.page}>
       <div className={styles.heroBlock}>
         <div className={styles.photoCol}>
           <div className={styles.photoWrap}>
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80"
-              alt="Wa'il — Walito"
-              className={styles.photo}
-            />
+            {!imgError ? (
+              <img
+                src={WALITO_PHOTO}
+                alt="Wa'il — Walito"
+                className={styles.photo}
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              <div className={styles.photoFallback}>
+                <User size={56} />
+              </div>
+            )}
             <div className={styles.photoBorder} />
           </div>
           <div className={styles.photoMeta}>

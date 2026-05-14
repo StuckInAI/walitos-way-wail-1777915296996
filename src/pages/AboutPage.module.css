@@ -35,6 +35,17 @@
   filter: contrast(1.06) saturate(0.88);
 }
 
+.photoFallback {
+  width: 220px;
+  height: 290px;
+  background: var(--color-bg-card);
+  border: 3px solid var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
 .photoBorder {
   position: absolute;
   bottom: -8px;

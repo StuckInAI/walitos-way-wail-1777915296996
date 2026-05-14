@@ -6,9 +6,12 @@ type HeroProps = {
   totalCount: number;
 };
 
+const WALITO_PHOTO = 'https://i.imgur.com/8bZkHxJ.jpeg';
+
 export default function Hero({ totalCount }: HeroProps) {
   const [email, setEmail] = useState('');
   const [joined, setJoined] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   const handleJoin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,11 +117,18 @@ export default function Hero({ totalCount }: HeroProps) {
       {/* Walito photo panel */}
       <div className={styles.heroRight}>
         <div className={styles.photoWrap}>
-          <img
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
-            alt="Wa'il — Walito"
-            className={styles.heroPhoto}
-          />
+          {!imgError ? (
+            <img
+              src={WALITO_PHOTO}
+              alt="Wa'il — Walito"
+              className={styles.heroPhoto}
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className={styles.photoFallback}>
+              <LucideIcons.User size={48} />
+            </div>
+          )}
           <div className={styles.photoLabel}>
             <span className={styles.photoLabelName}>Wa'il</span>
             <span className={styles.photoLabelSub}>Walito · Curator</span>
