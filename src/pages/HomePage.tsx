@@ -1,50 +1,49 @@
+import { useState } from 'react';
+import { ITEMS, CATEGORIES } from '@/data/items';
+import type { Item } from '@/data/items';
 import Hero from '@/components/Hero';
-import styles from './HomePage.module.css';
-import { items, categories } from '@/data/items';
-import CategoryFilter from '@/components/CategoryFilter';
-import SearchBar from '@/components/SearchBar';
 import ItemCard from '@/components/ItemCard';
-import { useState, useMemo } from 'react';
+import SearchBar from '@/components/SearchBar';
+import CategoryFilter from '@/components/CategoryFilter';
+import styles from './HomePage.module.css';
 
 export default function HomePage() {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
 
-  const filtered = useMemo(() => {
-    return items.filter((item) => {
-      const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
-      const matchesSearch =
-        !search ||
-        item.title.toLowerCase().includes(search.toLowerCase()) ||
-        item.description.toLowerCase().includes(search.toLowerCase()) ||
-        item.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()));
-      return matchesCategory && matchesSearch;
-    });
-  }, [activeCategory, search]);
+  const filtered = ITEMS.filter((item: Item) => {
+    const matchesCategory =
+      activeCategory === 'all' || item.category === activeCategory;
+    const q = search.toLowerCase();
+    const matchesSearch =
+      !q ||
+      item.title.toLowerCase().includes(q) ||
+      item.description.toLowerCase().includes(q) ||
+      item.tags.some((t: string) => t.toLowerCase().includes(q));
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <div>
+    <>
       <Hero />
-      <div className={styles.content}>
-        <div className={styles.toolbar}>
+      <section className={styles.section}>
+        <div className={styles.controls}>
           <CategoryFilter
-            categories={categories}
+            categories={CATEGORIES}
             active={activeCategory}
             onChange={setActiveCategory}
           />
           <SearchBar value={search} onChange={setSearch} />
         </div>
         <div className={styles.grid}>
-          {filtered.map((item) => (
+          {filtered.map((item: Item) => (
             <ItemCard key={item.id} item={item} />
           ))}
         </div>
         {filtered.length === 0 && (
-          <div className={styles.empty}>
-            <p>No picks match your search.</p>
-          </div>
+          <p className={styles.empty}>No picks match your search.</p>
         )}
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
