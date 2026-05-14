@@ -6,10 +6,16 @@ type HeroProps = {
   totalCount: number;
 };
 
-const WALITO_PHOTO = 'https://i.imgur.com/8bKDdts.jpeg';
-
 export default function Hero({ totalCount }: HeroProps) {
-  const [imgError, setImgError] = useState(false);
+  const [email, setEmail] = useState('');
+  const [joined, setJoined] = useState(false);
+
+  const handleJoin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setJoined(true);
+    }
+  };
 
   return (
     <div className={styles.hero}>
@@ -55,6 +61,32 @@ export default function Hero({ totalCount }: HeroProps) {
           </div>
         </div>
 
+        {/* Newsletter inline CTA */}
+        <div className={styles.newsletterBlock}>
+          {!joined ? (
+            <form className={styles.newsletterForm} onSubmit={handleJoin}>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={styles.emailInput}
+                required
+              />
+              <button type="submit" className={styles.joinBtn}>
+                Join The List
+                <LucideIcons.ArrowRight size={13} />
+              </button>
+            </form>
+          ) : (
+            <div className={styles.joinedMsg}>
+              <LucideIcons.CheckCircle size={16} />
+              You're in. New picks, monthly.
+            </div>
+          )}
+          <p className={styles.newsletterSub}>New picks, monthly. No noise.</p>
+        </div>
+
         <div className={styles.categories}>
           {[
             { icon: 'Music2', label: 'Music' },
@@ -66,6 +98,7 @@ export default function Hero({ totalCount }: HeroProps) {
             { icon: 'MapPin', label: 'Places' },
             { icon: 'Film', label: 'Film' },
             { icon: 'Pen', label: 'Design' },
+            { icon: 'Cpu', label: 'Tech' },
           ].map(({ icon, label }) => {
             const Icon = (LucideIcons as unknown as Record<string, LucideIcons.LucideIcon>)[icon];
             return (
@@ -81,18 +114,11 @@ export default function Hero({ totalCount }: HeroProps) {
       {/* Walito photo panel */}
       <div className={styles.heroRight}>
         <div className={styles.photoWrap}>
-          {!imgError ? (
-            <img
-              src={WALITO_PHOTO}
-              alt="Wa'il — Walito"
-              className={styles.heroPhoto}
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div className={styles.photoFallback}>
-              <span className={styles.photoFallbackW}>W</span>
-            </div>
-          )}
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
+            alt="Wa'il — Walito"
+            className={styles.heroPhoto}
+          />
           <div className={styles.photoLabel}>
             <span className={styles.photoLabelName}>Wa'il</span>
             <span className={styles.photoLabelSub}>Walito · Curator</span>

@@ -5,7 +5,7 @@ import CategoryFilter from '@/components/CategoryFilter';
 import SearchBar from '@/components/SearchBar';
 import ItemCard from '@/components/ItemCard';
 import Hero from '@/components/Hero';
-import styles from '@/pages/HomePage.module.css';
+import styles from './HomePage.module.css';
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -58,7 +58,7 @@ export default function HomePage() {
         )}
         {searchQuery && (
           <span className={styles.categoryLabel}>
-            matching <strong>"{ searchQuery }"</strong>
+            matching <strong>"{searchQuery}"</strong>
           </span>
         )}
       </div>
@@ -68,7 +68,7 @@ export default function HomePage() {
           <span className={styles.emptyIcon}>
             <Search size={32} />
           </span>
-          <p>Nothing found for <strong>"{ searchQuery }"</strong></p>
+          <p>Nothing found for <strong>"{searchQuery}"</strong></p>
           <p className={styles.emptyHint}>Try a different search or category</p>
         </div>
       ) : (

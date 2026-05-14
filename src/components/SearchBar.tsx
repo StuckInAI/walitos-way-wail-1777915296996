@@ -1,29 +1,25 @@
 import { Search, X } from 'lucide-react';
-import styles from '@/components/SearchBar.module.css';
+import styles from './SearchBar.module.css';
 
-type SearchBarProps = {
+type Props = {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (v: string) => void;
 };
 
-export default function SearchBar({ value, onChange }: SearchBarProps) {
+export default function SearchBar({ value, onChange }: Props) {
   return (
-    <div className={styles.wrapper}>
-      <Search className={styles.icon} size={16} />
+    <div className={styles.wrap}>
+      <Search size={14} className={styles.icon} />
       <input
-        className={styles.input}
         type="text"
-        placeholder="Search music, gear, food…"
+        placeholder="Search picks…"
         value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
+        className={styles.input}
       />
       {value && (
-        <button
-          className={styles.clear}
-          onClick={() => onChange('')}
-          aria-label="Clear search"
-        >
-          <X size={14} />
+        <button className={styles.clear} onClick={() => onChange('')} aria-label="Clear">
+          <X size={13} />
         </button>
       )}
     </div>

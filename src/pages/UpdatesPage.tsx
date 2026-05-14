@@ -1,243 +1,133 @@
-import { useState } from 'react';
-import { Rss, Plus, RefreshCw, Trash2, MessageSquare, ArrowUpRight, Calendar, Filter } from 'lucide-react';
-import { ITEMS } from '@/data/items';
-import styles from '@/pages/UpdatesPage.module.css';
-import { Update } from '@/types';
+import { Calendar, ArrowRight, Tag } from 'lucide-react';
+import styles from './UpdatesPage.module.css';
 
-const TAG_ICONS: Record<Update['tag'], React.ReactNode> = {
-  'new pick': <Plus size={12} />,
-  'update': <RefreshCw size={12} />,
-  'removed': <Trash2 size={12} />,
-  'note': <MessageSquare size={12} />,
-};
-
-const TAG_STYLES: Record<Update['tag'], string> = {
-  'new pick': 'tagNew',
-  'update': 'tagUpdate',
-  'removed': 'tagRemoved',
-  'note': 'tagNote',
-};
-
-const UPDATES: Update[] = [
+const UPDATES = [
   {
-    id: 'u-001',
-    date: 'December 2024',
-    title: 'Added Kendrick Lamar — GNX',
-    body: 'Still processing this album. Three weeks in and I keep going back. Pure artistry from front to back.',
-    tag: 'new pick',
-    itemId: 'music-3',
+    id: '1',
+    date: 'Jul 2024',
+    title: 'Added JMM Glass to Design',
+    body: 'Found these while looking for something to put in my workspace. Every piece is made to order and the craftsmanship is genuinely old-world. Added three items from their collection.',
+    tags: ['design', 'new pick'],
+    type: 'new',
   },
   {
-    id: 'u-002',
-    date: 'November 2024',
-    title: 'Added JMM Glass',
-    body: 'Finally putting this on the list. These pieces change the energy of any room. If you know, you know.',
-    tag: 'new pick',
-    itemId: 'design-4',
+    id: '2',
+    date: 'Jun 2024',
+    title: 'Rabbit R1 — 3 months in',
+    body: 'Updated my take on the R1 after carrying it daily for 3 months. The hardware is right. The software is catching up. Still think the form factor wins long-term.',
+    tags: ['tech', 'update'],
+    type: 'update',
   },
   {
-    id: 'u-003',
-    date: 'October 2024',
-    title: 'Added Eufairy UV Printer',
-    body: 'Been using this for about 6 months for custom merch prototypes. More capable than it has any right to be at this price point.',
-    tag: 'new pick',
-    itemId: 'gear-8',
+    id: '3',
+    date: 'Jun 2024',
+    title: 'Eufay UV Printer added to Gear',
+    body: 'This machine changed my production workflow. Printing directly on glass and leather with no transfer step is a different league. Added with full notes.',
+    tags: ['gear', 'new pick'],
+    type: 'new',
   },
   {
-    id: 'u-004',
-    date: 'April 2024',
-    title: 'Added Rabbit R1',
-    body: 'Controversial pick and I know it. I stand by it as a first-gen piece of hardware that points at something real. The TE design alone is worth acknowledging.',
-    tag: 'new pick',
-    itemId: 'gear-9',
+    id: '4',
+    date: 'May 2024',
+    title: 'Maison Margiela Jazz Club — confirmed long-term',
+    body: "Been wearing this for over a year now. Still gets the same reaction every time. Moved it from 'testing' to confirmed permanent on the list.",
+    tags: ['clothing', 'confirmed'],
+    type: 'confirmed',
   },
   {
-    id: 'u-005',
-    date: 'February 2024',
-    title: 'Added Perplexity AI to Apps',
-    body: 'Replaced my default search for research tasks entirely. The citation model is what makes it genuinely different.',
-    tag: 'new pick',
-    itemId: 'apps-5',
+    id: '5',
+    date: 'Apr 2024',
+    title: 'Aesop Hand Wash — added to everyday carry',
+    body: 'Sounds absurd to add a hand wash to a curated list. But I keep being asked what I use. So here it is.',
+    tags: ['clothing', 'new pick'],
+    type: 'new',
   },
   {
-    id: 'u-006',
-    date: 'January 2024',
-    title: 'Added Seoul, South Korea',
-    body: 'Just got back from my first trip. Dongdaemun at 3am is something you have to experience. Adding to places immediately.',
-    tag: 'new pick',
-    itemId: 'places-4',
+    id: '6',
+    date: 'Mar 2024',
+    title: 'Arc Browser review updated',
+    body: 'Added notes on Dev Mode and how I use Spaces across three different work contexts. The browser just keeps getting better.',
+    tags: ['apps', 'update'],
+    type: 'update',
   },
   {
-    id: 'u-007',
-    date: 'November 2023',
-    title: 'Added Cursor (AI code editor)',
-    body: 'VS Code is a museum piece now. Tab completion that actually reads your mind. Leveled up overnight.',
-    tag: 'new pick',
-    itemId: 'apps-6',
+    id: '7',
+    date: 'Mar 2024',
+    title: 'Sony XM5 — 14 months in',
+    body: 'Updated the personal take after 14 months of daily use. Battery still holds. ANC still unmatched on long flights.',
+    tags: ['gear', 'update'],
+    type: 'update',
   },
   {
-    id: 'u-008',
-    date: 'October 2023',
-    title: 'Added Arca',
-    body: 'Should have been on here from the start. Mutant is chaos that becomes addictive. Nobody else is doing this.',
-    tag: 'new pick',
-    itemId: 'music-8',
-  },
-  {
-    id: 'u-009',
-    date: 'August 2023',
-    title: 'Added Mexico City to Places',
-    body: "Spent three weeks in Roma Norte. Twenty-two million people and somehow the most navigable mega-city I've ever been to.",
-    tag: 'new pick',
-    itemId: 'places-5',
-  },
-  {
-    id: 'u-010',
-    date: 'July 2023',
-    title: 'Added Keychron Q1 Pro',
-    body: 'The sound profile is everything. Colleagues notice on video calls. Worth every penny for a serious desk setup.',
-    tag: 'new pick',
-    itemId: 'gear-3',
-  },
-  {
-    id: 'u-011',
-    date: 'June 2023',
-    title: 'Added Oaxaca, Mexico',
-    body: 'The tlayudas alone justify this entry. The mercado is the platonic ideal of a market.',
-    tag: 'new pick',
-    itemId: 'places-3',
-  },
-  {
-    id: 'u-012',
-    date: 'April 2023',
-    title: 'Added Readwise Reader',
-    body: 'Replaced Instapaper, Pocket, and three other apps in one move. The Obsidian highlights sync sealed it.',
-    tag: 'new pick',
-    itemId: 'apps-7',
-  },
-  {
-    id: 'u-013',
-    date: 'January 2024',
-    title: 'Note: All picks are self-funded',
-    body: "Just to be clear — I have never accepted payment, product gifting, or affiliate arrangements for anything on this list. If that ever changes, I'll say so explicitly.",
-    tag: 'note',
+    id: '8',
+    date: 'Jan 2024',
+    title: 'Site launched',
+    body: "The list has always existed — in my head, in texts to friends, in voice memos. Now it's a place you can send people. Welcome.",
+    tags: ['meta'],
+    type: 'milestone',
   },
 ];
 
-function getItemForUpdate(update: Update) {
-  if (!update.itemId) return null;
-  return ITEMS.find(i => i.id === update.itemId) ?? null;
-}
+const TYPE_LABELS: Record<string, string> = {
+  new: 'New Pick',
+  update: 'Updated',
+  confirmed: 'Confirmed',
+  milestone: 'Milestone',
+};
 
 export default function UpdatesPage() {
-  const [activeTag, setActiveTag] = useState<'all' | Update['tag']>('all');
-
-  const filtered = activeTag === 'all'
-    ? UPDATES
-    : UPDATES.filter(u => u.tag === activeTag);
-
-  const counts = {
-    all: UPDATES.length,
-    'new pick': UPDATES.filter(u => u.tag === 'new pick').length,
-    update: UPDATES.filter(u => u.tag === 'update').length,
-    removed: UPDATES.filter(u => u.tag === 'removed').length,
-    note: UPDATES.filter(u => u.tag === 'note').length,
-  };
-
   return (
     <div className={styles.page}>
-      {/* Header */}
-      <div className={styles.hero}>
+      <div className={styles.header}>
         <div className={styles.eyebrow}>
-          <Rss size={12} />
-          <span>What's changed</span>
+          <span className={styles.dot} />
+          The log
         </div>
         <h1 className={styles.title}>Updates</h1>
         <p className={styles.subtitle}>
-          This list is alive. Here's what's been added, changed, or noted — in reverse chronological order.
+          Every addition, revision, and milestone — in order. This is how you know
+          the list is alive, not a static page someone built once and left.
         </p>
-        <div className={styles.stats}>
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>{counts['new pick']}</span>
-            <span className={styles.statLabel}>new picks</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>{counts.note}</span>
-            <span className={styles.statLabel}>notes</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statItem}>
-            <span className={styles.statNum}>{UPDATES.length}</span>
-            <span className={styles.statLabel}>total entries</span>
-          </div>
-        </div>
       </div>
 
-      {/* Filter bar */}
-      <div className={styles.filterBar}>
-        <Filter size={13} className={styles.filterIcon} />
-        {(['all', 'new pick', 'update', 'removed', 'note'] as const).map(tag => (
-          <button
-            key={tag}
-            className={`${styles.filterBtn} ${activeTag === tag ? styles.filterBtnActive : ''}`}
-            onClick={() => setActiveTag(tag)}
-          >
-            {tag === 'all' ? 'All' : tag}
-            <span className={styles.filterCount}>{counts[tag]}</span>
-          </button>
+      <div className={styles.feed}>
+        {UPDATES.map((u, i) => (
+          <div key={u.id} className={styles.entry}>
+            <div className={styles.entryLeft}>
+              <div className={`${styles.entryDot} ${styles[`dot_${u.type}`]}`} />
+              {i < UPDATES.length - 1 && <div className={styles.entryLine} />}
+            </div>
+            <div className={styles.entryContent}>
+              <div className={styles.entryMeta}>
+                <span className={`${styles.typeLabel} ${styles[`type_${u.type}`]}`}>
+                  {TYPE_LABELS[u.type]}
+                </span>
+                <span className={styles.entryDate}>
+                  <Calendar size={10} />
+                  {u.date}
+                </span>
+              </div>
+              <h2 className={styles.entryTitle}>{u.title}</h2>
+              <p className={styles.entryBody}>{u.body}</p>
+              <div className={styles.entryTags}>
+                {u.tags.map((tag) => (
+                  <span key={tag} className={styles.tag}>
+                    <Tag size={9} />
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
         ))}
       </div>
 
-      {/* Feed */}
-      <div className={styles.feed}>
-        {filtered.map((update) => {
-          const linkedItem = getItemForUpdate(update);
-          return (
-            <div key={update.id} className={styles.entry}>
-              <div className={styles.entryLeft}>
-                <div className={styles.entryDot} />
-                <div className={styles.entryLine} />
-              </div>
-              <div className={styles.entryContent}>
-                <div className={styles.entryMeta}>
-                  <span className={`${styles.tag} ${styles[TAG_STYLES[update.tag]]}`}>
-                    {TAG_ICONS[update.tag]}
-                    {update.tag}
-                  </span>
-                  <span className={styles.entryDate}>
-                    <Calendar size={11} />
-                    {update.date}
-                  </span>
-                </div>
-                <h3 className={styles.entryTitle}>{update.title}</h3>
-                <p className={styles.entryBody}>{update.body}</p>
-                {linkedItem && linkedItem.link && (
-                  <a
-                    href={linkedItem.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.entryLink}
-                  >
-                    <ArrowUpRight size={13} />
-                    View {linkedItem.title}
-                  </a>
-                )}
-              </div>
-            </div>
-          );
-        })}
-        {filtered.length === 0 && (
-          <div className={styles.empty}>
-            No entries for this filter.
-          </div>
-        )}
+      <div className={styles.cta}>
+        <p className={styles.ctaText}>Want updates when new picks drop?</p>
+        <a href="/newsletter" className={styles.ctaBtn}>
+          Get The List <ArrowRight size={13} />
+        </a>
       </div>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <p className={styles.footerText}>Walito's Way — updated regularly, no filler.</p>
-      </footer>
     </div>
   );
 }

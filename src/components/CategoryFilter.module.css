@@ -1,90 +1,38 @@
-.wrapper {
-  position: relative;
-}
-
-.scroll {
+.wrap {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
-  overflow-x: auto;
-  padding-bottom: var(--space-2);
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.btn {
-  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  border-radius: 0;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-text-secondary);
-  background: var(--color-bg-card);
-  border: 1.5px solid var(--color-border);
-  white-space: nowrap;
-  transition: all var(--transition-fast);
+  border: 1px solid var(--color-border-hover);
+  background: transparent;
+  color: var(--color-text-muted);
   cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: 0;
+  white-space: nowrap;
 }
 
-.btn:hover {
-  border-color: var(--color-border-hover);
+.tab:hover {
   color: var(--color-text-primary);
-  background: var(--color-bg-card-hover);
+  border-color: var(--color-text-secondary);
+  background: var(--color-bg-card);
 }
 
-.btnActive {
-  color: #000 !important;
-  border-color: transparent !important;
-  text-shadow: none;
-}
-
-/* Per-category active colors */
-.btnActive[data-cat="all"] {
+.tabActive {
   background: var(--color-accent) !important;
-  box-shadow: 0 0 18px rgba(255, 77, 0, 0.5) !important;
-}
-.btnActive[data-cat="music"] {
-  background: var(--color-accent) !important;
-  box-shadow: 0 0 18px rgba(255, 77, 0, 0.5) !important;
-}
-.btnActive[data-cat="gear"] {
-  background: var(--color-neon-cyan) !important;
-  box-shadow: 0 0 18px rgba(0, 245, 255, 0.5) !important;
-}
-.btnActive[data-cat="clothing"] {
-  background: var(--color-neon-gold) !important;
-  box-shadow: 0 0 18px rgba(255, 184, 0, 0.5) !important;
-}
-.btnActive[data-cat="food"] {
-  background: var(--color-neon-pink) !important;
-  color: #fff !important;
-  box-shadow: 0 0 18px rgba(255, 45, 107, 0.5) !important;
-}
-.btnActive[data-cat="apps"] {
-  background: var(--color-neon-violet) !important;
-  color: #fff !important;
-  box-shadow: 0 0 18px rgba(191, 95, 255, 0.5) !important;
-}
-.btnActive[data-cat="books"] {
-  background: var(--color-neon-green) !important;
-  box-shadow: 0 0 18px rgba(0, 255, 135, 0.5) !important;
-}
-.btnActive[data-cat="places"] {
-  background: var(--color-neon-blue) !important;
-  color: #fff !important;
-  box-shadow: 0 0 18px rgba(41, 121, 255, 0.5) !important;
-}
-
-.iconWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  color: white !important;
+  border-color: var(--color-accent) !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 12px rgba(255,77,0,0.25);
 }

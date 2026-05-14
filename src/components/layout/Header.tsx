@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import * as LucideIcons from 'lucide-react';
-import styles from '@/components/layout/Header.module.css';
+import styles from './Header.module.css';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

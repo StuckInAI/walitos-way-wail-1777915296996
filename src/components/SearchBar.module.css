@@ -1,55 +1,47 @@
-.wrapper {
+.wrap {
   position: relative;
   display: flex;
   align-items: center;
+  min-width: 220px;
 }
 
 .icon {
   position: absolute;
-  left: var(--space-4);
+  left: 12px;
   color: var(--color-text-muted);
   pointer-events: none;
-  flex-shrink: 0;
 }
 
 .input {
   width: 100%;
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4) var(--space-3) 40px;
+  border: 1px solid var(--color-border-hover);
   color: var(--color-text-primary);
-  font-size: 14px;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  padding: 9px 36px 9px 34px;
+  font-size: 13px;
   outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.input:focus {
+  border-color: var(--color-accent);
 }
 
 .input::placeholder {
   color: var(--color-text-muted);
 }
 
-.input:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.1);
-}
-
 .clear {
   position: absolute;
-  right: var(--space-3);
+  right: 10px;
   color: var(--color-text-muted);
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: var(--radius-sm);
-  transition: color var(--transition-fast), background var(--transition-fast);
+  padding: 2px;
   cursor: pointer;
-  border: none;
-  background: none;
+  transition: color var(--transition-fast);
 }
 
 .clear:hover {
-  color: var(--color-text-primary);
-  background: var(--color-border);
+  color: var(--color-accent);
 }
