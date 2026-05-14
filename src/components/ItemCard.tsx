@@ -67,7 +67,10 @@ export default function ItemCard({ item }: Props) {
             {/* Close button */}
             <button
               className={styles.closeBtn}
-              onClick={() => setOpen(false)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpen(false);
+              }}
               aria-label="Close"
               type="button"
             >

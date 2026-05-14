@@ -1,6 +1,5 @@
-import { MapPin, Zap, Heart, ExternalLink } from 'lucide-react';
+import { MapPin, Zap, Heart, ExternalLink, Instagram, Twitter } from 'lucide-react';
 import styles from './AboutPage.module.css';
-import walitoPhoto from '../components/walito-photo';
 
 export default function AboutPage() {
   return (
@@ -8,16 +7,14 @@ export default function AboutPage() {
       <div className={styles.heroBlock}>
         <div className={styles.photoCol}>
           <div className={styles.photoWrap}>
-            <img
-              src={walitoPhoto}
-              alt="Wa'il — Walito"
-              className={styles.photo}
-            />
+            <div className={styles.photoPlaceholder}>
+              <span className={styles.photoInitial}>W</span>
+            </div>
             <div className={styles.photoBorder} />
           </div>
           <div className={styles.photoMeta}>
             <span className={styles.photoName}>Wa'il</span>
-            <span className={styles.photoTitle}>Walito · Founder & Curator</span>
+            <span className={styles.photoTitle}>aka Walito · Founder & Curator</span>
           </div>
         </div>
 
@@ -84,6 +81,20 @@ export default function AboutPage() {
         </div>
       </div>
 
+      <div className={styles.statsRow}>
+        {[
+          { num: '20+', label: 'Curated picks' },
+          { num: '10', label: 'Categories' },
+          { num: '4', label: 'Trips to Tokyo' },
+          { num: '0', label: 'Affiliate links' },
+        ].map((s) => (
+          <div key={s.label} className={styles.stat}>
+            <span className={styles.statNum}>{s.num}</span>
+            <span className={styles.statLabel}>{s.label}</span>
+          </div>
+        ))}
+      </div>
+
       <div className={styles.contactBlock}>
         <h2 className={styles.contactTitle}>Want to reach me?</h2>
         <p className={styles.contactBody}>
@@ -94,6 +105,14 @@ export default function AboutPage() {
           <a href="mailto:hello@walitosway.com" className={styles.contactLink}>
             <ExternalLink size={13} />
             hello@walitosway.com
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+            <Twitter size={13} />
+            Twitter / X
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+            <Instagram size={13} />
+            Instagram
           </a>
         </div>
       </div>

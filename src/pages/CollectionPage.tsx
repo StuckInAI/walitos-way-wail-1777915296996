@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ITEMS, CATEGORIES } from '@/data/items';
-import { ExternalLink, Tag, Calendar } from 'lucide-react';
+import { ExternalLink, Tag, Calendar, Star } from 'lucide-react';
 import styles from './CollectionPage.module.css';
 
 export default function CollectionPage() {
@@ -29,7 +29,6 @@ export default function CollectionPage() {
         </p>
       </div>
 
-      {/* Category sidebar + content */}
       <div className={styles.layout}>
         <aside className={styles.sidebar}>
           <p className={styles.sidebarLabel}>Categories</p>
@@ -64,6 +63,16 @@ export default function CollectionPage() {
                 <div className={styles.rowBody}>
                   <div className={styles.rowMeta}>
                     <span className={styles.rowCategory}>{item.category}</span>
+                    <div className={styles.rowStars}>
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          size={10}
+                          fill={i < item.rating ? 'currentColor' : 'none'}
+                          className={i < item.rating ? styles.starFilled : styles.starEmpty}
+                        />
+                      ))}
+                    </div>
                     <span className={styles.rowDate}>
                       <Calendar size={10} />
                       {item.dateAdded}
