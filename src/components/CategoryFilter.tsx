@@ -13,7 +13,7 @@ export default function CategoryFilter({ categories, active, onChange }: Props) 
     <div className={styles.wrap}>
       <div className={styles.scroll}>
         {categories.map((cat) => {
-          const Icon = (LucideIcons as Record<string, React.FC<{ size?: number }>>)[cat.icon];
+          const Icon = (LucideIcons as unknown as Record<string, React.FC<{ size?: number }>>)[cat.icon];
           const isActive = cat.id === active;
           return (
             <button
