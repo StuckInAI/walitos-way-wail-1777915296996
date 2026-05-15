@@ -22,6 +22,22 @@ const EMPTY_DRAFT: Draft = {
   featured: false,
 };
 
+function isDraftDirty(draft: Draft, item: Item): boolean {
+  return (
+    draft.title !== item.title ||
+    draft.description !== item.description ||
+    draft.category !== item.category ||
+    draft.image !== item.image ||
+    draft.rating !== item.rating ||
+    draft.personalTake !== item.personalTake ||
+    draft.dateAdded !== item.dateAdded ||
+    (draft.link ?? '') !== (item.link ?? '') ||
+    (draft.featured ?? false) !== (item.featured ?? false) ||
+    draft.tags.length !== item.tags.length ||
+    draft.tags.some((tag, i) => tag !== item.tags[i])
+  );
+}
+
 export default function AdminPage() {
   const { items, addItem, updateItem, deleteItem } = useAdminItems();
   const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT);
@@ -50,7 +66,13 @@ export default function AdminPage() {
     setTagInput('');
   }
 
-  function handleSave() {
+  function handleSaveChanges() {
+    if (!editing || !draft.title.trim()) return;
+    updateItem(editing.id, { ...draft });
+    setEditing({ ...draft, id: editing.id });
+  }
+
+  function handleSaveAndClose() {
     if (!draft.title.trim()) return;
     if (editing) {
       updateItem(editing.id, { ...draft });
@@ -59,6 +81,27 @@ export default function AdminPage() {
     }
     cancelEdit();
   }
+
+  function onImageFilePick(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file?.type.startsWith('image/')) return;
+    if (file.size > 400_000) {
+      window.alert(
+        'Image is too large to store locally. Use an image URL instead (under 400KB for uploads).'
+      );
+      e.target.value = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const url = reader.result as string;
+      setDraft((d) => ({ ...d, image: url }));
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  }
+
+  const formDirty = editing != null && isDraftDirty(draft, editing);
 
   function addTag() {
     const t = tagInput.trim();
@@ -138,16 +181,50 @@ export default function AdminPage() {
               />
             </label>
 
-            {/* Image URL */}
-            <label className={styles.label}>
-              <span className={styles.labelIcon}><ImageIcon size={12} /> Image URL</span>
+            {/* Image */}
+            <div className={styles.imageSection}>
+              <label className={styles.label} htmlFor="admin-item-image-file">
+                <span className={styles.labelIcon}>
+                  <ImageIcon size={12} /> Image
+                </span>
+              </label>
+              <input
+                id="admin-item-image-file"
+                type="file"
+                accept="image/*"
+                className={styles.fileInput}
+                onChange={onImageFilePick}
+              />
+              <label
+                htmlFor="admin-item-image-file"
+                className={styles.imagePreview}
+                style={
+                  draft.image
+                    ? { backgroundImage: `url(${draft.image})` }
+                    : undefined
+                }
+              >
+                {!draft.image ? (
+                  <span className={styles.imagePlaceholder}>
+                    <ImageIcon size={28} strokeWidth={1.25} />
+                    Click to upload
+                  </span>
+                ) : (
+                  <span className={styles.imageChangeHint}>Change image</span>
+                )}
+              </label>
+
+              <p className={styles.imageOrDivider}>or paste URL</p>
               <input
                 className={styles.input}
                 value={draft.image}
-                onChange={(e) => setDraft((d) => ({ ...d, image: e.target.value }))}
+                onChange={(e) =>
+                  setDraft((d) => ({ ...d, image: e.target.value }))
+                }
                 placeholder="https://..."
               />
-            </label>
+
+            </div>
 
             {/* Link */}
             <label className={styles.label}>
@@ -220,10 +297,38 @@ export default function AdminPage() {
               Featured
             </label>
 
-            <button className={styles.saveBtn} onClick={handleSave} type="button">
-              <Save size={14} />
-              {editing ? 'Update Item' : 'Add Item'}
-            </button>
+            <div className={styles.formActions}>
+              {editing ? (
+                <>
+                  <button
+                    className={styles.saveChangesBtn}
+                    type="button"
+                    disabled={!formDirty}
+                    onClick={handleSaveChanges}
+                  >
+                    <Save size={14} />
+                    Save changes
+                  </button>
+                  <button
+                    className={styles.saveBtn}
+                    type="button"
+                    onClick={handleSaveAndClose}
+                  >
+                    <Save size={14} />
+                    Save & close
+                  </button>
+                </>
+              ) : (
+                <button
+                  className={styles.saveBtn}
+                  type="button"
+                  onClick={handleSaveAndClose}
+                >
+                  <Save size={14} />
+                  Add item
+                </button>
+              )}
+            </div>
           </div>
         </aside>
 
