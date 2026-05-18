@@ -1,7 +1,6 @@
 .hero {
-  padding-top: 64px;
   background: #000;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid #111;
   overflow: hidden;
   position: relative;
 }
@@ -10,24 +9,24 @@
 .marqueeWrap {
   overflow: hidden;
   border-bottom: 1px solid #111;
-  padding: 10px 0;
+  padding: 8px 0;
   background: #050505;
 }
 
 .marquee {
   display: flex;
   width: max-content;
-  animation: marqueeScroll 30s linear infinite;
+  animation: marqueeScroll 40s linear infinite;
 }
 
 .marqueeItem {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #333;
+  color: #222;
   white-space: nowrap;
-  padding-right: 0;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 @keyframes marqueeScroll {
@@ -37,43 +36,43 @@
 
 /* ── INNER ── */
 .inner {
-  max-width: 640px;
+  max-width: 600px;
   margin: 0 auto;
   text-align: center;
-  padding: 72px 24px 64px;
+  padding: 80px 24px 72px;
 }
 
-/* ── AVATAR BLOCK ── */
+/* ── AVATAR ── */
 .avatarBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
 .avatarImg {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
-  border: 2px solid #2a2a2a;
+  border: 1px solid #2a2a2a;
   display: block;
-  box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 5px #1e1e1e;
+  filter: grayscale(20%) contrast(1.05);
   background: #111;
 }
 
 .avatarFallback {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background: #0f0f0f;
-  border: 2px solid #1e1e1e;
+  background: #0a0a0a;
+  border: 1px solid #1e1e1e;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 900;
   color: #fff;
   letter-spacing: -0.04em;
@@ -87,51 +86,57 @@
 }
 
 .avatarName {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .avatarAlias {
-  font-size: 11px;
-  color: #444;
+  font-size: 10px;
+  color: #333;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
+/* ── EYEBROW ── */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #555;
-  margin-bottom: 28px;
+  color: #333;
+  margin-bottom: 24px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #fff;
   display: inline-block;
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse 2.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  50% { opacity: 0.2; }
 }
 
+/* ── HEADLINE ── */
 .headline {
-  font-size: clamp(56px, 10vw, 96px);
+  font-size: clamp(64px, 12vw, 112px);
   font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  margin: 0 0 24px;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+  margin: 0 0 28px;
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
@@ -144,7 +149,7 @@
 }
 
 .headlineAccent {
-  -webkit-text-stroke: 2px #fff;
+  -webkit-text-stroke: 1.5px #fff;
   color: transparent;
 }
 
@@ -159,15 +164,17 @@
 }
 
 .rotatingWord {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
   color: #fff;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  min-width: 100px;
+  transform: translateY(5px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  min-width: 110px;
   text-align: right;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 .rotatingWordVisible {
@@ -176,45 +183,45 @@
 }
 
 .rotatingRest {
-  font-size: 13px;
-  color: #444;
-  letter-spacing: 0.01em;
+  font-size: 11px;
+  color: #333;
+  letter-spacing: 0.05em;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
+/* ── VOICE ── */
 .voice {
-  font-size: 15px;
-  line-height: 1.75;
-  color: #666;
-  max-width: 500px;
-  margin: 0 auto 36px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: #555;
+  max-width: 480px;
+  margin: 0 auto 40px;
+  font-weight: 400;
 }
 
 /* ── EMAIL FORM ── */
 .emailForm {
   display: flex;
-  gap: 8px;
-  max-width: 420px;
+  gap: 0;
+  max-width: 400px;
   margin: 0 auto 10px;
+  border: 1px solid #222;
 }
 
 .emailInput {
   flex: 1;
-  background: #0d0d0d;
-  border: 1px solid #222;
+  background: #050505;
+  border: none;
   color: #fff;
-  padding: 11px 14px;
-  font-size: 14px;
-  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 13px;
   outline: none;
-  transition: border-color 0.15s;
-}
-
-.emailInput:focus {
-  border-color: #fff;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  letter-spacing: 0.02em;
 }
 
 .emailInput::placeholder {
-  color: #333;
+  color: #2a2a2a;
 }
 
 .emailBtn {
@@ -224,34 +231,37 @@
   background: #fff;
   color: #000;
   border: none;
-  padding: 11px 20px;
-  font-size: 13px;
-  font-weight: 700;
-  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 11px;
+  font-weight: 800;
   cursor: pointer;
   white-space: nowrap;
-  transition: opacity 0.15s, transform 0.15s;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
 }
 
 .emailBtn:hover {
   opacity: 0.85;
-  transform: translateY(-1px);
 }
 
 .emailSuccess {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #4ade80;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 10px 0;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 0;
+  border-bottom: 1px solid #fff;
 }
 
 .emailSub {
-  font-size: 11px;
-  color: #333;
-  margin: 0;
-  letter-spacing: 0.08em;
+  font-size: 9px;
+  color: #222;
+  margin: 8px 0 0;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }

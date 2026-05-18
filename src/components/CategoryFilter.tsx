@@ -7,6 +7,8 @@ import {
   Plane,
   BookOpen,
   Home,
+  Watch,
+  Heart,
   type LucideIcon,
 } from 'lucide-react';
 import type { Category } from '@/data/items';
@@ -21,6 +23,8 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   Plane,
   BookOpen,
   Home,
+  Watch,
+  Heart,
 };
 
 type Props = {
@@ -43,7 +47,7 @@ export default function CategoryFilter({ categories, active, onChange }: Props) 
               onClick={() => onChange(cat.id)}
               type="button"
             >
-              {Icon && <Icon size={13} />}
+              {Icon && <Icon size={12} />}
               {cat.label}
             </button>
           );

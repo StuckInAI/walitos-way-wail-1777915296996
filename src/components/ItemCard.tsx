@@ -13,12 +13,21 @@ export default function ItemCard({ item }: Props) {
       {/* Card */}
       <article className={styles.card} onClick={() => setOpen(true)}>
         <div className={styles.imageWrap}>
-          <img src={item.image} alt={item.title} className={styles.image} />
+          <img
+            src={item.image}
+            alt={item.title}
+            className={styles.image}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src =
+                `https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=800&q=90`;
+            }}
+          />
           <div className={styles.imageOverlay} />
           <span className={styles.categoryBadge}>{item.category}</span>
+          {item.featured && <span className={styles.featuredBadge}>PICK</span>}
           <div className={styles.viewHint}>
-            <ArrowRight size={14} />
-            <span>See why I picked this</span>
+            <ArrowRight size={12} />
+            <span>Why I picked this</span>
           </div>
         </div>
 
@@ -28,14 +37,14 @@ export default function ItemCard({ item }: Props) {
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
-                  size={11}
+                  size={10}
                   fill={i < item.rating ? 'currentColor' : 'none'}
                   className={i < item.rating ? styles.starFilled : styles.starEmpty}
                 />
               ))}
             </div>
             <span className={styles.dateAdded}>
-              <Calendar size={10} />
+              <Calendar size={9} />
               {item.dateAdded}
             </span>
           </div>
@@ -46,7 +55,7 @@ export default function ItemCard({ item }: Props) {
           <div className={styles.tags}>
             {item.tags.slice(0, 3).map((tag) => (
               <span key={tag} className={styles.tag}>
-                <Tag size={9} />
+                <Tag size={8} />
                 {tag}
               </span>
             ))}
@@ -74,14 +83,23 @@ export default function ItemCard({ item }: Props) {
               aria-label="Close"
               type="button"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
 
             {/* Modal image */}
             <div className={styles.modalImageWrap}>
-              <img src={item.image} alt={item.title} className={styles.modalImage} />
+              <img
+                src={item.image}
+                alt={item.title}
+                className={styles.modalImage}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src =
+                    `https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=800&q=90`;
+                }}
+              />
               <div className={styles.modalImageOverlay} />
               <span className={styles.modalCategoryBadge}>{item.category}</span>
+              {item.featured && <span className={styles.modalFeaturedBadge}>WALITO'S PICK</span>}
               <h2 className={styles.modalTitleOverlay}>{item.title}</h2>
             </div>
 
@@ -92,14 +110,14 @@ export default function ItemCard({ item }: Props) {
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
-                      size={13}
+                      size={12}
                       fill={i < item.rating ? 'currentColor' : 'none'}
                       className={i < item.rating ? styles.starFilled : styles.starEmpty}
                     />
                   ))}
                 </div>
                 <span className={styles.dateAdded}>
-                  <Calendar size={11} />
+                  <Calendar size={10} />
                   Added {item.dateAdded}
                 </span>
               </div>
@@ -114,7 +132,7 @@ export default function ItemCard({ item }: Props) {
               <div className={styles.modalTags}>
                 {item.tags.map((tag) => (
                   <span key={tag} className={styles.tag}>
-                    <Tag size={9} />
+                    <Tag size={8} />
                     {tag}
                   </span>
                 ))}
@@ -128,7 +146,7 @@ export default function ItemCard({ item }: Props) {
                   className={styles.modalLink}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <ExternalLink size={14} />
+                  <ExternalLink size={13} />
                   Visit {item.title}
                 </a>
               )}

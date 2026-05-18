@@ -12,19 +12,45 @@ export default function HomePage() {
   return (
     <div className={styles.page}>
       <Hero />
+
       <div className={styles.toolbar}>
-        <SearchBar value={search} onChange={setSearch} />
-        <CategoryFilter
-          categories={categories}
-          active={activeCategory}
-          onChange={setActiveCategory}
-        />
+        <div className={styles.toolbarInner}>
+          <SearchBar value={search} onChange={setSearch} />
+          <CategoryFilter
+            categories={categories}
+            active={activeCategory}
+            onChange={setActiveCategory}
+          />
+        </div>
       </div>
-      <div className={styles.grid}>
-        {items.map((item) => (
-          <ItemCard key={item.id} item={item} />
-        ))}
+
+      <div className={styles.gridWrap}>
+        {items.length === 0 ? (
+          <div className={styles.empty}>
+            <span className={styles.emptySymbol}>—</span>
+            <p>Nothing found.</p>
+            <p className={styles.emptyHint}>Try a different search or category.</p>
+          </div>
+        ) : (
+          <>
+            <p className={styles.count}>
+              {items.length} {items.length === 1 ? 'pick' : 'picks'}
+              {activeCategory !== 'all' && <span className={styles.countCat}> in {activeCategory}</span>}
+            </p>
+            <div className={styles.grid}>
+              {items.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))}
+            </div>
+          </>
+        )}
       </div>
+
+      <footer className={styles.footer}>
+        <span className={styles.footerMark}>W</span>
+        <p className={styles.footerText}>Walito's Way</p>
+        <p className={styles.footerSub}>Everything here I've paid for myself.</p>
+      </footer>
     </div>
   );
 }

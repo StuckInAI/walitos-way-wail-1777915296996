@@ -4,9 +4,6 @@ import styles from './Hero.module.css';
 
 const ROTATING_WORDS = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
 
-// Walito's photo embedded as a base64 data URI so it always loads
-// regardless of public folder serving. Replace the src below with
-// a real base64 string or keep using the public path fallback.
 const WALITO_PHOTO = '/walito.jpg';
 
 export default function Hero() {
@@ -23,7 +20,7 @@ export default function Hero() {
         setWordIndex((i) => (i + 1) % ROTATING_WORDS.length);
         setVisible(true);
       }, 300);
-    }, 2000);
+    }, 2200);
     return () => clearInterval(interval);
   }, []);
 
@@ -34,17 +31,19 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
+      {/* Marquee */}
       <div className={styles.marqueeWrap} aria-hidden="true">
         <div className={styles.marquee}>
-          {Array.from({ length: 6 }).map((_, i) => (
+          {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className={styles.marqueeItem}>
-              WALITO'S WAY &nbsp;·&nbsp; CURATED PICKS &nbsp;·&nbsp; NO AFFILIATE LINKS &nbsp;·&nbsp; REAL EXPERIENCE ONLY &nbsp;·&nbsp;
+              WALITO'S WAY &nbsp;/&nbsp; CURATED PICKS &nbsp;/&nbsp; NO AFFILIATE LINKS &nbsp;/&nbsp; REAL EXPERIENCE ONLY &nbsp;/&nbsp;
             </span>
           ))}
         </div>
       </div>
 
       <div className={styles.inner}>
+        {/* Avatar */}
         <div className={styles.avatarBlock}>
           {!imgError ? (
             <img
@@ -64,16 +63,19 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Eyebrow */}
         <div className={styles.eyebrow}>
           <span className={styles.dot} />
           Personal curation by Wa'il
         </div>
 
+        {/* Headline */}
         <h1 className={styles.headline}>
           <span className={styles.headlineStatic}>Walito's</span>
           <span className={styles.headlineAccent}>Way</span>
         </h1>
 
+        {/* Rotating line */}
         <div className={styles.rotatingRow}>
           <span className={`${styles.rotatingWord} ${visible ? styles.rotatingWordVisible : ''}`}>
             {ROTATING_WORDS[wordIndex]}
@@ -81,12 +83,14 @@ export default function Hero() {
           <span className={styles.rotatingRest}>No sponsorships. No filler. Just the real stuff.</span>
         </div>
 
+        {/* Voice */}
         <p className={styles.voice}>
           Everything here I've paid for myself, visited in person, or used until it broke.
           No sponsorships. No affiliate links.
           Just the stuff that actually earned a permanent spot in my life.
         </p>
 
+        {/* Email form */}
         {!joined ? (
           <form className={styles.emailForm} onSubmit={handleSubmit}>
             <input
@@ -99,12 +103,12 @@ export default function Hero() {
             />
             <button type="submit" className={styles.emailBtn}>
               Get The List
-              <ArrowRight size={14} />
+              <ArrowRight size={13} />
             </button>
           </form>
         ) : (
           <div className={styles.emailSuccess}>
-            <CheckCircle size={16} />
+            <CheckCircle size={15} />
             You're in. First issue drops next month.
           </div>
         )}
