@@ -10,7 +10,7 @@
 /* ── HERO BLOCK ── */
 .heroBlock {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 220px 1fr;
   gap: 64px;
   padding: 72px 0 64px;
   border-bottom: 1px solid #111;
@@ -37,13 +37,23 @@
 
 .photoWrap {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
+}
+
+.photoImg {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid #1e1e1e;
+  display: block;
 }
 
 .photoPlaceholder {
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   background: #0f0f0f;
   border: 1px solid #1e1e1e;
@@ -53,7 +63,7 @@
 }
 
 .photoInitial {
-  font-size: 56px;
+  font-size: 64px;
   font-weight: 900;
   color: #fff;
   letter-spacing: -0.04em;

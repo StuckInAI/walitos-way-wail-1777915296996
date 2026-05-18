@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import styles from './Hero.module.css';
+import walitoPhoto from './walito-photo';
 
 const ROTATING_WORDS = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
 
@@ -9,6 +10,7 @@ export default function Hero() {
   const [joined, setJoined] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,6 +41,23 @@ export default function Hero() {
       </div>
 
       <div className={styles.inner}>
+        <div className={styles.avatarBlock}>
+          {!imgError ? (
+            <img
+              src={walitoPhoto}
+              alt="Wa'il aka Walito"
+              className={styles.avatarImg}
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className={styles.avatarFallback}>W</div>
+          )}
+          <div className={styles.avatarMeta}>
+            <span className={styles.avatarName}>Wa'il</span>
+            <span className={styles.avatarAlias}>aka Walito</span>
+          </div>
+        </div>
+
         <div className={styles.eyebrow}>
           <span className={styles.dot} />
           Personal curation by Wa'il

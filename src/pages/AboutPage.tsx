@@ -1,5 +1,6 @@
 import { MapPin, Zap, Heart, ExternalLink, Instagram, Twitter } from 'lucide-react';
 import styles from './AboutPage.module.css';
+import walitoPhoto from '../components/walito-photo';
 
 export default function AboutPage() {
   return (
@@ -8,7 +9,18 @@ export default function AboutPage() {
       <div className={styles.heroBlock}>
         <div className={styles.photoCol}>
           <div className={styles.photoWrap}>
-            <div className={styles.photoPlaceholder}>
+            <img
+              src={walitoPhoto}
+              alt="Wa'il aka Walito"
+              className={styles.photoImg}
+              onError={(e) => {
+                const target = e.currentTarget as HTMLImageElement;
+                target.style.display = 'none';
+                const fallback = target.nextElementSibling as HTMLElement;
+                if (fallback) fallback.style.display = 'flex';
+              }}
+            />
+            <div className={styles.photoPlaceholder} style={{ display: 'none' }}>
               <span className={styles.photoInitial}>W</span>
             </div>
           </div>
