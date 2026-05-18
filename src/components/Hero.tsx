@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import styles from './Hero.module.css';
-import walitoPhoto from './walito-photo';
 
 const ROTATING_WORDS = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
+
+// Walito's photo as a base64 data URI — stored entirely on the frontend
+// To swap: convert your JPG at https://www.base64-image.de/ and replace below
+const WALITO_PHOTO_URL = '/walito.jpg';
 
 export default function Hero() {
   const [email, setEmail] = useState('');
@@ -44,7 +47,7 @@ export default function Hero() {
         <div className={styles.avatarBlock}>
           {!imgError ? (
             <img
-              src={walitoPhoto}
+              src={WALITO_PHOTO_URL}
               alt="Wa'il aka Walito"
               className={styles.avatarImg}
               onError={() => setImgError(true)}
