@@ -4,10 +4,6 @@ import styles from './Hero.module.css';
 
 const ROTATING_WORDS = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
 
-// Walito's photo as a base64 data URI — stored entirely on the frontend
-// To swap: convert your JPG at https://www.base64-image.de/ and replace below
-const WALITO_PHOTO_URL = '/walito.jpg';
-
 export default function Hero() {
   const [email, setEmail] = useState('');
   const [joined, setJoined] = useState(false);
@@ -31,6 +27,10 @@ export default function Hero() {
     if (email.trim()) setJoined(true);
   };
 
+  // Inline the image as a data URI or use a reliable public path
+  // The image is stored in /public/walito.jpg and served at /walito.jpg
+  const photoSrc = `${import.meta.env.BASE_URL}walito.jpg`;
+
   return (
     <section className={styles.hero}>
       <div className={styles.marqueeWrap} aria-hidden="true">
@@ -47,7 +47,7 @@ export default function Hero() {
         <div className={styles.avatarBlock}>
           {!imgError ? (
             <img
-              src={WALITO_PHOTO_URL}
+              src={photoSrc}
               alt="Wa'il aka Walito"
               className={styles.avatarImg}
               onError={() => setImgError(true)}

@@ -1,9 +1,9 @@
 import { MapPin, Zap, Heart, ExternalLink, Instagram, Twitter } from 'lucide-react';
 import styles from './AboutPage.module.css';
 
-const WALITO_PHOTO_URL = '/walito.jpg';
-
 export default function AboutPage() {
+  const photoSrc = `${import.meta.env.BASE_URL}walito.jpg`;
+
   return (
     <div className={styles.page}>
 
@@ -11,7 +11,7 @@ export default function AboutPage() {
         <div className={styles.photoCol}>
           <div className={styles.photoWrap}>
             <img
-              src={WALITO_PHOTO_URL}
+              src={photoSrc}
               alt="Wa'il aka Walito"
               className={styles.photoImg}
               onError={(e) => {
