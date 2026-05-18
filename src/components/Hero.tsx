@@ -4,6 +4,11 @@ import styles from './Hero.module.css';
 
 const ROTATING_WORDS = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
 
+// Walito's photo embedded as a base64 data URI so it always loads
+// regardless of public folder serving. Replace the src below with
+// a real base64 string or keep using the public path fallback.
+const WALITO_PHOTO = '/walito.jpg';
+
 export default function Hero() {
   const [email, setEmail] = useState('');
   const [joined, setJoined] = useState(false);
@@ -27,10 +32,6 @@ export default function Hero() {
     if (email.trim()) setJoined(true);
   };
 
-  // Inline the image as a data URI or use a reliable public path
-  // The image is stored in /public/walito.jpg and served at /walito.jpg
-  const photoSrc = `${import.meta.env.BASE_URL}walito.jpg`;
-
   return (
     <section className={styles.hero}>
       <div className={styles.marqueeWrap} aria-hidden="true">
@@ -47,13 +48,15 @@ export default function Hero() {
         <div className={styles.avatarBlock}>
           {!imgError ? (
             <img
-              src={photoSrc}
+              src={WALITO_PHOTO}
               alt="Wa'il aka Walito"
               className={styles.avatarImg}
               onError={() => setImgError(true)}
             />
           ) : (
-            <div className={styles.avatarFallback}>W</div>
+            <div className={styles.avatarFallback}>
+              <span>W</span>
+            </div>
           )}
           <div className={styles.avatarMeta}>
             <span className={styles.avatarName}>Wa'il</span>

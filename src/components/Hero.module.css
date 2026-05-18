@@ -61,6 +61,7 @@
   border: 2px solid #2a2a2a;
   display: block;
   box-shadow: 0 0 0 4px #0a0a0a, 0 0 0 5px #1e1e1e;
+  background: #111;
 }
 
 .avatarFallback {
