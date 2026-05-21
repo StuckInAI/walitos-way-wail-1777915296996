@@ -39,8 +39,9 @@ ul, ol {
   list-style: none;
 }
 
+/* Remove default padding-top — hero header handles spacing */
 main {
-  padding-top: 58px;
+  padding-top: 0;
 }
 
 ::-webkit-scrollbar {

@@ -4,14 +4,11 @@ import styles from './Hero.module.css';
 
 const ROTATING_WORDS = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
 
-const WALITO_PHOTO = '/walito.jpg';
-
 export default function Hero() {
   const [email, setEmail] = useState('');
   const [joined, setJoined] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,37 +40,11 @@ export default function Hero() {
       </div>
 
       <div className={styles.inner}>
-        {/* Avatar */}
-        <div className={styles.avatarBlock}>
-          {!imgError ? (
-            <img
-              src={WALITO_PHOTO}
-              alt="Wa'il aka Walito"
-              className={styles.avatarImg}
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div className={styles.avatarFallback}>
-              <span>W</span>
-            </div>
-          )}
-          <div className={styles.avatarMeta}>
-            <span className={styles.avatarName}>Wa'il</span>
-            <span className={styles.avatarAlias}>aka Walito</span>
-          </div>
-        </div>
-
         {/* Eyebrow */}
         <div className={styles.eyebrow}>
           <span className={styles.dot} />
           Personal curation by Wa'il
         </div>
-
-        {/* Headline */}
-        <h1 className={styles.headline}>
-          <span className={styles.headlineStatic}>Walito's</span>
-          <span className={styles.headlineAccent}>Way</span>
-        </h1>
 
         {/* Rotating line */}
         <div className={styles.rotatingRow}>

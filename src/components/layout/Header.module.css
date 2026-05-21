@@ -1,46 +1,189 @@
+/* ── HERO HEADER (home page full-bleed) ── */
+.heroHeader {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  background: #000;
+}
+
+.heroImageWrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(25%) contrast(1.1);
+  display: block;
+}
+
+.heroImageFallback {
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120px;
+  font-weight: 900;
+  color: #1a1a1a;
+}
+
+/* gradient fade bottom */
+.heroFade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.0) 0%,
+    rgba(0,0,0,0.15) 40%,
+    rgba(0,0,0,0.65) 70%,
+    rgba(0,0,0,1) 100%
+  );
+  pointer-events: none;
+}
+
+/* text overlay */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.heroOverlayInner {
+  padding: 0 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.heroEyebrow {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.heroTitle {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.88;
+  margin: 4px 0 6px;
+}
+
+.heroTitleLine1 {
+  font-size: clamp(56px, 10vw, 100px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  /* Brutalist / avant-art: stroke outline on second word */
+  font-family: 'Arial Black', 'Arial', Impact, sans-serif;
+  line-height: 1;
+}
+
+.heroTitleLine2 {
+  font-size: clamp(80px, 15vw, 160px);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  font-family: 'Arial Black', 'Arial', Impact, sans-serif;
+  line-height: 0.9;
+  /* avant-art outline effect */
+  -webkit-text-stroke: 2px #fff;
+  color: transparent;
+  /* slight offset shadow for brutalist depth */
+  text-shadow:
+    3px 3px 0 rgba(255,255,255,0.08),
+    6px 6px 0 rgba(255,255,255,0.04);
+}
+
+.heroSub {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ── STICKY NAV ── */
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(8, 8, 16, 0.96);
-  border-bottom: 1px solid var(--color-border);
+  background: rgba(0, 0, 0, 0.97);
+  border-bottom: 1px solid #111;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  height: var(--header-height);
+  height: 58px;
+}
+
+.headerHome {
+  /* when on home, nav sits right below the hero bleed */
+  border-top: 1px solid #111;
 }
 
 .inner {
-  max-width: var(--container-max);
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--space-6);
+  padding: 0 24px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-6);
+  gap: 24px;
 }
 
 /* Brand */
 .brand {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 10px;
   text-decoration: none;
   flex-shrink: 0;
 }
 
+.brandAvatarWrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.brandAvatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(20%);
+  display: block;
+}
+
 .brandMark {
-  width: 36px;
-  height: 36px;
-  background: var(--color-accent);
-  color: white;
+  width: 34px;
+  height: 34px;
+  background: #fff;
+  color: #000;
   font-weight: 900;
-  font-size: 18px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
+  font-family: 'Arial Black', Arial, sans-serif;
   flex-shrink: 0;
+  letter-spacing: -0.04em;
 }
 
 .brandText {
@@ -50,26 +193,29 @@
 }
 
 .brandName {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 900;
-  color: var(--color-text-primary);
-  letter-spacing: -0.025em;
+  color: #fff;
+  letter-spacing: -0.04em;
   line-height: 1;
+  font-family: 'Arial Black', Arial, Impact, sans-serif;
+  text-transform: uppercase;
 }
 
 .brandTagline {
-  font-size: 10px;
-  color: var(--color-text-muted);
-  letter-spacing: 0.1em;
+  font-size: 9px;
+  color: #333;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 /* Nav */
 .nav {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 2px;
 }
 
 .navLink {
@@ -77,30 +223,33 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  letter-spacing: 0.02em;
-  transition: color var(--transition-fast);
+  font-size: 12px;
+  font-weight: 700;
+  color: #444;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
   text-decoration: none;
   border: 1px solid transparent;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 .navLink:hover {
-  color: var(--color-text-primary);
+  color: #fff;
+  border-color: #222;
 }
 
 .navLinkActive {
-  color: var(--color-text-primary) !important;
-  border-color: var(--color-border);
-  background: var(--color-bg-card);
+  color: #fff !important;
+  border-color: #333 !important;
+  background: #111;
 }
 
 /* Meta */
 .meta {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 12px;
   flex-shrink: 0;
 }
 
@@ -109,58 +258,64 @@
   align-items: center;
   gap: 6px;
   padding: 8px 16px;
-  background: var(--color-accent);
-  color: white;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  background: #fff;
+  color: #000;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background var(--transition-fast);
+  transition: opacity 0.15s ease;
   border: none;
   cursor: pointer;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 .ctaBtn:hover {
-  background: var(--color-accent-hover);
+  opacity: 0.8;
 }
 
 .menuBtn {
   display: none;
-  color: var(--color-text-muted);
+  color: #555;
   padding: 4px;
   cursor: pointer;
-  transition: color var(--transition-fast);
+  transition: color 0.15s ease;
+  background: none;
+  border: none;
 }
 
 .menuBtn:hover {
-  color: var(--color-text-primary);
+  color: #fff;
 }
 
 /* Mobile menu */
 .mobileMenu {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--color-border);
-  background: var(--color-bg);
+  border-top: 1px solid #111;
+  background: #000;
 }
 
 .mobileNavLink {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-4) var(--space-6);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  border-bottom: 1px solid var(--color-border);
+  gap: 12px;
+  padding: 16px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+  border-bottom: 1px solid #0a0a0a;
   text-decoration: none;
-  transition: color var(--transition-fast), background var(--transition-fast);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  transition: color 0.15s ease, background 0.15s ease;
 }
 
 .mobileNavLink:hover {
-  color: var(--color-text-primary);
-  background: var(--color-bg-card);
+  color: #fff;
+  background: #080808;
 }
 
 @media (max-width: 768px) {
@@ -172,5 +327,17 @@
   }
   .ctaBtn {
     display: none;
+  }
+  .heroHeader {
+    height: 380px;
+  }
+  .heroTitleLine1 {
+    font-size: 48px;
+  }
+  .heroTitleLine2 {
+    font-size: 72px;
+  }
+  .heroOverlayInner {
+    padding: 0 20px 28px;
   }
 }
