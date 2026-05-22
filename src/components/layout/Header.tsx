@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import styles from './Header.module.css';
 
-const WALITO_PHOTO = '/walito.jpg';
+const WALITO_PHOTO = 'https://i.imgur.com/8bQpDvN.jpeg';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

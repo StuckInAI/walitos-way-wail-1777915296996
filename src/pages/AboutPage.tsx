@@ -1,6 +1,6 @@
 import styles from './AboutPage.module.css';
 
-const WALITO_PHOTO = '/walito.jpg';
+const WALITO_PHOTO = 'https://i.imgur.com/8bQpDvN.jpeg';
 
 export default function AboutPage() {
   return (
