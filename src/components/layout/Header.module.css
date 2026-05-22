@@ -35,7 +35,6 @@
   color: #1a1a1a;
 }
 
-/* gradient fade bottom */
 .heroFade {
   position: absolute;
   inset: 0;
@@ -49,7 +48,6 @@
   pointer-events: none;
 }
 
-/* text overlay */
 .heroOverlay {
   position: absolute;
   inset: 0;
@@ -87,7 +85,6 @@
   color: #fff;
   letter-spacing: -0.06em;
   text-transform: uppercase;
-  /* Brutalist / avant-art: stroke outline on second word */
   font-family: 'Arial Black', 'Arial', Impact, sans-serif;
   line-height: 1;
 }
@@ -99,10 +96,8 @@
   text-transform: uppercase;
   font-family: 'Arial Black', 'Arial', Impact, sans-serif;
   line-height: 0.9;
-  /* avant-art outline effect */
   -webkit-text-stroke: 2px #fff;
   color: transparent;
-  /* slight offset shadow for brutalist depth */
   text-shadow:
     3px 3px 0 rgba(255,255,255,0.08),
     6px 6px 0 rgba(255,255,255,0.04);
@@ -129,7 +124,6 @@
 }
 
 .headerHome {
-  /* when on home, nav sits right below the hero bleed */
   border-top: 1px solid #111;
 }
 
@@ -144,7 +138,6 @@
   gap: 24px;
 }
 
-/* Brand */
 .brand {
   display: flex;
   align-items: center;
@@ -184,6 +177,7 @@
   font-family: 'Arial Black', Arial, sans-serif;
   flex-shrink: 0;
   letter-spacing: -0.04em;
+  border-radius: 50%;
 }
 
 .brandText {
@@ -211,7 +205,6 @@
   font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
-/* Nav */
 .nav {
   display: flex;
   align-items: center;
@@ -245,7 +238,6 @@
   background: #111;
 }
 
-/* Meta */
 .meta {
   display: flex;
   align-items: center;
@@ -275,6 +267,26 @@
   opacity: 0.8;
 }
 
+.adminBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #111;
+  border: 1px solid #1a1a1a;
+  color: #444;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.adminBtn:hover {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #333;
+}
+
 .menuBtn {
   display: none;
   color: #555;
@@ -289,7 +301,6 @@
   color: #fff;
 }
 
-/* Mobile menu */
 .mobileMenu {
   display: flex;
   flex-direction: column;
@@ -326,6 +337,9 @@
     display: flex;
   }
   .ctaBtn {
+    display: none;
+  }
+  .adminBtn {
     display: none;
   }
   .heroHeader {

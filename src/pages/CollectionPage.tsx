@@ -1,58 +1,92 @@
-import { useMemo } from 'react';
-import { categories } from '@/data/items';
-import type { Category, Item } from '@/data/items';
-import { useItems } from '@/hooks/useItems';
-import ItemCard from '@/components/ItemCard';
-import CategoryFilter from '@/components/CategoryFilter';
-import SearchBar from '@/components/SearchBar';
+import { useState } from 'react';
+import { items } from '@/data/items';
 import styles from './CollectionPage.module.css';
 
-type GroupedEntry = { label: string; items: Item[] };
+const CATS = ['All', 'Tech', 'Style', 'Travel', 'Home', 'Wellness', 'Watches', 'Grooming', 'Food', 'Books'];
 
 export default function CollectionPage() {
-  const { items, search, setSearch, activeCategory, setActiveCategory } = useItems();
+  const [active, setActive] = useState('All');
 
-  const grouped = useMemo(() => {
-    return categories
-      .filter((c: Category) => c.id !== 'all')
-      .reduce<Record<string, GroupedEntry>>((acc, cat: Category) => {
-        const catItems = items.filter((item: Item) => item.category === cat.id);
-        if (catItems.length > 0) {
-          acc[cat.id] = { label: cat.label, items: catItems };
-        }
-        return acc;
-      }, {});
-  }, [items]);
+  const filtered = active === 'All'
+    ? items
+    : items.filter((i) => i.category.toLowerCase() === active.toLowerCase());
+
+  const featured = items.filter((i) => i.featured);
 
   return (
     <div className={styles.page}>
-      <div className={styles.toolbar}>
-        <SearchBar value={search} onChange={setSearch} />
-        <CategoryFilter
-          categories={categories}
-          active={activeCategory}
-          onChange={setActiveCategory}
-        />
+      <div className={styles.header}>
+        <span className={styles.eyebrow}>The Archive</span>
+        <h1 className={styles.title}>Collection</h1>
+        <p className={styles.subtitle}>
+          {items.length} picks. Everything personally paid for, visited, or used until it broke.
+        </p>
       </div>
 
-      {Object.entries(grouped).length === 0 ? (
-        <div className={styles.empty}>
-          <p>No items found.</p>
-        </div>
-      ) : (
-        <div className={styles.sections}>
-          {Object.entries(grouped).map(([catId, { label, items: catItems }]) => (
-            <section key={catId} className={styles.section}>
-              <h2 className={styles.sectionTitle}>{label}</h2>
-              <div className={styles.grid}>
-                {catItems.map((item: Item) => (
-                  <ItemCard key={item.id} item={item} />
-                ))}
+      {/* Featured */}
+      <div className={styles.featuredSection}>
+        <div className={styles.sectionLabel}>Featured Picks</div>
+        <div className={styles.featuredGrid}>
+          {featured.map((item) => (
+            <div key={item.id} className={styles.featuredCard}>
+              <div className={styles.featuredImgWrap}>
+                <img src={item.image} alt={item.title} className={styles.featuredImg} />
+                <div className={styles.featuredImgFade} />
               </div>
-            </section>
+              <div className={styles.featuredInfo}>
+                <span className={styles.featuredCat}>{item.category}</span>
+                <h3 className={styles.featuredTitle}>{item.title}</h3>
+                <p className={styles.featuredTake}>{item.personalTake}</p>
+                <span className={styles.featuredDate}>Added {item.dateAdded}</span>
+              </div>
+            </div>
           ))}
         </div>
-      )}
+      </div>
+
+      {/* All items */}
+      <div className={styles.allSection}>
+        <div className={styles.filterRow}>
+          {CATS.map((cat) => (
+            <button
+              key={cat}
+              className={`${styles.filterBtn} ${active === cat ? styles.filterBtnActive : ''}`}
+              onClick={() => setActive(cat)}
+              type="button"
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div className={styles.listGrid}>
+          {filtered.map((item) => (
+            <div key={item.id} className={styles.listCard}>
+              <div className={styles.listImgWrap}>
+                <img src={item.image} alt={item.title} className={styles.listImg} />
+              </div>
+              <div className={styles.listInfo}>
+                <div className={styles.listTop}>
+                  <span className={styles.listCat}>{item.category}</span>
+                  <span className={styles.listDate}>{item.dateAdded}</span>
+                </div>
+                <h3 className={styles.listTitle}>{item.title}</h3>
+                <p className={styles.listTake}>{item.personalTake}</p>
+                {item.link && (
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles.listLink}>
+                    See it →
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <footer className={styles.footer}>
+        <span className={styles.footerMark}>—W</span>
+        <p className={styles.footerText}>Updated monthly. No sponsorships. No affiliate links.</p>
+      </footer>
     </div>
   );
 }

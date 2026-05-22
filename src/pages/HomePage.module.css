@@ -1,10 +1,10 @@
 .page {
-  min-height: 100vh;
   background: #000;
+  min-height: 100vh;
 }
 
 .toolbar {
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid #0d0d0d;
   background: #000;
   position: sticky;
   top: 58px;
@@ -14,16 +14,17 @@
 .toolbarInner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 12px 24px;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
 .gridWrap {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 24px 80px;
+  padding: 32px 24px 64px;
 }
 
 .count {
@@ -31,9 +32,9 @@
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #2a2a2a;
-  margin-bottom: 20px;
+  color: #222;
   font-family: 'JetBrains Mono', 'Courier New', monospace;
+  margin-bottom: 20px;
 }
 
 .countCat {
@@ -42,74 +43,68 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1px;
-  border: 1px solid #111;
-  background: #111;
-}
-
-.grid > * {
-  background: #000;
+  background: #0d0d0d;
 }
 
 .empty {
-  padding: 120px 0;
   text-align: center;
+  padding: 96px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: #2a2a2a;
-  font-size: 13px;
-  letter-spacing: 0.05em;
+  gap: 12px;
 }
 
 .emptySymbol {
   font-size: 32px;
-  font-weight: 100;
   color: #1a1a1a;
+  font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.empty p {
+  font-size: 14px;
+  color: #333;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 .emptyHint {
   font-size: 11px;
-  color: #1e1e1e;
+  color: #1a1a1a !important;
 }
 
 .footer {
-  border-top: 1px solid #111;
+  border-top: 1px solid #0d0d0d;
   padding: 48px 24px;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  text-align: center;
 }
 
 .footerMark {
-  width: 36px;
-  height: 36px;
-  background: #fff;
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 24px;
   font-weight: 900;
-  font-size: 16px;
+  color: #fff;
+  font-family: 'Arial Black', Arial, Impact, sans-serif;
   letter-spacing: -0.04em;
-  margin-bottom: 4px;
 }
 
 .footerText {
   font-size: 12px;
   font-weight: 800;
-  color: #333;
-  letter-spacing: -0.01em;
+  color: #222;
   text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 .footerSub {
   font-size: 10px;
-  color: #1e1e1e;
-  letter-spacing: 0.1em;
+  color: #111;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
 }

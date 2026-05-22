@@ -1,4 +1,3 @@
-import { MapPin, Zap, Heart, ExternalLink, Instagram, Twitter } from 'lucide-react';
 import styles from './AboutPage.module.css';
 
 const WALITO_PHOTO = '/walito.jpg';
@@ -6,128 +5,79 @@ const WALITO_PHOTO = '/walito.jpg';
 export default function AboutPage() {
   return (
     <div className={styles.page}>
-
-      <div className={styles.heroBlock}>
-        <div className={styles.photoCol}>
-          <div className={styles.photoWrap}>
-            <img
-              src={WALITO_PHOTO}
-              alt="Wa'il aka Walito"
-              className={styles.photoImg}
-              onError={(e) => {
-                const target = e.currentTarget as HTMLImageElement;
-                target.style.display = 'none';
-                const fallback = target.nextElementSibling as HTMLElement;
-                if (fallback) fallback.style.display = 'flex';
-              }}
-            />
-            <div className={styles.photoPlaceholder} style={{ display: 'none' }}>
-              <span className={styles.photoInitial}>W</span>
-            </div>
-          </div>
-          <div className={styles.photoMeta}>
-            <span className={styles.photoName}>Wa'il</span>
-            <span className={styles.photoAlias}>aka Walito</span>
-            <span className={styles.photoRole}>Founder & Curator</span>
-          </div>
+      <div className={styles.hero}>
+        <div className={styles.photoWrap}>
+          <img
+            src={WALITO_PHOTO}
+            alt="Wa'il aka Walito"
+            className={styles.photo}
+          />
+          <div className={styles.photoFade} />
         </div>
-
-        <div className={styles.introCol}>
-          <div className={styles.eyebrow}>
-            <span className={styles.dot} />
-            About Walito's Way
-          </div>
-          <h1 className={styles.title}>I research everything obsessively so you don't have to.</h1>
-          <p className={styles.lead}>
-            My name is Wa'il. I go by Walito. I'm a founder, traveler, and compulsive optimizer.
-            I've always kept a mental list of the things that actually work — the gear that holds up,
-            the music that moves something, the places that change you.
-          </p>
-          <p className={styles.body}>
-            This site is that list made public. Everything here I've personally paid for, used until
-            it broke, revisited, and decided was worth keeping. No brand deals. No sponsored content.
-            No affiliate links. If I recommend something, it's because a friend asked me and I
-            couldn't stop talking about it.
-          </p>
-          <p className={styles.body}>
-            The rule is simple: if I wouldn't text it to a friend, it doesn't go on the list.
-          </p>
-
-          <div className={styles.pillRow}>
-            <span className={styles.pill}><MapPin size={11} /> Based in Nairobi</span>
-            <span className={styles.pill}><Zap size={11} /> Founder</span>
-            <span className={styles.pill}><Heart size={11} /> Obsessive researcher</span>
-          </div>
+        <div className={styles.heroContent}>
+          <span className={styles.eyebrow}>About</span>
+          <h1 className={styles.name}>Wa'il<br />Walito</h1>
+          <p className={styles.tagline}>Founder. Traveler. Obsessive researcher.</p>
         </div>
       </div>
 
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>The Philosophy</h2>
-        <div className={styles.principlesGrid}>
-          {[
-            {
-              num: '01',
-              title: 'Real experience only.',
-              body: "If I haven't used it, eaten it, worn it, or been there — it's not on the list. No secondhand recommendations.",
-            },
-            {
-              num: '02',
-              title: 'Specificity over superlatives.',
-              body: "Anyone can say something is 'amazing'. I tell you the exact counter in Shinjuku at 1am, or the one setting on the headphones that matters.",
-            },
-            {
-              num: '03',
-              title: 'No noise.',
-              body: 'I update the list when I find something genuinely worth adding. No filler. No trend-chasing. The list stays lean on purpose.',
-            },
-            {
-              num: '04',
-              title: 'No financial interest.',
-              body: "Zero affiliate links. Zero sponsorships. If I'm recommending something, the only reason is that I think you should know about it.",
-            },
-          ].map((p) => (
-            <div key={p.num} className={styles.principle}>
-              <span className={styles.principleNum}>{p.num}</span>
-              <h3 className={styles.principleTitle}>{p.title}</h3>
-              <p className={styles.principleBody}>{p.body}</p>
-            </div>
-          ))}
+      <div className={styles.content}>
+        <div className={styles.block}>
+          <h2 className={styles.blockTitle}>Why This Exists</h2>
+          <p className={styles.blockText}>
+            Every recommendation on this site I've paid for myself, visited in person, or used until it broke.
+            No sponsorships. No affiliate links. No brand deals. Just the stuff that actually earned a permanent
+            spot in my life — and why.
+          </p>
+          <p className={styles.blockText}>
+            I got tired of "best of" lists written by people who haven't touched the product.
+            Walito's Way is the antidote: a living record of the things I actually reach for, wear, use, and recommend
+            to people I care about.
+          </p>
         </div>
-      </div>
 
-      <div className={styles.statsRow}>
-        {[
-          { num: '20+', label: 'Curated picks' },
-          { num: '10', label: 'Categories' },
-          { num: '4', label: 'Trips to Tokyo' },
-          { num: '0', label: 'Affiliate links' },
-        ].map((s) => (
-          <div key={s.label} className={styles.stat}>
-            <span className={styles.statNum}>{s.num}</span>
-            <span className={styles.statLabel}>{s.label}</span>
-          </div>
-        ))}
-      </div>
+        <div className={styles.block}>
+          <h2 className={styles.blockTitle}>The Rules</h2>
+          <ul className={styles.rulesList}>
+            <li className={styles.rulesItem}>
+              <span className={styles.rulesNum}>01</span>
+              <span>Everything is personally purchased or experienced. No exceptions.</span>
+            </li>
+            <li className={styles.rulesItem}>
+              <span className={styles.rulesNum}>02</span>
+              <span>No affiliate links. Ever. The list stays clean.</span>
+            </li>
+            <li className={styles.rulesItem}>
+              <span className={styles.rulesNum}>03</span>
+              <span>One specific detail per pick that proves real experience.</span>
+            </li>
+            <li className={styles.rulesItem}>
+              <span className={styles.rulesNum}>04</span>
+              <span>If it stops being excellent, it gets removed. No legacy picks.</span>
+            </li>
+            <li className={styles.rulesItem}>
+              <span className={styles.rulesNum}>05</span>
+              <span>The list is alive. New picks added monthly. Check back.</span>
+            </li>
+          </ul>
+        </div>
 
-      <div className={styles.contactBlock}>
-        <h2 className={styles.contactTitle}>Want to reach me?</h2>
-        <p className={styles.contactBody}>
-          I'm reachable. If you have a question about anything on the list, a recommendation
-          to share, or just want to talk — find me below.
-        </p>
-        <div className={styles.contactLinks}>
-          <a href="mailto:hello@walitosway.com" className={styles.contactLink}>
-            <ExternalLink size={13} />
-            hello@walitosway.com
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-            <Twitter size={13} />
-            Twitter / X
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
-            <Instagram size={13} />
-            Instagram
-          </a>
+        <div className={styles.block}>
+          <h2 className={styles.blockTitle}>Background</h2>
+          <p className={styles.blockText}>
+            Based between Dubai and wherever interesting is happening. I've been to Tokyo four times.
+            I queue for things that deserve it. I've eaten at counters with six seats at 1am.
+            I carry a bag I've taken to 14 countries. I track sleep obsessively and take notes on everything.
+          </p>
+          <p className={styles.blockText}>
+            The common thread: I do the research so you don't have to. And I tell you exactly what nobody
+            else will.
+          </p>
+        </div>
+
+        <div className={styles.signoff}>
+          <span className={styles.signoffMark}>—W</span>
+          <p className={styles.signoffText}>Walito's Way</p>
         </div>
       </div>
     </div>
