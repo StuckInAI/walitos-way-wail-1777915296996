@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from '@/components/layout/Layout';
-import HomePage from '@/pages/HomePage';
-import AboutPage from '@/pages/AboutPage';
-import UpdatesPage from '@/pages/UpdatesPage';
-import CollectionPage from '@/pages/CollectionPage';
-import NewsletterPage from '@/pages/NewsletterPage';
-import AdminPage from '@/pages/AdminPage';
+import Layout from './components/layout/Layout';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import UpdatesPage from './pages/UpdatesPage';
+import CollectionPage from './pages/CollectionPage';
+import NewsletterPage from './pages/NewsletterPage';
+import AdminPage from './pages/AdminPage';
 
 export default function App() {
   return (

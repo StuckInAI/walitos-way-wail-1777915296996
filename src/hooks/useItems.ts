@@ -1,60 +1,60 @@
-import { useState, useCallback } from 'react';
-import { defaultItems } from '@/data/items';
-import type { Item } from '@/data/items';
+import { useState, useMemo, useCallback, useEffect } from 'react';
+import type { Item } from '../data/items';
+import { loadStoredItems, saveStoredItems, ITEMS_UPDATED_EVENT } from '../lib/itemsStorage';
 
-const STORAGE_KEY = 'walitos-items';
+interface UseItemsReturn {
+  items: Item[];
+  allItems: Item[];
+  search: string;
+  setSearch: (s: string) => void;
+  activeCategory: string;
+  setActiveCategory: (c: string) => void;
+  addItem: (item: Item) => void;
+  removeItem: (id: string) => void;
+}
 
-function loadItems(): Item[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw) as Item[];
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+export function useItems(): UseItemsReturn {
+  const [allItems, setAllItems] = useState<Item[]>(() => loadStoredItems());
+  const [search, setSearch] = useState<string>('');
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+
+  useEffect(() => {
+    const handler = (): void => {
+      setAllItems(loadStoredItems());
+    };
+    window.addEventListener(ITEMS_UPDATED_EVENT, handler);
+    return () => window.removeEventListener(ITEMS_UPDATED_EVENT, handler);
+  }, []);
+
+  const items = useMemo(() => {
+    let filtered = allItems;
+    if (activeCategory !== 'all') {
+      filtered = filtered.filter((item) => item.category === activeCategory);
     }
-  } catch {
-    // ignore
-  }
-  return defaultItems;
-}
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      filtered = filtered.filter(
+        (item) =>
+          item.title.toLowerCase().includes(q) ||
+          item.description.toLowerCase().includes(q) ||
+          item.tags.some((t) => t.toLowerCase().includes(q))
+      );
+    }
+    return filtered;
+  }, [allItems, activeCategory, search]);
 
-function saveItems(items: Item[]): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  } catch {
-    // ignore
-  }
-}
-
-export function useItems() {
-  const [allItems, setAllItems] = useState<Item[]>(loadItems);
-  const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState('all');
-
-  const items = allItems.filter((item) => {
-    const matchCat = activeCategory === 'all' || item.category === activeCategory;
-    const q = search.toLowerCase();
-    const matchSearch =
-      !q ||
-      item.title.toLowerCase().includes(q) ||
-      item.description.toLowerCase().includes(q) ||
-      item.personalTake.toLowerCase().includes(q) ||
-      item.tags.some((t) => t.toLowerCase().includes(q));
-    return matchCat && matchSearch;
-  });
-
-  const addItem = useCallback((item: Omit<Item, 'id'>) => {
-    const newItem: Item = { ...item, id: Date.now().toString() };
+  const addItem = useCallback((item: Item): void => {
     setAllItems((prev) => {
-      const next = [newItem, ...prev];
-      saveItems(next);
+      const next = [item, ...prev];
+      saveStoredItems(next);
       return next;
     });
   }, []);
 
-  const removeItem = useCallback((id: string) => {
+  const removeItem = useCallback((id: string): void => {
     setAllItems((prev) => {
       const next = prev.filter((i) => i.id !== id);
-      saveItems(next);
+      saveStoredItems(next);
       return next;
     });
   }, []);

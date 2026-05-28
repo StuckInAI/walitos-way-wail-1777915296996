@@ -1,5 +1,5 @@
-import { defaultItems } from '@/data/items';
-import type { Item } from '@/types';
+import { defaultItems } from '../data/items';
+import type { Item } from '../types';
 
 export const ITEMS_STORAGE_KEY = 'walitos-items';
 export const ITEMS_UPDATED_EVENT = 'walitos-items-updated';

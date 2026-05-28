@@ -7,35 +7,52 @@ interface Props {
 
 interface State {
   hasError: boolean;
-  message: string;
 }
 
 export default class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { hasError: false, message: '' };
+    this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, message: error.message };
+  static getDerivedStateFromError(): State {
+    return { hasError: true };
   }
 
-  componentDidCatch(error: Error, info: ErrorInfo) {
+  componentDidCatch(error: Error, info: ErrorInfo): void {
     console.error('ErrorBoundary caught:', error, info);
   }
 
-  render() {
+  render(): ReactNode {
     if (this.state.hasError) {
       return (
-        <div style={{ padding: '2rem', fontFamily: 'monospace', color: '#fff', background: '#000', minHeight: '100vh' }}>
-          <h1 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Something went wrong</h1>
-          <p style={{ color: '#555', fontSize: '0.85rem', marginBottom: '1rem' }}>{this.state.message}</p>
+        <div style={{
+          padding: 32,
+          textAlign: 'center',
+          fontFamily: 'system-ui, sans-serif',
+          maxWidth: 420,
+          margin: '80px auto',
+        }}>
+          <h1 style={{ fontSize: 18, marginBottom: 12, color: '#f0f0ff' }}>Something went wrong</h1>
+          <p style={{ color: '#8888AA', fontSize: 14, marginBottom: 16 }}>Try refreshing the page.</p>
           <button
             type="button"
-            onClick={() => this.setState({ hasError: false, message: '' })}
-            style={{ background: '#fff', color: '#000', border: 'none', padding: '0.5rem 1rem', cursor: 'pointer', fontWeight: 700 }}
+            onClick={() => {
+              this.setState({ hasError: false });
+              window.location.reload();
+            }}
+            style={{
+              background: '#FF4D00',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 999,
+              padding: '10px 24px',
+              fontWeight: 700,
+              fontSize: 13,
+              cursor: 'pointer',
+            }}
           >
-            Try again
+            Reload
           </button>
         </div>
       );

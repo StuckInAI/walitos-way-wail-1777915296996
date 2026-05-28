@@ -1,92 +1,49 @@
-import { useState } from 'react';
-import { items } from '@/data/items';
-import styles from './CollectionPage.module.css';
-
-const CATS = ['All', 'Tech', 'Style', 'Travel', 'Home', 'Wellness', 'Watches', 'Grooming', 'Food', 'Books'];
+import { useItems } from '../hooks/useItems';
+import ItemCard from '../components/ItemCard';
 
 export default function CollectionPage() {
-  const [active, setActive] = useState('All');
+  const { allItems } = useItems();
 
-  const filtered = active === 'All'
-    ? items
-    : items.filter((i) => i.category.toLowerCase() === active.toLowerCase());
+  const byCategory: Record<string, typeof allItems> = {};
+  allItems.forEach((item) => {
+    if (!byCategory[item.category]) byCategory[item.category] = [];
+    byCategory[item.category].push(item);
+  });
 
-  const featured = items.filter((i) => i.featured);
+  const sortedCategories = Object.keys(byCategory).sort();
 
   return (
-    <div className={styles.page}>
-      <div className={styles.header}>
-        <span className={styles.eyebrow}>The Archive</span>
-        <h1 className={styles.title}>Collection</h1>
-        <p className={styles.subtitle}>
-          {items.length} picks. Everything personally paid for, visited, or used until it broke.
-        </p>
-      </div>
+    <div style={{ maxWidth: 1200, margin: '0 auto', padding: '60px 24px 80px' }}>
+      <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 8, color: '#f0f0ff' }}>Full Collection</h1>
+      <p style={{ fontSize: 13, color: '#8888AA', marginBottom: 48 }}>
+        Everything, organized by category. {allItems.length} picks total.
+      </p>
 
-      {/* Featured */}
-      <div className={styles.featuredSection}>
-        <div className={styles.sectionLabel}>Featured Picks</div>
-        <div className={styles.featuredGrid}>
-          {featured.map((item) => (
-            <div key={item.id} className={styles.featuredCard}>
-              <div className={styles.featuredImgWrap}>
-                <img src={item.image} alt={item.title} className={styles.featuredImg} />
-                <div className={styles.featuredImgFade} />
-              </div>
-              <div className={styles.featuredInfo}>
-                <span className={styles.featuredCat}>{item.category}</span>
-                <h3 className={styles.featuredTitle}>{item.title}</h3>
-                <p className={styles.featuredTake}>{item.personalTake}</p>
-                <span className={styles.featuredDate}>Added {item.dateAdded}</span>
-              </div>
-            </div>
-          ))}
+      {sortedCategories.map((cat) => (
+        <div key={cat} style={{ marginBottom: 56 }}>
+          <h2 style={{
+            fontSize: 14,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+            color: '#FF4D00',
+            marginBottom: 20,
+            paddingBottom: 12,
+            borderBottom: '1px solid #1a1a28',
+          }}>
+            {cat} ({byCategory[cat].length})
+          </h2>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gap: 24,
+          }}>
+            {byCategory[cat].map((item) => (
+              <ItemCard key={item.id} item={item} />
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* All items */}
-      <div className={styles.allSection}>
-        <div className={styles.filterRow}>
-          {CATS.map((cat) => (
-            <button
-              key={cat}
-              className={`${styles.filterBtn} ${active === cat ? styles.filterBtnActive : ''}`}
-              onClick={() => setActive(cat)}
-              type="button"
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className={styles.listGrid}>
-          {filtered.map((item) => (
-            <div key={item.id} className={styles.listCard}>
-              <div className={styles.listImgWrap}>
-                <img src={item.image} alt={item.title} className={styles.listImg} />
-              </div>
-              <div className={styles.listInfo}>
-                <div className={styles.listTop}>
-                  <span className={styles.listCat}>{item.category}</span>
-                  <span className={styles.listDate}>{item.dateAdded}</span>
-                </div>
-                <h3 className={styles.listTitle}>{item.title}</h3>
-                <p className={styles.listTake}>{item.personalTake}</p>
-                {item.link && (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles.listLink}>
-                    See it →
-                  </a>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <footer className={styles.footer}>
-        <span className={styles.footerMark}>—W</span>
-        <p className={styles.footerText}>Updated monthly. No sponsorships. No affiliate links.</p>
-      </footer>
+      ))}
     </div>
   );
 }
