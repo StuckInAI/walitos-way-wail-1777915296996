@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
-const WALITO_PHOTO = 'https://i.imgur.com/8bQpDvN.jpeg';
+const WALITO_PHOTO = 'https://znfsypnfeqkwmfywvbnv.supabase.co/storage/v1/object/public/prompt-images/build-images/1779997357644-image.png';
 const ROTATING_WORDS: string[] = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
 
 export default function Hero() {
@@ -9,7 +9,6 @@ export default function Hero() {
   const [joined, setJoined] = useState<boolean>(false);
   const [wordIndex, setWordIndex] = useState<number>(0);
   const [visible, setVisible] = useState<boolean>(true);
-  const [imgError, setImgError] = useState<boolean>(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,40 +30,37 @@ export default function Hero() {
     <section style={{
       position: 'relative',
       overflow: 'hidden',
-      minHeight: 520,
+      minHeight: 560,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '80px 24px 60px',
     }}>
-      {/* Background photo */}
-      {!imgError && (
+      {/* Full-bleed background photo */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 0,
+      }}>
+        <img
+          src={WALITO_PHOTO}
+          alt="Walito"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 15%',
+            opacity: 0.22,
+            filter: 'grayscale(20%) contrast(1.1)',
+          }}
+        />
         <div style={{
           position: 'absolute',
           inset: 0,
-          zIndex: 0,
-        }}>
-          <img
-            src={WALITO_PHOTO}
-            alt=""
-            onError={() => setImgError(true)}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center 20%',
-              opacity: 0.18,
-              filter: 'grayscale(50%)',
-            }}
-          />
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(180deg, rgba(5,5,8,0.3) 0%, rgba(5,5,8,0.95) 80%, rgba(5,5,8,1) 100%)',
-          }} />
-        </div>
-      )}
+          background: 'linear-gradient(180deg, rgba(5,5,8,0.2) 0%, rgba(5,5,8,0.7) 50%, rgba(5,5,8,0.98) 90%, rgba(5,5,8,1) 100%)',
+        }} />
+      </div>
 
       <div style={{
         position: 'relative',
@@ -76,6 +72,23 @@ export default function Hero() {
         alignItems: 'center',
         gap: 20,
       }}>
+        {/* Avatar */}
+        <div style={{
+          width: 88,
+          height: 88,
+          borderRadius: '50%',
+          overflow: 'hidden',
+          border: '3px solid #FF4D00',
+          boxShadow: '0 0 0 6px rgba(255,77,0,0.12)',
+          flexShrink: 0,
+        }}>
+          <img
+            src={WALITO_PHOTO}
+            alt="Wa'il aka Walito"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%' }}
+          />
+        </div>
+
         {/* Eyebrow */}
         <div style={{
           display: 'flex',

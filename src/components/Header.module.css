@@ -26,19 +26,65 @@
   flex-shrink: 0;
 }
 
-.brandMark {
-  width: 32px;
-  height: 32px;
+/* Avatar */
+.avatarWrap {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: visible;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.avatarImg {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 10%;
+  border: 2px solid #FF4D00;
+  display: block;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.avatarWrap:hover .avatarImg {
+  border-color: #fff;
+  transform: scale(1.08);
+}
+
+.avatarTooltip {
+  position: absolute;
+  bottom: -38px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #fff;
   color: #000;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 1rem;
-  letter-spacing: -0.05em;
-  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 200;
+  letter-spacing: 0.01em;
+}
+
+.avatarTooltip::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #fff;
+}
+
+.avatarWrap:hover .avatarTooltip {
+  opacity: 1;
 }
 
 .brandText {
@@ -104,8 +150,8 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  background: #fff;
-  color: #000;
+  background: #FF4D00;
+  color: #fff;
   border: none;
   border-radius: 20px;
   padding: 0.4rem 0.9rem;
