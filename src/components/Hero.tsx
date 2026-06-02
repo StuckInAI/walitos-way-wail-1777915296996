@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
-const WALITO_PHOTO = 'https://znfsypnfeqkwmfywvbnv.supabase.co/storage/v1/object/public/prompt-images/build-images/1780426765540-Screenshot-2026-06-02-at-2.58.52-PM.png';
 const ROTATING_WORDS: string[] = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
 
 export default function Hero() {
@@ -30,38 +29,13 @@ export default function Hero() {
     <section style={{
       position: 'relative',
       overflow: 'hidden',
-      minHeight: 600,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '100px 24px 80px',
+      padding: '60px 24px 60px',
+      background: '#000',
     }}>
-      {/* Full-bleed background photo — no avatar circle */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        zIndex: 0,
-      }}>
-        <img
-          src={WALITO_PHOTO}
-          alt="Walito"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center 20%',
-            opacity: 0.28,
-            filter: 'grayscale(15%) contrast(1.1)',
-          }}
-        />
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(180deg, rgba(5,5,8,0.15) 0%, rgba(5,5,8,0.55) 40%, rgba(5,5,8,0.95) 80%, rgba(5,5,8,1) 100%)',
-        }} />
-      </div>
-
       <div style={{
         position: 'relative',
         zIndex: 1,
@@ -72,26 +46,6 @@ export default function Hero() {
         alignItems: 'center',
         gap: 20,
       }}>
-        {/* Eyebrow */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          fontSize: 11,
-          textTransform: 'uppercase',
-          letterSpacing: 3,
-          color: '#FF4D00',
-          fontWeight: 600,
-        }}>
-          <span style={{
-            width: 6,
-            height: 6,
-            borderRadius: '50%',
-            background: '#FF4D00',
-          }} />
-          Personal curation by Wa'il
-        </div>
-
         {/* Rotating word */}
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
           <span style={{
@@ -127,10 +81,8 @@ export default function Hero() {
             gap: 0,
             width: '100%',
             maxWidth: 420,
-            borderRadius: 999,
             overflow: 'hidden',
-            border: '1px solid #1a1a28',
-            background: '#0a0a10',
+            border: '1px solid #1a1a1a',
           }}>
             <input
               type="email"
@@ -141,25 +93,29 @@ export default function Hero() {
               style={{
                 flex: 1,
                 padding: '12px 20px',
-                background: 'transparent',
+                background: '#050505',
                 border: 'none',
                 outline: 'none',
                 color: '#f0f0ff',
                 fontSize: 13,
+                fontFamily: "'JetBrains Mono', 'Courier New', monospace",
               }}
             />
             <button type="submit" style={{
               display: 'flex',
               alignItems: 'center',
               gap: 6,
-              padding: '12px 24px',
-              background: '#FF4D00',
-              color: '#fff',
+              padding: '12px 20px',
+              background: '#fff',
+              color: '#000',
               border: 'none',
-              fontSize: 12,
-              fontWeight: 700,
+              fontSize: 10,
+              fontWeight: 900,
               cursor: 'pointer',
               whiteSpace: 'nowrap',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              fontFamily: "'JetBrains Mono', 'Courier New', monospace",
             }}>
               Get The List
               <ArrowRight size={13} />
@@ -170,16 +126,18 @@ export default function Hero() {
             display: 'flex',
             alignItems: 'center',
             gap: 8,
-            color: '#00FF87',
+            color: '#fff',
             fontSize: 13,
             fontWeight: 600,
+            padding: '12px 0',
+            borderBottom: '1px solid #fff',
           }}>
             <CheckCircle size={15} />
             You're in. First issue drops next month.
           </div>
         )}
 
-        <p style={{ fontSize: 11, color: '#44445A' }}>New picks, monthly. No noise.</p>
+        <p style={{ fontSize: 9, color: '#1e1e1e', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: "'JetBrains Mono', 'Courier New', monospace" }}>New picks, monthly. No noise.</p>
       </div>
     </section>
   );
