@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
-const WALITO_PHOTO = 'https://znfsypnfeqkwmfywvbnv.supabase.co/storage/v1/object/public/prompt-images/build-images/1779997357644-image.png';
+const WALITO_PHOTO = 'https://znfsypnfeqkwmfywvbnv.supabase.co/storage/v1/object/public/prompt-images/build-images/1780426765540-Screenshot-2026-06-02-at-2.58.52-PM.png';
 const ROTATING_WORDS: string[] = ['Founder.', 'Traveler.', 'Researcher.', 'Curator.', 'Obsessive.'];
 
 export default function Hero() {
@@ -30,14 +30,14 @@ export default function Hero() {
     <section style={{
       position: 'relative',
       overflow: 'hidden',
-      minHeight: 560,
+      minHeight: 600,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '80px 24px 60px',
+      padding: '100px 24px 80px',
     }}>
-      {/* Full-bleed background photo */}
+      {/* Full-bleed background photo — no avatar circle */}
       <div style={{
         position: 'absolute',
         inset: 0,
@@ -50,15 +50,15 @@ export default function Hero() {
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            objectPosition: 'center 15%',
-            opacity: 0.22,
-            filter: 'grayscale(20%) contrast(1.1)',
+            objectPosition: 'center 20%',
+            opacity: 0.28,
+            filter: 'grayscale(15%) contrast(1.1)',
           }}
         />
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(5,5,8,0.2) 0%, rgba(5,5,8,0.7) 50%, rgba(5,5,8,0.98) 90%, rgba(5,5,8,1) 100%)',
+          background: 'linear-gradient(180deg, rgba(5,5,8,0.15) 0%, rgba(5,5,8,0.55) 40%, rgba(5,5,8,0.95) 80%, rgba(5,5,8,1) 100%)',
         }} />
       </div>
 
@@ -72,23 +72,6 @@ export default function Hero() {
         alignItems: 'center',
         gap: 20,
       }}>
-        {/* Avatar */}
-        <div style={{
-          width: 88,
-          height: 88,
-          borderRadius: '50%',
-          overflow: 'hidden',
-          border: '3px solid #FF4D00',
-          boxShadow: '0 0 0 6px rgba(255,77,0,0.12)',
-          flexShrink: 0,
-        }}>
-          <img
-            src={WALITO_PHOTO}
-            alt="Wa'il aka Walito"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%' }}
-          />
-        </div>
-
         {/* Eyebrow */}
         <div style={{
           display: 'flex',

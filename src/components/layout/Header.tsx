@@ -12,11 +12,8 @@ import {
   X,
 } from 'lucide-react';
 
-const WALITO_PHOTO = 'https://i.imgur.com/8bQpDvN.jpeg';
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [imgError, setImgError] = useState<boolean>(false);
   const location = useLocation();
 
   const isActive = (path: string): boolean =>
@@ -47,37 +44,8 @@ export default function Header() {
         alignItems: 'center',
         justifyContent: 'space-between',
       }}>
-        {/* Brand */}
+        {/* Brand — text only, no avatar */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
-          <div style={{
-            width: 36,
-            height: 36,
-            borderRadius: '50%',
-            overflow: 'hidden',
-            border: '2px solid #FF4D00',
-            flexShrink: 0,
-          }}>
-            {!imgError ? (
-              <img
-                src={WALITO_PHOTO}
-                alt="Walito"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                onError={() => setImgError(true)}
-              />
-            ) : (
-              <div style={{
-                width: '100%',
-                height: '100%',
-                background: '#FF4D00',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#fff',
-                fontWeight: 800,
-                fontSize: 16,
-              }}>W</div>
-            )}
-          </div>
           <div>
             <div style={{ fontSize: 15, fontWeight: 800, color: '#f0f0ff', letterSpacing: '-0.5px', lineHeight: 1.2 }}>Walito's Way</div>
             <div style={{ fontSize: 10, color: '#8888AA', textTransform: 'uppercase', letterSpacing: 2 }}>curated cool</div>
@@ -144,6 +112,7 @@ export default function Header() {
               justifyContent: 'center',
               color: '#44445A',
               transition: 'color 0.15s',
+              textDecoration: 'none',
             }}
           >
             <Settings size={14} />

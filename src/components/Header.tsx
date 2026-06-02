@@ -13,8 +13,6 @@ import {
 } from 'lucide-react';
 import styles from './Header.module.css';
 
-const WALITO_PHOTO = 'https://znfsypnfeqkwmfywvbnv.supabase.co/storage/v1/object/public/prompt-images/build-images/1779997357644-image.png';
-
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
@@ -26,14 +24,6 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link to="/" className={styles.brand}>
-          <div className={styles.avatarWrap} title="Hi, I'm Wa'il">
-            <img
-              src={WALITO_PHOTO}
-              alt="Wa'il aka Walito"
-              className={styles.avatarImg}
-            />
-            <span className={styles.avatarTooltip}>Hi, I'm Wa'il 👋</span>
-          </div>
           <div className={styles.brandText}>
             <span className={styles.brandName}>Walito's Way</span>
             <span className={styles.brandTagline}>curated cool</span>
