@@ -33,8 +33,9 @@ export default function Hero() {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '60px 24px 60px',
+      padding: '64px 24px 64px',
       background: '#000',
+      borderBottom: '3px solid #ff4d00',
     }}>
       <div style={{
         position: 'relative',
@@ -44,31 +45,37 @@ export default function Hero() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: 20,
+        gap: 24,
       }}>
         {/* Rotating word */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
           <span style={{
-            fontSize: 20,
-            fontWeight: 800,
-            color: '#FF4D00',
+            fontSize: 24,
+            fontWeight: 900,
+            color: '#ff4d00',
             opacity: visible ? 1 : 0,
             transition: 'opacity 0.3s ease',
-            minWidth: 120,
+            minWidth: 140,
+            fontFamily: "'Arial Black', Impact, sans-serif",
+            textTransform: 'uppercase',
+            letterSpacing: '-0.03em',
           }}>
             {ROTATING_WORDS[wordIndex]}
           </span>
-          <span style={{ fontSize: 14, color: '#8888AA' }}>
-            No sponsorships. No filler. Just the real stuff.
+          <span style={{ fontSize: 14, color: '#666', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+            No sponsorships. No filler.
           </span>
         </div>
 
         {/* Voice paragraph */}
         <p style={{
-          fontSize: 14,
-          lineHeight: 1.7,
-          color: '#8888AA',
+          fontSize: 15,
+          lineHeight: 1.8,
+          color: '#666',
           maxWidth: 520,
+          borderLeft: '3px solid #ff4d00',
+          paddingLeft: 20,
+          textAlign: 'left',
         }}>
           Everything here I've paid for myself, visited in person, or used until it broke.
           No affiliate links. Just the stuff that actually earned a permanent spot in my life.
@@ -80,64 +87,76 @@ export default function Hero() {
             display: 'flex',
             gap: 0,
             width: '100%',
-            maxWidth: 420,
+            maxWidth: 440,
             overflow: 'hidden',
-            border: '1px solid #1a1a1a',
+            border: '2px solid #ff4d00',
           }}>
             <input
               type="email"
-              placeholder="your@email.com"
+              placeholder="YOUR@EMAIL.COM"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               style={{
                 flex: 1,
-                padding: '12px 20px',
-                background: '#050505',
+                padding: '14px 20px',
+                background: '#0a0a0a',
                 border: 'none',
                 outline: 'none',
-                color: '#f0f0ff',
-                fontSize: 13,
-                fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                color: '#fff',
+                fontSize: 12,
+                fontFamily: "'JetBrains Mono', monospace",
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
               }}
             />
             <button type="submit" style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 6,
-              padding: '12px 20px',
-              background: '#fff',
+              gap: 8,
+              padding: '14px 24px',
+              background: '#ff4d00',
               color: '#000',
               border: 'none',
-              fontSize: 10,
+              fontSize: 11,
               fontWeight: 900,
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              letterSpacing: '0.1em',
+              letterSpacing: '0.12em',
               textTransform: 'uppercase',
-              fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+              fontFamily: "'JetBrains Mono', monospace",
+              transition: 'background 0.15s ease',
             }}>
-              Get The List
-              <ArrowRight size={13} />
+              GET THE LIST
+              <ArrowRight size={14} />
             </button>
           </form>
         ) : (
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 8,
-            color: '#fff',
-            fontSize: 13,
-            fontWeight: 600,
-            padding: '12px 0',
-            borderBottom: '1px solid #fff',
+            gap: 10,
+            color: '#ff4d00',
+            fontSize: 14,
+            fontWeight: 900,
+            padding: '14px 0',
+            borderBottom: '3px solid #ff4d00',
+            fontFamily: "'JetBrains Mono', monospace",
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
           }}>
-            <CheckCircle size={15} />
+            <CheckCircle size={16} />
             You're in. First issue drops next month.
           </div>
         )}
 
-        <p style={{ fontSize: 9, color: '#1e1e1e', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: "'JetBrains Mono', 'Courier New', monospace" }}>New picks, monthly. No noise.</p>
+        <p style={{
+          fontSize: 9,
+          color: '#333',
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          fontFamily: "'JetBrains Mono', monospace",
+        }}>New picks, monthly. No noise.</p>
       </div>
     </section>
   );

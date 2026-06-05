@@ -29,6 +29,6 @@ main { padding-top: 0; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: #050508; }
 ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 0; }
-::-webkit-scrollbar-thumb:hover { background: #333; }
+::-webkit-scrollbar-thumb:hover { background: #ff4d00; }
 
-::selection { background: #fff; color: #000; }
+::selection { background: #ff4d00; color: #fff; }

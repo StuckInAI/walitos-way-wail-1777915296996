@@ -42,7 +42,7 @@ export default function Header() {
               onError={() => setImgError(true)}
             />
           ) : (
-            <div className={styles.imagePlaceholder}>WALITO</div>
+            <div className={styles.imagePlaceholder}>W</div>
           )}
           <div className={styles.gradientOverlay} />
         </div>
