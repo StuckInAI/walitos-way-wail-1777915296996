@@ -11,9 +11,8 @@ import {
   Menu,
   X,
 } from 'lucide-react';
+import walitoPhoto from './walito-photo';
 import styles from './Header.module.css';
-
-const WALITO_PHOTO = 'https://znfsypnfeqkwmfywvbnv.supabase.co/storage/v1/object/public/prompt-images/build-images/1780426765540-Screenshot-2026-06-02-at-2.58.52-PM.png';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -29,7 +28,7 @@ export default function Header() {
       <div className={styles.heroHeader}>
         <div className={styles.heroImageWrap}>
           <img
-            src={WALITO_PHOTO}
+            src={walitoPhoto}
             alt="Walito"
             className={styles.heroImage}
           />
