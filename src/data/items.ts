@@ -33,6 +33,18 @@ export const categories: Category[] = [
 
 export const defaultItems: Item[] = [
   {
+    id: '16',
+    title: 'Test Product',
+    description: 'A sample entry created to try out the image upload.',
+    category: 'home',
+    image: '/test-img.jpeg',
+    rating: 5,
+    tags: ['sample', 'test'],
+    personalTake: 'This is a placeholder item added to check that a locally uploaded image shows up correctly across the site.',
+    dateAdded: '2024-06',
+    featured: true,
+  },
+  {
     id: '1',
     title: 'Aesop Resurrection Rinse-Free Hand Wash',
     description: 'The best hand wash I have ever used. Period.',
